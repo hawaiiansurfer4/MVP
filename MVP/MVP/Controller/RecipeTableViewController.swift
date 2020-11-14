@@ -6,15 +6,15 @@
 //
 
 import UIKit
-import Alamofire
-import SwiftyJSON
 
 class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
     
 //    var currentIndexPath = In
     var recipeManager = RecipeManager()
+    var webPageModel = WebPageModel()
     var tableRecipeItems: String = ""
     var recipeArray = [String]()
+    var urlArray = [String]()
 
     @IBOutlet weak var searchBarTextField: UISearchBar!
     
@@ -22,8 +22,8 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
         super.viewDidLoad()
         
         searchBarTextField.delegate = self
-//        tableView.delegate = self
-//        tableView.dataSource = self
+        tableView.delegate = self
+        recipeManager.delegate = self
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -63,17 +63,28 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "goToWebView", sender: indexPath.row)
+        webPageModel.fetchFinalWebpage(webURL: urlArray[indexPath.row])
         print(indexPath.row)
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        guard let showWebViewRecipe = segue.destination as? 
+//    }
 }
 //MARK: - RecipeManagerDelegate
     
 extension RecipeTableViewController: RecipeManagerDelegate {
     func didUpdateRecipe(_ recipeManager: RecipeManager, recipe: RecipeModel) {
         DispatchQueue.main.async {
-            self.tableRecipeItems = recipe.recipeLabel
+            self.recipeArray.append(contentsOf: recipe.recipeLabel)
+            self.urlArray.append(contentsOf: recipe.urlString)
+            print("the current url array is \(recipe.urlString)")
+            
+            
             print("The label reads \(recipe.recipeLabel)")
+            self.tableView.reloadData()
         }
     }
     

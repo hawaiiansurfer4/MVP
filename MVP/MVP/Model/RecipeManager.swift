@@ -6,11 +6,10 @@
 //
 
 import UIKit
-import Alamofire
-import SwiftyJSON
 
 protocol RecipeManagerDelegate {
     func didUpdateRecipe(_ recipeManager: RecipeManager, recipe: RecipeModel)
+//    func didUpdateWebPage(_ recipeManager: RecipeManager)
     func didFailWithError(error: Error)
 }
 
@@ -18,17 +17,17 @@ struct RecipeManager {
     let recipeURL = "https://api.edamam.com/search?"
     let appID = "3214dd26"
     let appKey = "24f428ea7ca46ce12a04eabda6c59909"
+    let maxNumberOfApiRequests = 100
     
     var delegate: RecipeManagerDelegate?
     
-//    internal var recipeSearchList: [String]
-    
     func fetchRecipe(typeOfFood: String) {
-        let urlString = "\(recipeURL)&app_id=\(appID)&app_key=\(appKey)&q=\(typeOfFood)"
+        let urlString = "\(recipeURL)&app_id=\(appID)&app_key=\(appKey)&q=\(typeOfFood)&from=0&to=\(maxNumberOfApiRequests)"
         print(urlString)
         performRequest(urlString: urlString)
     }
     
+        
     func performRequest(urlString: String) {
         
         if let url = URL(string: urlString) {
@@ -43,7 +42,7 @@ struct RecipeManager {
                 
                 if let safeData = data {
                     if let recipe = parseJSON(safeData) {
-                        self.decodeData(safeData)
+                        
                         self.delegate?.didUpdateRecipe(self, recipe: recipe)
                     }
                 }
@@ -52,36 +51,24 @@ struct RecipeManager {
         }
     }
     
-    func decodeData(_ recipeData: Data) {
-        do {
-            let json = try JSON(data: recipeData)
-            let foodName = json["hits"].stringValue
-            let swiftyDecode = JSON(recipeData)
-            
-            print("the swiftyDecode is \(swiftyDecode)")
-            print("The food name is \(foodName)")
-//            print("the decoded data using swiftyJSON is \(json)")
-        } catch {
-            fatalError("Decoding data using SwiftyJSON failed")
-        }
-        
-    }
-    
     func parseJSON(_ recipeData: Data) -> RecipeModel? {
         let decoder = JSONDecoder()
-        
+        var recipeList = [String]()
+        var urlList = [String]()
         do {
             let decodedData = try decoder.decode(RecipeData.self, from: recipeData)
             
-//            DispatchQueue.main.async {
-//                for i in 0...99 {
-//                    print(decodedData.hits[0].recipe.ingredientLines)
-                    let recipeList = decodedData.hits[0].recipe.label
-                    let recipe = RecipeModel(recipeLabel: recipeList)
-//                    print(recipe.recipeLabel)
-                    return recipe
-//                }
-//            }
+            for i in 0..<maxNumberOfApiRequests {
+                recipeList.append(contentsOf: [decodedData.hits[i].recipe.label])
+            }
+            
+            for j in 0..<maxNumberOfApiRequests {
+                urlList.append(contentsOf: [decodedData.hits[j].recipe.url])
+            }
+            print(urlList)
+            var recipe = RecipeModel(recipeLabel: recipeList, urlString: urlList)
+            recipeList.removeAll()
+            return recipe
         } catch {
             print(error)
             return nil
@@ -89,3 +76,6 @@ struct RecipeManager {
         
     }
 }
+
+
+

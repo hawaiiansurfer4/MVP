@@ -8,5 +8,6 @@
 import UIKit
 
 struct RecipeModel {
-    let recipeLabel: String
+    var recipeLabel: [String]
+    var urlString: [String]
 }
