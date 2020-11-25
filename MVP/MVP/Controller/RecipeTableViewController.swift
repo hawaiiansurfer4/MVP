@@ -14,7 +14,9 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
     var webPageModel = WebPageModel()
     var tableRecipeItems: String = ""
     var recipeArray = [String]()
-    var urlArray = [String]()
+//    var webPageDelegate = WebPageDelegate()
+    var webPageViewController = WebPageViewController()
+    static var urlArray = [String]()
 
     @IBOutlet weak var searchBarTextField: UISearchBar!
     
@@ -26,8 +28,10 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
         recipeManager.delegate = self
     }
     
+    
+    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        print(searchBarTextField.text!)
+//        print(searchBarTextField.text!)
         tableView.reloadData()
         searchBarTextField.endEditing(true)
     }
@@ -64,7 +68,9 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "goToWebView", sender: indexPath.row)
-        webPageModel.fetchFinalWebpage(webURL: urlArray[indexPath.row])
+        webPageModel.fetchFinalWebpage(webURL: RecipeTableViewController.urlArray[indexPath.row])
+        WebPageViewController.webShowRecipeURL = RecipeTableViewController.urlArray[indexPath.row]
+//        webPageViewController.grabURLForRecipeScreen(urlString: RecipeTableViewController.urlArray[indexPath.row])
         print(indexPath.row)
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -79,11 +85,11 @@ extension RecipeTableViewController: RecipeManagerDelegate {
     func didUpdateRecipe(_ recipeManager: RecipeManager, recipe: RecipeModel) {
         DispatchQueue.main.async {
             self.recipeArray.append(contentsOf: recipe.recipeLabel)
-            self.urlArray.append(contentsOf: recipe.urlString)
-            print("the current url array is \(recipe.urlString)")
+            RecipeTableViewController.urlArray.append(contentsOf: recipe.urlString)
+//            print("the current url array is \(recipe.urlString)")
             
             
-            print("The label reads \(recipe.recipeLabel)")
+//            print("The label reads \(recipe.recipeLabel)")
             self.tableView.reloadData()
         }
     }

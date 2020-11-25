@@ -8,11 +8,13 @@
 import UIKit
 
 protocol WebPageDelegate {
+//    func updateWebPageView(webViewURLString: String)
     func webViewDidFail(error: Error)
 }
 
 struct WebPageModel {
     
+//    var webPageViewController = WebPageViewController()
     var webDelegate: WebPageDelegate?
     func fetchFinalWebpage(webURL: String) {
         if let url = URL(string: webURL) {
@@ -26,6 +28,7 @@ struct WebPageModel {
                 }
                 
                 if let safeData = data {
+                    
                     return
                 }
             }

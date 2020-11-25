@@ -9,7 +9,6 @@ import UIKit
 
 protocol RecipeManagerDelegate {
     func didUpdateRecipe(_ recipeManager: RecipeManager, recipe: RecipeModel)
-//    func didUpdateWebPage(_ recipeManager: RecipeManager)
     func didFailWithError(error: Error)
 }
 
@@ -19,11 +18,12 @@ struct RecipeManager {
     let appKey = "24f428ea7ca46ce12a04eabda6c59909"
     let maxNumberOfApiRequests = 100
     
+    static var recipeArray = [String]()
     var delegate: RecipeManagerDelegate?
     
     func fetchRecipe(typeOfFood: String) {
         let urlString = "\(recipeURL)&app_id=\(appID)&app_key=\(appKey)&q=\(typeOfFood)&from=0&to=\(maxNumberOfApiRequests)"
-        print(urlString)
+//        print(urlString)
         performRequest(urlString: urlString)
     }
     
@@ -65,7 +65,7 @@ struct RecipeManager {
             for j in 0..<maxNumberOfApiRequests {
                 urlList.append(contentsOf: [decodedData.hits[j].recipe.url])
             }
-            print(urlList)
+//            print(urlList)
             var recipe = RecipeModel(recipeLabel: recipeList, urlString: urlList)
             recipeList.removeAll()
             return recipe
