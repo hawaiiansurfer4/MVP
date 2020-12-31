@@ -9,14 +9,18 @@ import UIKit
 
 class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
     
-//    var currentIndexPath = In
     var recipeManager = RecipeManager()
     var webPageModel = WebPageModel()
     var tableRecipeItems: String = ""
     var recipeArray = [String]()
-//    var webPageDelegate = WebPageDelegate()
     var webPageViewController = WebPageViewController()
     static var urlArray = [String]()
+    
+    enum State {
+        case loading
+        case sucess
+        case error 
+    }
 
     @IBOutlet weak var searchBarTextField: UISearchBar!
     
@@ -38,6 +42,7 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
     
     func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
         if searchBar.text != "" {
+            State.loading
             tableView.reloadData()
             return true
         } else {
@@ -68,28 +73,23 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "goToWebView", sender: indexPath.row)
-        webPageModel.fetchFinalWebpage(webURL: RecipeTableViewController.urlArray[indexPath.row])
         WebPageViewController.webShowRecipeURL = RecipeTableViewController.urlArray[indexPath.row]
-//        webPageViewController.grabURLForRecipeScreen(urlString: RecipeTableViewController.urlArray[indexPath.row])
         print(indexPath.row)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        guard let showWebViewRecipe = segue.destination as? 
-//    }
 }
 //MARK: - RecipeManagerDelegate
     
 extension RecipeTableViewController: RecipeManagerDelegate {
     func didUpdateRecipe(_ recipeManager: RecipeManager, recipe: RecipeModel) {
         DispatchQueue.main.async {
+            self.recipeArray.removeAll()
+            RecipeTableViewController.urlArray.removeAll()
             self.recipeArray.append(contentsOf: recipe.recipeLabel)
+            
             RecipeTableViewController.urlArray.append(contentsOf: recipe.urlString)
-//            print("the current url array is \(recipe.urlString)")
             
-            
-//            print("The label reads \(recipe.recipeLabel)")
             self.tableView.reloadData()
         }
     }
@@ -99,3 +99,6 @@ extension RecipeTableViewController: RecipeManagerDelegate {
     }
 
 }
+
+
+

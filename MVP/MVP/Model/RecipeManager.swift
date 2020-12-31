@@ -56,6 +56,11 @@ struct RecipeManager {
         var recipeList = [String]()
         var urlList = [String]()
         do {
+//            recipeList.removeAll()
+//            urlList.removeAll()
+            
+//            print("This is my recipe list \(recipeList)")
+//            print("This is my url list \(urlList)")
             let decodedData = try decoder.decode(RecipeData.self, from: recipeData)
             
             for i in 0..<maxNumberOfApiRequests {
@@ -67,7 +72,8 @@ struct RecipeManager {
             }
 //            print(urlList)
             var recipe = RecipeModel(recipeLabel: recipeList, urlString: urlList)
-            recipeList.removeAll()
+//            recipeList.removeAll()
+//            urlList.removeAll()
             return recipe
         } catch {
             print(error)

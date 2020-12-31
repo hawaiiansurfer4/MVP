@@ -41,16 +41,5 @@ class WebPageViewController: UIViewController, WKUIDelegate {
         
     }
     
-    
-//    func Recipe() {
-//
-//        recipeManager.
-//    }
-//
-//    func showRecipeOnScreen(webPageView: Data) {
-//
-//    }
-//    override func loadFileURL(_ URL: URL, allowingReadAccessTo readAccessURL: URL) -> WKNavigation? {
-//        web
-//    }
 }
+
