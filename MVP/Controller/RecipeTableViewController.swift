@@ -7,13 +7,16 @@
 
 import UIKit
 
-class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
+class RecipeTableViewController: UITableViewController, UISearchBarDelegate {
     
     var recipeManager = RecipeManager()
     var webPageModel = WebPageModel()
     var tableRecipeItems: String = ""
     var recipeArray = [String]()
     var webPageViewController = WebPageViewController()
+    var spinnerView = SpinnerView()
+//    var activityIndicator = UIActivityIndicatorView()
+    var indicator = UIActivityIndicatorView(frame: CoreGraphics.CGRect(x: 0, y: 0, width: 100, height: 100))
     static var urlArray = [String]()
     
     enum State {
@@ -35,14 +38,14 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
     
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-//        print(searchBarTextField.text!)
+        
         tableView.reloadData()
+        
         searchBarTextField.endEditing(true)
     }
     
     func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
         if searchBar.text != "" {
-            State.loading
             tableView.reloadData()
             return true
         } else {
@@ -54,8 +57,34 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         if let recipe = searchBarTextField.text {
             recipeManager.fetchRecipe(typeOfFood: recipe)
+            startLoadingScreen(state: .loading)
         }
         searchBarTextField.text = ""
+    }
+    
+    func startLoadingScreen(state: State) {
+        switch state {
+        case .loading:
+//            activityIndicator.center = UITableViewController.accessibilityActivationPoint()
+//            activityIndicator.hidesWhenStopped = true
+//            activityIndicator.style = UIActivityIndicatorView.Style.medium
+//            view.addSubview(activityIndicator)
+            
+            indicator.style = UIActivityIndicatorView.Style.large
+            indicator.startAnimating()
+            indicator.color = UIColor.green
+            indicator.backgroundColor = UIColor.clear
+            indicator.center = self.view.center
+            self.view.addSubview(indicator)
+            indicator.hidesWhenStopped = true
+        case .sucess:
+            indicator.stopAnimating()
+        case .error:
+            let alert = UIAlertController(title: "Error", message: "Invalid Search! Please check spelling and try again!", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -86,6 +115,7 @@ extension RecipeTableViewController: RecipeManagerDelegate {
         DispatchQueue.main.async {
             self.recipeArray.removeAll()
             RecipeTableViewController.urlArray.removeAll()
+            self.startLoadingScreen(state: .sucess)
             self.recipeArray.append(contentsOf: recipe.recipeLabel)
             
             RecipeTableViewController.urlArray.append(contentsOf: recipe.urlString)
@@ -102,7 +132,7 @@ extension RecipeTableViewController: RecipeManagerDelegate {
     }
     
     func didFailWithError(error: Error) {
-        print(error)
+        startLoadingScreen(state: .error)
     }
 
 }

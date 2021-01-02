@@ -30,6 +30,10 @@ struct RecipeManager {
         
     func performRequest(urlString: String) {
         
+//        adding the spinning circle here
+        
+        
+        
         if let url = URL(string: urlString) {
             
             let session = URLSession(configuration: .default)
@@ -74,8 +78,7 @@ struct RecipeManager {
                 urlList.append(contentsOf: [decodedData.hits[j].recipe.url])
             }
             var recipe = RecipeModel(recipeLabel: recipeList, urlString: urlList)
-//            recipeList.removeAll()
-//            urlList.removeAll()
+            
             return recipe
         } catch {
             print(error)
