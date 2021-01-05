@@ -14,9 +14,8 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate {
     var tableRecipeItems: String = ""
     var recipeArray = [String]()
     var webPageViewController = WebPageViewController()
-    var spinnerView = SpinnerView()
-//    var activityIndicator = UIActivityIndicatorView()
     var indicator = UIActivityIndicatorView(frame: CoreGraphics.CGRect(x: 0, y: 0, width: 100, height: 100))
+//    var loadingManager = LoadingManager()
     static var urlArray = [String]()
     
     enum State {
@@ -57,6 +56,7 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate {
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         if let recipe = searchBarTextField.text {
             recipeManager.fetchRecipe(typeOfFood: recipe)
+//            loadingManager.startLoadingScreen(state: .loading)
             startLoadingScreen(state: .loading)
         }
         searchBarTextField.text = ""
@@ -65,11 +65,6 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate {
     func startLoadingScreen(state: State) {
         switch state {
         case .loading:
-//            activityIndicator.center = UITableViewController.accessibilityActivationPoint()
-//            activityIndicator.hidesWhenStopped = true
-//            activityIndicator.style = UIActivityIndicatorView.Style.medium
-//            view.addSubview(activityIndicator)
-            
             indicator.style = UIActivityIndicatorView.Style.large
             indicator.startAnimating()
             indicator.color = UIColor.green
@@ -115,6 +110,7 @@ extension RecipeTableViewController: RecipeManagerDelegate {
         DispatchQueue.main.async {
             self.recipeArray.removeAll()
             RecipeTableViewController.urlArray.removeAll()
+//            self.loadingManager.startLoadingScreen(state: .sucess)
             self.startLoadingScreen(state: .sucess)
             self.recipeArray.append(contentsOf: recipe.recipeLabel)
             
@@ -132,10 +128,24 @@ extension RecipeTableViewController: RecipeManagerDelegate {
     }
     
     func didFailWithError(error: Error) {
-        startLoadingScreen(state: .error)
+        print(error)
     }
 
 }
 
-
+//MARK: - LoadingManagerDelegate
+//extension RecipeTableViewController: LoadingManagerDelegate {
+//    func didFailLoadingError(error: Error, loadingManager: LoadingManager) {
+//        loadingManager.startLoadingScreen(state: .error)
+//        print(error)
+//    }
+//    
+//    func didUpdateLoadingScreen(_ loadingManager: LoadingManager) {
+//        let viewSet = loadingManager.indicator
+//        viewSet.center = self.view.center
+//        self.view.addSubview(loadingManager.indicator)
+//    }
+//    
+//    
+//}
 

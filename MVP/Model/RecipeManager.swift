@@ -17,22 +17,19 @@ struct RecipeManager {
     let appID = "3214dd26"
     let appKey = "24f428ea7ca46ce12a04eabda6c59909"
     let maxNumberOfApiRequests = 100
+//    var loadingManager = LoadingManager()
+    
     
     static var recipeArray = [String]()
     var delegate: RecipeManagerDelegate?
     
     func fetchRecipe(typeOfFood: String) {
         let urlString = "\(recipeURL)&app_id=\(appID)&app_key=\(appKey)&q=\(typeOfFood)&from=0&to=\(maxNumberOfApiRequests)"
-//        print(urlString)
         performRequest(urlString: urlString)
     }
     
         
     func performRequest(urlString: String) {
-        
-//        adding the spinning circle here
-        
-        
         
         if let url = URL(string: urlString) {
             
@@ -50,6 +47,7 @@ struct RecipeManager {
                         self.delegate?.didUpdateRecipe(self, recipe: recipe)
 //                        add loading screen back to normal screen
                         RecipeTableViewController.State.sucess
+//                        loadingManager.startLoadingScreen(state: .sucess)
                     } else {
                         self.delegate?.didUpdateRecipe(self, recipe: RecipeModel(recipeLabel: [], urlString: []))
                     }
