@@ -21,7 +21,7 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
         case sucess
         case error 
     }
-
+    
     @IBOutlet weak var searchBarTextField: UISearchBar!
     
     override func viewDidLoad() {

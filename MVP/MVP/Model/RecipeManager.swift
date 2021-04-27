@@ -23,7 +23,7 @@ struct RecipeManager {
     
     func fetchRecipe(typeOfFood: String) {
         let urlString = "\(recipeURL)&app_id=\(appID)&app_key=\(appKey)&q=\(typeOfFood)&from=0&to=\(maxNumberOfApiRequests)"
-//        print(urlString)
+        print(urlString)
         performRequest(urlString: urlString)
     }
     
@@ -70,7 +70,7 @@ struct RecipeManager {
             for j in 0..<maxNumberOfApiRequests {
                 urlList.append(contentsOf: [decodedData.hits[j].recipe.url])
             }
-//            print(urlList)
+            print(urlList)
             var recipe = RecipeModel(recipeLabel: recipeList, urlString: urlList)
 //            recipeList.removeAll()
 //            urlList.removeAll()

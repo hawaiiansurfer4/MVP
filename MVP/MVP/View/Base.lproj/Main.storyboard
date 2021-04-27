@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="faX-Pu-1FP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="UF5-3Z-k1C">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -23,7 +23,7 @@
                         </searchBar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="recipeCells" id="Cyd-GT-LfF">
-                                <rect key="frame" x="0.0" y="72" width="414" height="43.5"/>
+                                <rect key="frame" x="0.0" y="68.5" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Cyd-GT-LfF" id="Vym-ia-hli">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -36,25 +36,26 @@
                             <outlet property="delegate" destination="faX-Pu-1FP" id="3hO-XW-jdz"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="R7t-4T-BTX"/>
                     <connections>
-                        <outlet property="searchBarTextField" destination="vta-4N-dNX" id="efL-kb-qwu"/>
+                        <outlet property="searchBarTextField" destination="vta-4N-dNX" id="k2f-T3-dQR"/>
                         <segue destination="szW-5T-Kl5" kind="show" identifier="goToWebView" id="EDc-IH-Cw7"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lMc-eE-B4B" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1918" y="128"/>
+            <point key="canvasLocation" x="2827.536231884058" y="127.90178571428571"/>
         </scene>
         <!--Web Page View Controller-->
         <scene sceneID="tFc-aP-9oa">
             <objects>
                 <viewController id="szW-5T-Kl5" customClass="WebPageViewController" customModule="MVP" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ebk-D9-elv">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H7O-4D-ivs">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
@@ -75,7 +76,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o3B-LJ-mP0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2729" y="128"/>
+            <point key="canvasLocation" x="3639.130434782609" y="127.90178571428571"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="FTz-vY-ffy">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="UF5-3Z-k1C" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="nFv-Uc-A2s">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="faX-Pu-1FP" kind="relationship" relationship="rootViewController" id="7xj-Wq-c7x"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="p24-SR-SjZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1917.3913043478262" y="127.90178571428571"/>
         </scene>
     </scenes>
     <resources>

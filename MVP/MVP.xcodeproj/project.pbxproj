@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		66621766F5644C165F1BF5D3 /* libPods-MVP.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 567C1FC757C6F233F6F867DC /* libPods-MVP.a */; };
 		C46886412550E848000E72FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46886402550E848000E72FF /* AppDelegate.swift */; };
 		C46886432550E848000E72FF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46886422550E848000E72FF /* SceneDelegate.swift */; };
 		C46886482550E848000E72FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C46886462550E848000E72FF /* Main.storyboard */; };
@@ -19,11 +20,10 @@
 		C484E168255B261E0044A790 /* WebPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C484E167255B261E0044A790 /* WebPageModel.swift */; };
 		C484E16B255C292C0044A790 /* WebPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C484E16A255C292C0044A790 /* WebPageViewController.swift */; };
 		C4917333258C2C3600BECE09 /* LoadingCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4917332258C2C3600BECE09 /* LoadingCircle.swift */; };
-		DE610C3633A356D64F3E5A23 /* Pods_MVP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12F4DA7DACCB4C66964955D0 /* Pods_MVP.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		12F4DA7DACCB4C66964955D0 /* Pods_MVP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MVP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		567C1FC757C6F233F6F867DC /* libPods-MVP.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MVP.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF5C2770252BEAC9D03FE68C /* Pods-MVP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MVP.release.xcconfig"; path = "Target Support Files/Pods-MVP/Pods-MVP.release.xcconfig"; sourceTree = "<group>"; };
 		C468863D2550E848000E72FF /* MVP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MVP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C46886402550E848000E72FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -47,7 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DE610C3633A356D64F3E5A23 /* Pods_MVP.framework in Frameworks */,
+				66621766F5644C165F1BF5D3 /* libPods-MVP.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,7 +128,7 @@
 		EE5EBA1C91318C4E89F901CA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				12F4DA7DACCB4C66964955D0 /* Pods_MVP.framework */,
+				567C1FC757C6F233F6F867DC /* libPods-MVP.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -144,7 +144,6 @@
 				C46886392550E848000E72FF /* Sources */,
 				C468863A2550E848000E72FF /* Frameworks */,
 				C468863B2550E848000E72FF /* Resources */,
-				C279845BCDBAFA52669C4556 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -221,23 +220,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C279845BCDBAFA52669C4556 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MVP/Pods-MVP-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MVP/Pods-MVP-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MVP/Pods-MVP-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

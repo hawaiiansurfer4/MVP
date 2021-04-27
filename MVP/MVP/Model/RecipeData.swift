@@ -16,7 +16,6 @@ struct RecipeData: Codable {
 
 struct Hits: Codable {
     let recipe: Recipe
-    let bookmarked: Bool
 }
 
 struct Recipe: Codable {
