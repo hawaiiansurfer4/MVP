@@ -24,16 +24,12 @@ class WebPageViewController: UIViewController, WKUIDelegate {
         view = webView
     }
     
-    func grabURLForRecipeScreen(urlString: String?) {
-//        if let url = urlString {
-//            webShowRecipeURL = url
-//            print("Here is the webShowRecipeURL \(webShowRecipeURL)")
-//        }
-    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         DispatchQueue.main.async {
+            self.createSpinnerView()
             guard let myURL = URL(string: WebPageViewController.webShowRecipeURL) else { fatalError("Error creating the final recipe URL screen")}
             let myRequest = URLRequest(url: myURL)
             self.webView.load(myRequest)
@@ -41,5 +37,18 @@ class WebPageViewController: UIViewController, WKUIDelegate {
         
     }
     
+    func createSpinnerView() {
+        let child = SpinnerViewController()
+
+        addChild(child)
+        child.view.frame = view.frame
+        view.addSubview(child.view)
+        child.didMove(toParent: self)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            child.willMove(toParent: nil)
+            child.view.removeFromSuperview()
+            child.removeFromParent()
+        }
+    }
 }
 
