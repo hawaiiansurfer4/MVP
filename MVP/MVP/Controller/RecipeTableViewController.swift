@@ -15,12 +15,14 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
     var recipeArray = [String]()
     var webPageViewController = WebPageViewController()
     static var urlArray = [String]()
+    let child = SpinnerViewController()
     
     enum State {
         case loading
         case sucess
         case error 
     }
+    
     
     @IBOutlet weak var searchBarTextField: UISearchBar!
     
@@ -66,6 +68,8 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "recipeCells", for: indexPath)
+        State.sucess
+        removeSpinnerView()
         cell.textLabel?.text = recipeArray[indexPath.row] ?? "Nothing searched yet"
         cell.textLabel?.numberOfLines = 0
         cell.accessoryType = .none
@@ -77,24 +81,6 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
         WebPageViewController.webShowRecipeURL = RecipeTableViewController.urlArray[indexPath.row]
         print(indexPath.row)
         tableView.deselectRow(at: indexPath, animated: true)
-    }
-    
-    func createSpinnerView() {
-        let child = SpinnerViewController()
-
-        // add the spinner view controller
-        addChild(child)
-        child.view.frame = view.frame
-        view.addSubview(child.view)
-        child.didMove(toParent: self)
-
-        // wait two seconds to simulate some work happening
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            // then remove the spinner view controller
-            child.willMove(toParent: nil)
-            child.view.removeFromSuperview()
-            child.removeFromParent()
-        }
     }
     
 }
@@ -121,8 +107,30 @@ extension RecipeTableViewController: RecipeManagerDelegate {
 
 }
 
-//MARK: - LoadingCircle
+//MARK: - spinner
 
+extension RecipeTableViewController {
+    func createSpinnerView() {
+        
+
+        // add the spinner view controller
+        addChild(child)
+        child.view.frame = view.frame
+        view.addSubview(child.view)
+        child.didMove(toParent: self)
+    }
+    
+    func removeSpinnerView() {
+
+        // wait two seconds to simulate some work happening
+        DispatchQueue.main.asyncAfter(deadline: .now()) {
+            // then remove the spinner view controller
+            self.child.willMove(toParent: nil)
+            self.child.view.removeFromSuperview()
+            self.child.removeFromParent()
+        }
+    }
+}
 
 
 

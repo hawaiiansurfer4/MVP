@@ -8,6 +8,5 @@ target 'MVP' do
   # Pods for MVP
 
  pod 'Alamofire'
-# pod 'SwiftyJSON'
 
 end
