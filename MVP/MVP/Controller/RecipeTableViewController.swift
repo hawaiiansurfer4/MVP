@@ -133,5 +133,20 @@ extension RecipeTableViewController {
 }
 
 
+//MARK: - State Management
+
+extension RecipeTableViewController {
+    func stateManagement(_ currentState: State) {
+        switch currentState {
+        case .loading:
+            createSpinnerView()
+        case .sucess:
+            removeSpinnerView()
+        case .error:
+            print("Error with the switch statement for your enum in State Management")
+        }
+    }
+}
+
 
 
