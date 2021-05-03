@@ -30,13 +30,13 @@ class WebPageViewController: UIViewController, WKUIDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         DispatchQueue.main.async {
+            self.webPageStateManagement(WebState.loading)
             guard let myURL = URL(string: WebPageViewController.webShowRecipeURL) else { fatalError("Error creating the final recipe URL screen")}
             let myRequest = URLRequest(url: myURL)
             self.webView.load(myRequest)
+            self.webPageStateManagement(WebState.success)
         }
-        
     }
-    
 }
     
     //MARK: - Activity Indicator
@@ -56,6 +56,28 @@ extension WebPageViewController {
             self.child.willMove(toParent: nil)
             self.child.view.removeFromSuperview()
             self.child.removeFromParent()
+        }
+    }
+}
+
+//MARK: - State Management
+
+extension WebPageViewController {
+
+    enum WebState {
+        case loading
+        case success
+        case error
+    }
+
+    func webPageStateManagement(_ currentState: WebState) {
+        switch currentState {
+        case .loading:
+            createSpinnerView()
+        case .success:
+            removeSpinner()
+        case .error:
+            print("Error with your web page VC State Management")
         }
     }
 }
