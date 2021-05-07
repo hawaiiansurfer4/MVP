@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
     
@@ -17,12 +18,20 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
     static var urlArray = [String]()
 //    let child = SpinnerViewController()
     var kid = SpinnerViewController()
+    @State private var searchButtonPressed: Bool = false
     
-    enum State {
+    enum Status {
         case none
         case loading
         case sucess
-        case error 
+//        case error
+        
+    }
+    
+    var status: Status = .none {
+        didSet {
+            UpdateUI()
+        }
     }
     
     
@@ -40,14 +49,18 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
 //        print(searchBarTextField.text!)
+//        stateManagement(State.loading)
+        
         tableView.reloadData()
-        stateManagement(State.loading)
         searchBarTextField.endEditing(true)
 //        stateManagement(State.loading)
     }
     
     func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
+//        stateManagement(State.loading)
         if searchBar.text != "" {
+            searchButtonPressed = true
+            status = .loading
 //            State.loading
 //            createSpinnerView()
 //            stateManagement(State.loading)
@@ -61,9 +74,13 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         if let recipe = searchBarTextField.text {
+//            stateManagement(State.loading)
             recipeManager.fetchRecipe(typeOfFood: recipe)
         }
+        
+//        stateManagement(State.loading) move to global
         searchBarTextField.text = ""
+//        stateManagement(State.loading)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -80,7 +97,8 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
         cell.textLabel?.numberOfLines = 0
         cell.accessoryType = .none
 //        stateManagement(State.none)
-        stateManagement(State.sucess)
+//        stateManagement(State.sucess)
+        searchButtonPressed = false
         return cell
     }
     
@@ -105,8 +123,9 @@ extension RecipeTableViewController: RecipeManagerDelegate {
             self.recipeArray.append(contentsOf: recipe.recipeLabel)
             
             RecipeTableViewController.urlArray.append(contentsOf: recipe.urlString)
-            
+//            self.stateManagement(State.sucess)
             self.tableView.reloadData()
+            self.status = .sucess
 //            self.stateManagement(State.sucess)
         }
     }
@@ -138,7 +157,8 @@ extension RecipeTableViewController {
             self.kid.view.removeFromSuperview()
             self.kid.removeFromParent()
             self.kid = SpinnerViewController()
-            self.stateManagement(State.none)
+//            self.kid.delete(Any?)
+//            self.spinner(State.none)
         }
     }
 }
@@ -147,10 +167,13 @@ extension RecipeTableViewController {
 //MARK: - State Management
 
 extension RecipeTableViewController {
-    func stateManagement(_ currentState: State) {
-        switch currentState {
+    
+    func UpdateUI() {
+        
+        switch status {
         case .none:
             print("reset the state")
+//            removeSpinnerView()
         case .loading:
             createSpinnerView()
             print("loading state")
@@ -158,8 +181,8 @@ extension RecipeTableViewController {
             removeSpinnerView()
             print("success")
 //            State.none
-        case .error:
-            print("Error with the switch statement for your enum in State Management")
+//        case .error:
+//            print("Error with the switch statement for your enum in State Management")
         }
     }
 }
