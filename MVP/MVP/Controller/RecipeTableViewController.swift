@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
     
@@ -15,12 +16,21 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
     var recipeArray = [String]()
     var webPageViewController = WebPageViewController()
     static var urlArray = [String]()
-    let child = SpinnerViewController()
+    var kid = SpinnerViewController()
+    @State private var searchButtonPressed: Bool = false
     
-    enum State {
+    enum Status {
+        case none
         case loading
         case sucess
-        case error 
+//        case error
+        
+    }
+    
+    var status: Status = .none {
+        didSet {
+            UpdateUI()
+        }
     }
     
     
@@ -38,14 +48,15 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
 //        print(searchBarTextField.text!)
+        
         tableView.reloadData()
         searchBarTextField.endEditing(true)
     }
     
     func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
         if searchBar.text != "" {
-            State.loading
-            createSpinnerView()
+            searchButtonPressed = true
+            status = .loading
             tableView.reloadData()
             return true
         } else {
@@ -56,8 +67,10 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         if let recipe = searchBarTextField.text {
+            
             recipeManager.fetchRecipe(typeOfFood: recipe)
         }
+        
         searchBarTextField.text = ""
     }
     
@@ -68,18 +81,17 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "recipeCells", for: indexPath)
-        State.sucess
-        removeSpinnerView()
         cell.textLabel?.text = recipeArray[indexPath.row] ?? "Nothing searched yet"
         cell.textLabel?.numberOfLines = 0
         cell.accessoryType = .none
+        searchButtonPressed = false
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "goToWebView", sender: indexPath.row)
         WebPageViewController.webShowRecipeURL = RecipeTableViewController.urlArray[indexPath.row]
-        print(indexPath.row)
+//        print(indexPath.row)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
@@ -96,8 +108,8 @@ extension RecipeTableViewController: RecipeManagerDelegate {
             self.recipeArray.append(contentsOf: recipe.recipeLabel)
             
             RecipeTableViewController.urlArray.append(contentsOf: recipe.urlString)
-            
             self.tableView.reloadData()
+            self.status = .sucess
         }
     }
     
@@ -111,27 +123,49 @@ extension RecipeTableViewController: RecipeManagerDelegate {
 
 extension RecipeTableViewController {
     func createSpinnerView() {
-        
-
+        kid = SpinnerViewController()
         // add the spinner view controller
-        addChild(child)
-        child.view.frame = view.frame
-        view.addSubview(child.view)
-        child.didMove(toParent: self)
+        addChild(kid)
+        kid.view.frame = view.frame
+        view.addSubview(kid.view)
+        kid.didMove(toParent: self)
     }
     
     func removeSpinnerView() {
 
-        // wait two seconds to simulate some work happening
+        // simulate some work happening
         DispatchQueue.main.asyncAfter(deadline: .now()) {
             // then remove the spinner view controller
-            self.child.willMove(toParent: nil)
-            self.child.view.removeFromSuperview()
-            self.child.removeFromParent()
+            self.kid.willMove(toParent: nil)
+            self.kid.view.removeFromSuperview()
+            self.kid.removeFromParent()
+            self.kid = SpinnerViewController()
         }
     }
 }
 
+
+//MARK: - State Management
+
+extension RecipeTableViewController {
+    
+    func UpdateUI() {
+        
+        switch status {
+        case .none:
+            print("reset the state")
+        case .loading:
+            createSpinnerView()
+            print("loading state")
+        case .sucess:
+            removeSpinnerView()
+            print("success")
+//            State.none
+//        case .error:
+//            print("Error with the switch statement for your enum in State Management")
+        }
+    }
+}
 
 
 
