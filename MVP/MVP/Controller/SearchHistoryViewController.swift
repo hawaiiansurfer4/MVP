@@ -33,6 +33,7 @@ class SearchHistoryViewController: UIViewController, UITableViewDelegate, UISear
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         searchBarSHVC.text = testArray[indexPath.row]
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
