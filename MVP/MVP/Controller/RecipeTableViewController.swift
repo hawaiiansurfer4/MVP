@@ -45,6 +45,11 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
     }
     
     
+    @IBAction func searcButtonPressed(_ sender: UIBarButtonItem) {
+        performSegue(withIdentifier: "goToSearchHistory", sender: sender)
+    }
+    
+    @IBAction func unwindToRecipeTableVC(segue: UIStoryboardSegue) {}
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
 //        print(searchBarTextField.text!)

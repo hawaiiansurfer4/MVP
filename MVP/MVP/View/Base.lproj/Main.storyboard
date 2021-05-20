@@ -36,37 +36,54 @@
                             <outlet property="delegate" destination="faX-Pu-1FP" id="3hO-XW-jdz"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="R7t-4T-BTX"/>
+                    <navigationItem key="navigationItem" id="R7t-4T-BTX">
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="h6a-lk-W2T">
+                            <connections>
+                                <action selector="searcButtonPressed:" destination="faX-Pu-1FP" id="UQw-zX-CBS"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="searchBarTextField" destination="vta-4N-dNX" id="k2f-T3-dQR"/>
                         <segue destination="szW-5T-Kl5" kind="show" identifier="goToWebView" id="EDc-IH-Cw7"/>
+                        <segue destination="2c7-LZ-QFT" kind="presentation" identifier="goToSearchHistory" id="Wue-0x-ySR"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lMc-eE-B4B" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2827.536231884058" y="127.90178571428571"/>
         </scene>
-        <!--View Controller-->
+        <!--Search History View Controller-->
         <scene sceneID="sMD-X5-eKR">
             <objects>
-                <viewController id="2c7-LZ-QFT" sceneMemberID="viewController">
+                <viewController id="2c7-LZ-QFT" customClass="SearchHistoryViewController" customModule="MVP" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RHQ-eW-q6B">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="BOg-sV-ceY">
-                                <rect key="frame" x="0.0" y="44" width="414" height="51"/>
+                                <rect key="frame" x="0.0" y="56" width="414" height="51"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6Dh-zI-kLN">
-                                <rect key="frame" x="0.0" y="88" width="414" height="354"/>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z4s-5k-RBz">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                                <items>
+                                    <navigationItem title="Title" id="rTP-QT-k8R"/>
+                                </items>
+                            </navigationBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6Dh-zI-kLN">
+                                <rect key="frame" x="0.0" y="107" width="414" height="414"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="414" id="PTP-k4-Ksn"/>
+                                    <constraint firstAttribute="width" constant="414" id="gOy-Ek-Hfx"/>
+                                </constraints>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Y1X-CD-ris">
-                                        <rect key="frame" x="0.0" y="24.5" width="414" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchHistoryCell" id="Y1X-CD-ris">
+                                        <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Y1X-CD-ris" id="ikS-mK-f7Y">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -76,14 +93,26 @@
                         <viewLayoutGuide key="safeArea" id="Mxg-0c-rKy"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="6Dh-zI-kLN" firstAttribute="top" secondItem="BOg-sV-ceY" secondAttribute="bottom" id="25C-tS-XmR"/>
-                            <constraint firstItem="BOg-sV-ceY" firstAttribute="trailing" secondItem="Mxg-0c-rKy" secondAttribute="trailing" id="Isv-6V-tiq"/>
-                            <constraint firstItem="BOg-sV-ceY" firstAttribute="top" secondItem="Mxg-0c-rKy" secondAttribute="top" id="Jvl-jx-Gks"/>
-                            <constraint firstItem="BOg-sV-ceY" firstAttribute="leading" secondItem="Mxg-0c-rKy" secondAttribute="leading" id="LVx-Qy-lxy"/>
+                            <constraint firstItem="BOg-sV-ceY" firstAttribute="trailing" secondItem="Mxg-0c-rKy" secondAttribute="trailing" id="A0E-gc-qva"/>
+                            <constraint firstItem="Z4s-5k-RBz" firstAttribute="trailing" secondItem="Mxg-0c-rKy" secondAttribute="trailing" id="JQd-22-fMt"/>
+                            <constraint firstItem="6Dh-zI-kLN" firstAttribute="top" secondItem="BOg-sV-ceY" secondAttribute="bottom" id="LSa-L1-PSP"/>
+                            <constraint firstItem="BOg-sV-ceY" firstAttribute="top" secondItem="Z4s-5k-RBz" secondAttribute="bottom" id="Nnt-wf-G6R"/>
+                            <constraint firstItem="6Dh-zI-kLN" firstAttribute="trailing" secondItem="Mxg-0c-rKy" secondAttribute="trailing" id="W0S-NR-ALe"/>
+                            <constraint firstItem="BOg-sV-ceY" firstAttribute="leading" secondItem="Mxg-0c-rKy" secondAttribute="leading" id="YOO-Ip-0sb"/>
+                            <constraint firstItem="Z4s-5k-RBz" firstAttribute="top" secondItem="Mxg-0c-rKy" secondAttribute="top" id="cB9-aD-veB"/>
+                            <constraint firstItem="6Dh-zI-kLN" firstAttribute="leading" secondItem="Mxg-0c-rKy" secondAttribute="leading" id="ndL-Oe-OI5"/>
+                            <constraint firstItem="Z4s-5k-RBz" firstAttribute="leading" secondItem="Mxg-0c-rKy" secondAttribute="leading" id="zbA-eI-gWd"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="historyTable" destination="6Dh-zI-kLN" id="7pE-wT-4rq"/>
+                        <outlet property="searchBarSHVC" destination="BOg-sV-ceY" id="9lo-Hc-vsp"/>
+                        <outlet property="searhHistoryNavBar" destination="Z4s-5k-RBz" id="VtA-Vj-P3b"/>
+                        <segue destination="ve3-F1-Wri" kind="unwind" identifier="unwindToRecipeTableVC" unwindAction="unwindToRecipeTableVCWithSegue:" id="wDa-Fx-MXt"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LlM-il-UEB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="ve3-F1-Wri" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2826.0869565217395" y="829.6875"/>
         </scene>
