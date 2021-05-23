@@ -26,7 +26,7 @@ struct RecipeManager {
 //        print(urlString)
         performRequest(urlString: urlString)
     }
-    
+
         
     func performRequest(urlString: String) {
         
@@ -82,6 +82,4 @@ struct RecipeManager {
         
     }
 }
-
-
 

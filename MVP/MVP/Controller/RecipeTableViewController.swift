@@ -29,6 +29,7 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
     
     var status: Status = .none {
         didSet {
+            
             UpdateUI()
         }
     }
@@ -39,9 +40,12 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        searchBarTextField.delegate = self
+//        searchBarTextField.delegate = self
         tableView.delegate = self
         recipeManager.delegate = self
+//        self.loadView()
+        self.tableView.reloadData()
+//        reloadInputViews()
     }
     
     

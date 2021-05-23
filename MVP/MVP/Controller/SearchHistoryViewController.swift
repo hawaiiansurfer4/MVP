@@ -10,7 +10,8 @@ import UIKit
 class SearchHistoryViewController: UIViewController, UITableViewDelegate, UISearchBarDelegate, UITableViewDataSource {
     
     
-    var testArray = ["test","runing","now","go","Search","up","to","now"]
+    var testArray = ["Chicken","Country","Steak","Shrimp","Scallop","Banana","Nutella","Whip Cream"]
+    var recipeManager = RecipeManager()
     
     @IBOutlet weak var historyTable: UITableView!
     @IBOutlet weak var searhHistoryNavBar: UINavigationBar!
@@ -23,9 +24,34 @@ class SearchHistoryViewController: UIViewController, UITableViewDelegate, UISear
         historyTable.dataSource = self
     }
     
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        performSegue(withIdentifier: "unwindToRecipeTableVC", sender: searchBar)
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        if let recipe = searchBarSHVC.text {
+            
+            recipeManager.fetchRecipe(typeOfFood: recipe)
+        }
+        
+        searchBarSHVC.text = ""
     }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if searchBarSHVC.text != "" {
+        performSegue(withIdentifier: "unwindToRecipeTableVC", sender: searchBar)
+        } else {
+            searchBar.placeholder = "Type Something!"
+        }
+//        let recipeTableVC = RecipeTableViewController()
+//        recipeTableVC.status = .loading
+//        recipeTableVC.createSpinnerView()
+    }
+    
+//    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
+//        if searchBar.text != "" {
+//            return true
+//        } else {
+//            searchBar.placeholder = "Type Something!"
+//            return false
+//        }
+//    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return testArray.count
