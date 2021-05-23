@@ -51,6 +51,8 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
     
     @IBAction func searcButtonPressed(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: "goToSearchHistory", sender: sender)
+        status = .loading
+        tableView.reloadData()
     }
     
     @IBAction func unwindToRecipeTableVC(segue: UIStoryboardSegue) {}
