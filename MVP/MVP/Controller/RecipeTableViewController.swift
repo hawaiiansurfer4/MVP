@@ -22,14 +22,11 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
         case none
         case loading
         case sucess
-//        case error
-        
+        case error
     }
     
     var status: Status = .none {
-        didSet {
-            UpdateUI()
-        }
+        didSet { UpdateUI() }
     }
     
     
@@ -53,6 +50,7 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
     @IBAction func searcButtonPressed(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: "goToSearchHistory", sender: sender)
 //        tableView.reloadData()
+        status = .loading
     }
     
     @IBAction func unwindToRecipeTableVC(segue: UIStoryboardSegue) {
@@ -131,6 +129,8 @@ extension RecipeTableViewController: RecipeManagerDelegate {
     func didFailWithError(error: Error) {
         print("Recipte Table VC noticed the error")
         print(error)
+        
+        status = .error
     }
 
 }
@@ -139,12 +139,14 @@ extension RecipeTableViewController: RecipeManagerDelegate {
 
 extension RecipeTableViewController {
     func createSpinnerView() {
-        kid = SpinnerViewController()
-        // add the spinner view controller
-        addChild(kid)
-        kid.view.frame = view.frame
-        view.addSubview(kid.view)
-        kid.didMove(toParent: self)
+        DispatchQueue.main.async{
+            self.kid = SpinnerViewController()
+            // add the spinner view controller
+            self.addChild(self.kid)
+            self.kid.view.frame = self.view.frame
+            self.view.addSubview(self.kid.view)
+            self.kid.didMove(toParent: self)
+        }
     }
     
     func removeSpinnerView() {
@@ -176,9 +178,9 @@ extension RecipeTableViewController {
         case .sucess:
             removeSpinnerView()
             print("success")
-//            State.none
-//        case .error:
-//            print("Error with the switch statement for your enum in State Management")
+        case .error:
+            removeSpinnerView()
+            print("Error with the switch statement for your enum in State Management")
         }
     }
 }
