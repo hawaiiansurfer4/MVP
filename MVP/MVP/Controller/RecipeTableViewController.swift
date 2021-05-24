@@ -117,20 +117,20 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
 extension RecipeTableViewController: RecipeManagerDelegate {
     func didUpdateRecipe(_ recipeManager: RecipeManager, recipeModel: RecipeModel) {
         print("Recipte Table VC noticed the update")
-//        DispatchQueue.main.async {
-//            self.recipeArray.removeAll()
-//            RecipeTableViewController.urlArray.removeAll()
-//            self.recipeArray.append(contentsOf: recipeModel.recipeLabel)
-//
-//            RecipeTableViewController.urlArray.append(contentsOf: recipeModel.urlString)
-//            self.tableView.reloadData()
-//            self.status = .sucess
-//        }
+        DispatchQueue.main.async {
+            self.recipeArray.removeAll()
+            RecipeTableViewController.urlArray.removeAll()
+            self.recipeArray.append(contentsOf: recipeModel.recipeLabel)
+
+            RecipeTableViewController.urlArray.append(contentsOf: recipeModel.urlString)
+            self.tableView.reloadData()
+            self.status = .sucess
+        }
     }
     
     func didFailWithError(error: Error) {
-//        print(error)
         print("Recipte Table VC noticed the error")
+        print(error)
     }
 
 }

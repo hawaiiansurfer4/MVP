@@ -42,14 +42,6 @@ struct RecipeManager {
         self.delegateManager = ReceipeManagerMultiCastDelegate(delegates: [])
     }
     
-    enum Status {
-        case none
-        case loading
-        case sucess
-        case error
-        
-    }
-    
     static var recipeArray = [String]()
     var delegate: RecipeManagerDelegate?
     
