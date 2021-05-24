@@ -9,8 +9,7 @@ import UIKit
 import SwiftUI
 
 class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
-    
-    var recipeManager = RecipeManager()
+
     var webPageModel = WebPageModel()
     var tableRecipeItems: String = ""
     var recipeArray = [String]()
@@ -36,12 +35,15 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
     
     @IBOutlet weak var searchBarTextField: UISearchBar!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        RecipeManager.shared.delegateManager.multicast.add(self)
         
 //        searchBarTextField.delegate = self
         tableView.delegate = self
-        recipeManager.delegate = self
+//        recipeManager.delegate = self
 //        self.loadView()
         self.tableView.reloadData()
 //        reloadInputViews()
@@ -55,8 +57,8 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
     
     @IBAction func unwindToRecipeTableVC(segue: UIStoryboardSegue) {
 //        tableView.reloadData()
-        status = .loading
-        tableView.reloadData()
+//        status = .loading
+//        tableView.reloadData()
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -80,8 +82,7 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         if let recipe = searchBarTextField.text {
-            
-            recipeManager.fetchRecipe(typeOfFood: recipe)
+            RecipeManager.shared.fetchRecipe(typeOfFood: recipe)
         }
         
         searchBarTextField.text = ""
@@ -115,19 +116,21 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
     
 extension RecipeTableViewController: RecipeManagerDelegate {
     func didUpdateRecipe(_ recipeManager: RecipeManager, recipeModel: RecipeModel) {
-        DispatchQueue.main.async {
-            self.recipeArray.removeAll()
-            RecipeTableViewController.urlArray.removeAll()
-            self.recipeArray.append(contentsOf: recipeModel.recipeLabel)
-            
-            RecipeTableViewController.urlArray.append(contentsOf: recipeModel.urlString)
-            self.tableView.reloadData()
-            self.status = .sucess
-        }
+        print("Recipte Table VC noticed the update")
+//        DispatchQueue.main.async {
+//            self.recipeArray.removeAll()
+//            RecipeTableViewController.urlArray.removeAll()
+//            self.recipeArray.append(contentsOf: recipeModel.recipeLabel)
+//
+//            RecipeTableViewController.urlArray.append(contentsOf: recipeModel.urlString)
+//            self.tableView.reloadData()
+//            self.status = .sucess
+//        }
     }
     
     func didFailWithError(error: Error) {
-        print(error)
+//        print(error)
+        print("Recipte Table VC noticed the error")
     }
 
 }
@@ -179,6 +182,4 @@ extension RecipeTableViewController {
         }
     }
 }
-
-
 

@@ -12,10 +12,9 @@ protocol RecipeManagerDelegate {
     func didFailWithError(error: Error)
 }
 
-
-final class ReceipeManagerMultiCastDelegate: NSObject, RecipeManagerDelegate{
+class ReceipeManagerMultiCastDelegate: NSObject, RecipeManagerDelegate{
     
-    private let multicast = MulticastDelegate<RecipeManagerDelegate>()
+    let multicast = MulticastDelegate<RecipeManagerDelegate>()
     
     init(delegates: [RecipeManagerDelegate]) {
         super.init()
@@ -37,6 +36,12 @@ struct RecipeManager {
     let appKey = "24f428ea7ca46ce12a04eabda6c59909"
     let maxNumberOfApiRequests = 100
     
+    static let shared = RecipeManager()
+    var delegateManager: ReceipeManagerMultiCastDelegate
+    private init() {
+        self.delegateManager = ReceipeManagerMultiCastDelegate(delegates: [])
+    }
+    
     enum Status {
         case none
         case loading
@@ -44,8 +49,6 @@ struct RecipeManager {
         case error
         
     }
-    
-    
     
     static var recipeArray = [String]()
     var delegate: RecipeManagerDelegate?
@@ -69,14 +72,16 @@ struct RecipeManager {
             
             let task = session.dataTask(with: url) { (data, response, error) in
                 if error != nil {
-                    self.delegate?.didFailWithError(error: error!)
+//                    self.delegate?.didFailWithError(error: error!)
+                    delegateManager.didFailWithError(error: error!)
                     return
                 }
                 
                 if let safeData = data {
                     if let recipeModel = parseJSON(safeData) {
                         
-                        self.delegate?.didUpdateRecipe(self, recipeModel: recipeModel)
+//                        self.delegate?.didUpdateRecipe(self, recipeModel: recipeModel)
+                        delegateManager.didUpdateRecipe(self, recipeModel: recipeModel)
                     }
                 }
             }

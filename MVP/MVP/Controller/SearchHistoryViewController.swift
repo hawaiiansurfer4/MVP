@@ -11,7 +11,7 @@ class SearchHistoryViewController: UIViewController, UITableViewDelegate, UISear
     
     
     var testArray = ["Chicken","Country","Steak","Shrimp","Scallop","Banana","Nutella","Whip Cream"]
-    var recipeManager = RecipeManager()
+    
     
     @IBOutlet weak var historyTable: UITableView!
     @IBOutlet weak var searhHistoryNavBar: UINavigationBar!
@@ -24,12 +24,12 @@ class SearchHistoryViewController: UIViewController, UITableViewDelegate, UISear
         historyTable.delegate = self
         historySearchBar.delegate = self
         historyTable.dataSource = self
+        RecipeManager.shared.delegateManager.multicast.add(self)
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         if let recipe = historySearchBar.text {
-            
-            recipeManager.fetchRecipe(typeOfFood: recipe)
+            RecipeManager.shared.fetchRecipe(typeOfFood: recipe)
         }
         
         historySearchBar.text = ""
@@ -72,4 +72,15 @@ class SearchHistoryViewController: UIViewController, UITableViewDelegate, UISear
         return cell
     }
     
+}
+
+
+extension SearchHistoryViewController: RecipeManagerDelegate {
+    func didUpdateRecipe(_ recipeManager: RecipeManager, recipeModel: RecipeModel) {
+        print("Search History VC notices the update")
+    }
+    
+    func didFailWithError(error: Error) {
+        print("Search History VC notices the error")
+    }
 }

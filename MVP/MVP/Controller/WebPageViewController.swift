@@ -12,7 +12,6 @@ import SafariServices
 class WebPageViewController: UIViewController, WKUIDelegate {
     
 //    var webPageModel = WebPageModel()
-    var recipeManager = RecipeManager()
     static var webShowRecipeURL = String()
     var webView: WKWebView!
     let child = SpinnerViewController()
