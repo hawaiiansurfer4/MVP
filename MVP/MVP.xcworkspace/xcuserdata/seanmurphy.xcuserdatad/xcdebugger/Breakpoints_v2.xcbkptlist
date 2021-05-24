@@ -14,8 +14,8 @@
             filePath = "MVP/Model/RecipeManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "16"
-            endingLineNumber = "16"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
             landmarkName = "RecipeManager"
             landmarkType = "14">
             <Locations>
@@ -62,8 +62,8 @@
             filePath = "MVP/Model/RecipeManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
             landmarkName = "fetchRecipe(typeOfFood:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -78,8 +78,8 @@
             filePath = "MVP/Model/RecipeManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
             landmarkName = "performRequest(urlString:)"
             landmarkType = "7">
          </BreakpointContent>

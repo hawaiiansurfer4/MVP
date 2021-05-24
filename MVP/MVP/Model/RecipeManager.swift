@@ -12,6 +12,25 @@ protocol RecipeManagerDelegate {
     func didFailWithError(error: Error)
 }
 
+
+final class ReceipeManagerMultiCastDelegate: NSObject, RecipeManagerDelegate{
+    
+    private let multicast = MulticastDelegate<RecipeManagerDelegate>()
+    
+    init(delegates: [RecipeManagerDelegate]) {
+        super.init()
+        delegates.forEach(multicast.add)
+    }
+    
+    func didUpdateRecipe(_ recipeManager: RecipeManager, recipeModel: RecipeModel) {
+        multicast.invoke{$0.didUpdateRecipe(recipeManager, recipeModel: recipeModel)}
+    }
+    
+    func didFailWithError(error: Error) {
+        multicast.invoke{$0.didFailWithError(error: error)}
+    }
+}
+
 struct RecipeManager {
     let recipeURL = "https://api.edamam.com/search?"
     let appID = "3214dd26"

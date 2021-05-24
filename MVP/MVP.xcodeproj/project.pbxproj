@@ -20,6 +20,7 @@
 		C484E168255B261E0044A790 /* WebPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C484E167255B261E0044A790 /* WebPageModel.swift */; };
 		C484E16B255C292C0044A790 /* WebPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C484E16A255C292C0044A790 /* WebPageViewController.swift */; };
 		C4B7BAC42655AB63003FAAB8 /* SearchHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B7BAC32655AB63003FAAB8 /* SearchHistoryViewController.swift */; };
+		C4B7BAC7265B5E08003FAAB8 /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B7BAC6265B5E08003FAAB8 /* MulticastDelegate.swift */; };
 		C4D60A8F2638D49000DA1E33 /* SpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D60A8E2638D49000DA1E33 /* SpinnerViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +41,7 @@
 		C484E167255B261E0044A790 /* WebPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPageModel.swift; sourceTree = "<group>"; };
 		C484E16A255C292C0044A790 /* WebPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPageViewController.swift; sourceTree = "<group>"; };
 		C4B7BAC32655AB63003FAAB8 /* SearchHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryViewController.swift; sourceTree = "<group>"; };
+		C4B7BAC6265B5E08003FAAB8 /* MulticastDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulticastDelegate.swift; sourceTree = "<group>"; };
 		C4D60A8E2638D49000DA1E33 /* SpinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerViewController.swift; sourceTree = "<group>"; };
 		FFEBDCE37CA6ED9E5846CA03 /* Pods-MVP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MVP.debug.xcconfig"; path = "Target Support Files/Pods-MVP/Pods-MVP.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -86,6 +88,7 @@
 		C468863F2550E848000E72FF /* MVP */ = {
 			isa = PBXGroup;
 			children = (
+				C4B7BAC5265B5DE8003FAAB8 /* Utils */,
 				C46886402550E848000E72FF /* AppDelegate.swift */,
 				C46886422550E848000E72FF /* SceneDelegate.swift */,
 				C46886592550EC6D000E72FF /* Model */,
@@ -126,6 +129,14 @@
 				C46886462550E848000E72FF /* Main.storyboard */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		C4B7BAC5265B5DE8003FAAB8 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				C4B7BAC6265B5E08003FAAB8 /* MulticastDelegate.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		EE5EBA1C91318C4E89F901CA /* Frameworks */ = {
@@ -240,6 +251,7 @@
 				C468865F2550F00A000E72FF /* RecipeData.swift in Sources */,
 				C46886412550E848000E72FF /* AppDelegate.swift in Sources */,
 				C4B7BAC42655AB63003FAAB8 /* SearchHistoryViewController.swift in Sources */,
+				C4B7BAC7265B5E08003FAAB8 /* MulticastDelegate.swift in Sources */,
 				C46886432550E848000E72FF /* SceneDelegate.swift in Sources */,
 				C46886872551D076000E72FF /* RecipeModel.swift in Sources */,
 			);
