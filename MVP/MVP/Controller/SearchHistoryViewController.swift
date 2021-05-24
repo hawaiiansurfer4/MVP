@@ -15,27 +15,29 @@ class SearchHistoryViewController: UIViewController, UITableViewDelegate, UISear
     
     @IBOutlet weak var historyTable: UITableView!
     @IBOutlet weak var searhHistoryNavBar: UINavigationBar!
-    @IBOutlet weak var searchBarSHVC: UISearchBar!
+    @IBOutlet weak var historySearchBar: UISearchBar!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        searchBarSHVC.becomeFirstResponder()
+        historySearchBar.becomeFirstResponder()
         historyTable.delegate = self
-        searchBarSHVC.delegate = self
+        historySearchBar.delegate = self
         historyTable.dataSource = self
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        if let recipe = searchBarSHVC.text {
+        if let recipe = historySearchBar.text {
             
             recipeManager.fetchRecipe(typeOfFood: recipe)
         }
         
-        searchBarSHVC.text = ""
+        historySearchBar.text = ""
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        if searchBarSHVC.text != "" {
-        performSegue(withIdentifier: "unwindToRecipeTableVC", sender: searchBar)
+        if historySearchBar.text != "" {
+            performSegue(withIdentifier: "unwindToRecipeTableVC", sender: searchBar)
         } else {
             searchBar.placeholder = "Type Something!"
         }
@@ -58,7 +60,7 @@ class SearchHistoryViewController: UIViewController, UITableViewDelegate, UISear
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        searchBarSHVC.text = testArray[indexPath.row]
+        historySearchBar.text = testArray[indexPath.row]
         tableView.deselectRow(at: indexPath, animated: true)
     }
     

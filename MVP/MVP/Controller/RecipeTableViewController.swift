@@ -29,7 +29,6 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
     
     var status: Status = .none {
         didSet {
-            
             UpdateUI()
         }
     }
@@ -51,11 +50,14 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
     
     @IBAction func searcButtonPressed(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: "goToSearchHistory", sender: sender)
+//        tableView.reloadData()
+    }
+    
+    @IBAction func unwindToRecipeTableVC(segue: UIStoryboardSegue) {
+//        tableView.reloadData()
         status = .loading
         tableView.reloadData()
     }
-    
-    @IBAction func unwindToRecipeTableVC(segue: UIStoryboardSegue) {}
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
 //        print(searchBarTextField.text!)
@@ -112,13 +114,13 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
 //MARK: - RecipeManagerDelegate
     
 extension RecipeTableViewController: RecipeManagerDelegate {
-    func didUpdateRecipe(_ recipeManager: RecipeManager, recipe: RecipeModel) {
+    func didUpdateRecipe(_ recipeManager: RecipeManager, recipeModel: RecipeModel) {
         DispatchQueue.main.async {
             self.recipeArray.removeAll()
             RecipeTableViewController.urlArray.removeAll()
-            self.recipeArray.append(contentsOf: recipe.recipeLabel)
+            self.recipeArray.append(contentsOf: recipeModel.recipeLabel)
             
-            RecipeTableViewController.urlArray.append(contentsOf: recipe.urlString)
+            RecipeTableViewController.urlArray.append(contentsOf: recipeModel.urlString)
             self.tableView.reloadData()
             self.status = .sucess
         }

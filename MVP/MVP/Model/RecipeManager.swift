@@ -8,7 +8,7 @@
 import UIKit
 
 protocol RecipeManagerDelegate {
-    func didUpdateRecipe(_ recipeManager: RecipeManager, recipe: RecipeModel)
+    func didUpdateRecipe(_ recipeManager: RecipeManager, recipeModel: RecipeModel)
     func didFailWithError(error: Error)
 }
 
@@ -18,10 +18,21 @@ struct RecipeManager {
     let appKey = "24f428ea7ca46ce12a04eabda6c59909"
     let maxNumberOfApiRequests = 100
     
+    enum Status {
+        case none
+        case loading
+        case sucess
+        case error
+        
+    }
+    
+    
+    
     static var recipeArray = [String]()
     var delegate: RecipeManagerDelegate?
     
     func fetchRecipe(typeOfFood: String) {
+        
         let urlString = "\(recipeURL)&app_id=\(appID)&app_key=\(appKey)&q=\(typeOfFood)&from=0&to=\(maxNumberOfApiRequests)"
 //        print(urlString)
         performRequest(urlString: urlString)
@@ -29,6 +40,9 @@ struct RecipeManager {
 
         
     func performRequest(urlString: String) {
+        
+//        let recipeTableVC = RecipeTableViewController()
+//        recipeTableVC.status = .loading
         
         if let url = URL(string: urlString) {
             
@@ -41,9 +55,9 @@ struct RecipeManager {
                 }
                 
                 if let safeData = data {
-                    if let recipe = parseJSON(safeData) {
+                    if let recipeModel = parseJSON(safeData) {
                         
-                        self.delegate?.didUpdateRecipe(self, recipe: recipe)
+                        self.delegate?.didUpdateRecipe(self, recipeModel: recipeModel)
                     }
                 }
             }
@@ -65,18 +79,19 @@ struct RecipeManager {
             
             for i in 0..<maxNumberOfApiRequests {
                 recipeList.append(contentsOf: [decodedData.hits[i].recipe.label])
+                urlList.append(contentsOf: [decodedData.hits[i].recipe.url])
             }
             
-            for j in 0..<maxNumberOfApiRequests {
-                urlList.append(contentsOf: [decodedData.hits[j].recipe.url])
-            }
+//            for j in 0..<maxNumberOfApiRequests {
+//                urlList.append(contentsOf: [decodedData.hits[j].recipe.url])
+//            }
 //            print(urlList)
             var recipe = RecipeModel(recipeLabel: recipeList, urlString: urlList)
 //            recipeList.removeAll()
 //            urlList.removeAll()
             return recipe
         } catch {
-            print(error)
+            self.delegate?.didFailWithError(error: error)
             return nil
         }
         
