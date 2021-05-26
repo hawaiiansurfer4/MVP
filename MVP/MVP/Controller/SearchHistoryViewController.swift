@@ -48,15 +48,6 @@ class SearchHistoryViewController: UIViewController, UITableViewDelegate, UISear
 //        recipeTableVC.createSpinnerView()
     }
     
-//    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
-//        if searchBar.text != "" {
-//            return true
-//        } else {
-//            searchBar.placeholder = "Type Something!"
-//            return false
-//        }
-//    }
-    
     func updateSearchHistory(_ latestSearch: String) {
         searchHistoryModel.push(latestSearch)
     }
@@ -71,14 +62,14 @@ class SearchHistoryViewController: UIViewController, UITableViewDelegate, UISear
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "searchHistoryCell", for: indexPath)
+        let searchCell = tableView.dequeueReusableCell(withIdentifier: "searchHistoryCell", for: indexPath)
 //        cell.textLabel?.text = testArray[indexPath.row] ?? "No Search History yet"
-        cell.textLabel?.text = searchHistoryModel.searchPopulation()[indexPath.row] ?? "No search History"
+        searchCell.textLabel?.text = searchHistoryModel.searchPopulation()[indexPath.row] ?? "No search History"
 //        let tempArray = searchHistoryModel.searchPopulation()
 //        cell.textLabel?.text = tempArray[indexPath.row]  ?? "No Search History yet"
-        cell.textLabel?.numberOfLines = 0
-        cell.accessoryType = .none
-        return cell
+        searchCell.textLabel?.numberOfLines = 0
+        searchCell.accessoryType = .none
+        return searchCell
     }
     
 }

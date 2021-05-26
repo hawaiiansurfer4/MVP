@@ -30,7 +30,8 @@ struct SearchHistoryModel {
     }
     
     mutating func searchPopulation() -> [String] {
-        var stackElements = Array(historyStorage.map{$0}.reversed())
+//        var stackElements = Array(historyStorage.map{$0}.reversed())
+        var stackElements = historyStorage
         return stackElements
     }
     

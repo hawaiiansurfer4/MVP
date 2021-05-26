@@ -87,7 +87,7 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
+        tableView.showsVerticalScrollIndicator = true
         return recipeArray.count
     }
     
@@ -176,6 +176,7 @@ extension RecipeTableViewController {
             print("reset the state")
         case .loading:
             createSpinnerView()
+//            tableView.scrollToRow(at: <#T##IndexPath#>, at: <#T##UITableView.ScrollPosition#>, animated: <#T##Bool#>)
             
             print("loading state")
         case .sucess:
