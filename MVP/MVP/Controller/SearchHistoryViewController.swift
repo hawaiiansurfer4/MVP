@@ -11,6 +11,7 @@ class SearchHistoryViewController: UIViewController, UITableViewDelegate, UISear
     
     
     var testArray = ["Chicken","Country","Steak","Shrimp","Scallop","Banana","Nutella","Whip Cream"]
+    var searchHistoryModel = SearchHistoryModel()
     
     
     @IBOutlet weak var historyTable: UITableView!
@@ -30,6 +31,7 @@ class SearchHistoryViewController: UIViewController, UITableViewDelegate, UISear
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         if let recipe = historySearchBar.text {
             RecipeManager.shared.fetchRecipe(typeOfFood: recipe)
+            updateSearchHistory(recipe)
         }
         
         historySearchBar.text = ""
@@ -55,8 +57,12 @@ class SearchHistoryViewController: UIViewController, UITableViewDelegate, UISear
 //        }
 //    }
     
+    func updateSearchHistory(_ latestSearch: String) {
+        searchHistoryModel.push(latestSearch)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return testArray.count
+        return searchHistoryModel.searchPopulation().count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -66,7 +72,10 @@ class SearchHistoryViewController: UIViewController, UITableViewDelegate, UISear
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "searchHistoryCell", for: indexPath)
-        cell.textLabel?.text = testArray[indexPath.row]
+//        cell.textLabel?.text = testArray[indexPath.row] ?? "No Search History yet"
+        cell.textLabel?.text = searchHistoryModel.searchPopulation()[indexPath.row] ?? "No search History"
+//        let tempArray = searchHistoryModel.searchPopulation()
+//        cell.textLabel?.text = tempArray[indexPath.row]  ?? "No Search History yet"
         cell.textLabel?.numberOfLines = 0
         cell.accessoryType = .none
         return cell

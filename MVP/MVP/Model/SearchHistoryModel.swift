@@ -7,22 +7,39 @@
 
 import UIKit
 
-struct SearchHistoryModel<Element> {
-    private var historyStorage: [Element] = []
+struct SearchHistoryModel {
+    private var historyStorage: [String] = []
     init() {}
     
-    mutating func push(_ element: Element) {
-        historyStorage.append(element)
+    mutating func capacity() {
+        var totalCapcity = historyStorage.count {
+            didSet {
+                if historyStorage.count == 8 {
+                    self.pop()
+                }
+            }
+        }
     }
     
-    mutating func pop() -> Element? {
+    mutating func push(_ recentlySearched: String) {
+        historyStorage.append(recentlySearched)
+    }
+    
+    mutating func pop() -> String? {
         return historyStorage.popLast()
     }
+    
+    mutating func searchPopulation() -> [String] {
+        var stackElements = Array(historyStorage.map{$0}.reversed())
+        return stackElements
+    }
+    
+
 }
 
 extension SearchHistoryModel: CustomStringConvertible {
     var description: String {
-        let stackElements = historyStorage.map{$0}.reversed()
+        var stackElements = historyStorage.map{$0}.reversed()
         return "called"
     }
     

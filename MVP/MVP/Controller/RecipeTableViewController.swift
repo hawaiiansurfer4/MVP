@@ -107,6 +107,8 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    
+    
 }
 
 
@@ -174,6 +176,7 @@ extension RecipeTableViewController {
             print("reset the state")
         case .loading:
             createSpinnerView()
+            
             print("loading state")
         case .sucess:
             removeSpinnerView()
