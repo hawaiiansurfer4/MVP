@@ -78,6 +78,7 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
         }
     }
     
+    
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         if let recipe = searchBarTextField.text {
             RecipeManager.shared.fetchRecipe(typeOfFood: recipe)
@@ -96,6 +97,7 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
         cell.textLabel?.text = recipeArray[indexPath.row] ?? "Nothing searched yet"
         cell.textLabel?.numberOfLines = 0
         cell.accessoryType = .none
+//        scrollToTop()
         searchButtonPressed = false
         return cell
     }
@@ -107,7 +109,10 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    
+    func scrollToTop() {
+        let topRow = IndexPath(row: 0, section: 0)
+        tableView.scrollToRow(at: topRow, at: .top, animated: true)
+    }
     
 }
 
@@ -124,6 +129,7 @@ extension RecipeTableViewController: RecipeManagerDelegate {
 
             RecipeTableViewController.urlArray.append(contentsOf: recipeModel.urlString)
             self.tableView.reloadData()
+//            self.scrollToTop()
             self.status = .sucess
         }
     }
@@ -144,6 +150,7 @@ extension RecipeTableViewController {
         DispatchQueue.main.async{
             self.kid = SpinnerViewController()
             // add the spinner view controller
+//            self.scrollToTop()
             self.addChild(self.kid)
             self.kid.view.frame = self.view.frame
             self.view.addSubview(self.kid.view)
@@ -176,11 +183,16 @@ extension RecipeTableViewController {
             print("reset the state")
         case .loading:
             createSpinnerView()
+//            scrollToTop()
 //            tableView.scrollToRow(at: <#T##IndexPath#>, at: <#T##UITableView.ScrollPosition#>, animated: <#T##Bool#>)
+//            tableView.scrollRectToVisible(CGRect(x: 1, y: 1, width: 0, height: 0), animated: true)
+//            tableView.touchesCancelled(<#T##touches: Set<UITouch>##Set<UITouch>#>, with: <#T##UIEvent?#>)
             
+            tableView.isUserInteractionEnabled = false
             print("loading state")
         case .sucess:
             removeSpinnerView()
+            tableView.isUserInteractionEnabled = true
             print("success")
         case .error:
             removeSpinnerView()
