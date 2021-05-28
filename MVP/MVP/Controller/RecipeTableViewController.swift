@@ -11,6 +11,7 @@ import SwiftUI
 class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
 
     var webPageModel = WebPageModel()
+    var searchHistoryModel = SearchHistoryModel()
     var tableRecipeItems: String = ""
     var recipeArray = [String]()
     var webPageViewController = WebPageViewController()
@@ -52,6 +53,12 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
 //        tableView.reloadData()
         status = .loading
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let searchHistoryVC = segue.destination as? SearchHistoryViewController else { return }
+        searchHistoryVC.searchHistoryModel = searchHistoryModel
+    }
+
     
     @IBAction func unwindToRecipeTableVC(segue: UIStoryboardSegue) {
 //        tableView.reloadData()

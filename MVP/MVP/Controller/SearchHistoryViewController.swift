@@ -40,6 +40,7 @@ class SearchHistoryViewController: UIViewController, UITableViewDelegate, UISear
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if historySearchBar.text != "" {
             performSegue(withIdentifier: "unwindToRecipeTableVC", sender: searchBar)
+            
         } else {
             searchBar.placeholder = "Type Something!"
         }
@@ -57,7 +58,7 @@ class SearchHistoryViewController: UIViewController, UITableViewDelegate, UISear
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        historySearchBar.text = testArray[indexPath.row]
+        historySearchBar.text = searchHistoryModel.searchPopulation()[indexPath.row]
         tableView.deselectRow(at: indexPath, animated: true)
     }
     

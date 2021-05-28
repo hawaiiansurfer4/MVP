@@ -7,41 +7,67 @@
 
 import UIKit
 
-struct SearchHistoryModel {
+//struct AppSearchHistory {
+//    var historyStorage: [String]
+//
+//    init(historyStorage: [String]) {
+//        self.historyStorage = historyStorage
+//    }
+//}
+
+class SearchHistoryModel {
     private var historyStorage: [String] = []
-    init() {}
-    
-    mutating func capacity() {
-        var totalCapcity = historyStorage.count {
-            didSet {
-                if historyStorage.count == 8 {
-                    self.pop()
-                }
+    private var count = 0 {
+        didSet {
+            if count > CAPACITY {
+                self.pop()
             }
         }
     }
-    
-    mutating func push(_ recentlySearched: String) {
+    private let CAPACITY = 8
+//    var historyStorage = [String]()
+
+//    init() {}
+//    var historyStorage = AppSearchHistory.init(historyStorage: [])
+
+//    mutating func capacity() {
+//        var totalCapcity = historyStorage.count {
+//            didSet {
+//                if historyStorage.count == 8 {
+//                    self.pop()
+//                }
+//            }
+//        }
+//        print(historyStorage)
+//    }
+
+    func push(_ recentlySearched: String) {
         historyStorage.append(recentlySearched)
+        count+=1
+//        print(historyStorage)
     }
-    
-    mutating func pop() -> String? {
-        return historyStorage.popLast()
+
+    func pop() -> Void {
+        historyStorage.removeFirst()
+        count-=1
     }
-    
-    mutating func searchPopulation() -> [String] {
+
+    func searchPopulation() -> [String] {
 //        var stackElements = Array(historyStorage.map{$0}.reversed())
-        var stackElements = historyStorage
-        return stackElements
-    }
-    
+//        var stackElements = [String]()
+//        for search in historyStorage {
+//            stackElements.append(search)
+//        }
+
+        return historyStorage.map{$0}.reversed()    }
+
 
 }
 
 extension SearchHistoryModel: CustomStringConvertible {
     var description: String {
-        var stackElements = historyStorage.map{$0}.reversed()
+//        var stackElements = historyStorage.map { $0 }.reversed()
         return "called"
     }
-    
+
 }

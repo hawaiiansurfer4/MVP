@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Recipe Table View Controller-->
+        <!--Recipe Search-->
         <scene sceneID="nr8-uF-HDf">
             <objects>
                 <tableViewController id="faX-Pu-1FP" customClass="RecipeTableViewController" customModule="MVP" customModuleProvider="target" sceneMemberID="viewController">
@@ -31,7 +31,7 @@
                             <outlet property="delegate" destination="faX-Pu-1FP" id="3hO-XW-jdz"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="R7t-4T-BTX">
+                    <navigationItem key="navigationItem" title="Recipe Search" id="R7t-4T-BTX">
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="h6a-lk-W2T">
                             <connections>
                                 <action selector="searcButtonPressed:" destination="faX-Pu-1FP" id="UQw-zX-CBS"/>
