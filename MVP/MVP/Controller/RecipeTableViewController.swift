@@ -39,18 +39,14 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
 
         RecipeManager.shared.delegateManager.multicast.add(self)
         
-//        searchBarTextField.delegate = self
         tableView.delegate = self
 //        recipeManager.delegate = self
-//        self.loadView()
         self.tableView.reloadData()
-//        reloadInputViews()
     }
     
     
     @IBAction func searcButtonPressed(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: "goToSearchHistory", sender: sender)
-//        tableView.reloadData()
         status = .loading
     }
     
@@ -61,14 +57,9 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
 
     
     @IBAction func unwindToRecipeTableVC(segue: UIStoryboardSegue) {
-//        tableView.reloadData()
-//        status = .loading
-//        tableView.reloadData()
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-//        print(searchBarTextField.text!)
-        
         tableView.reloadData()
         searchBarTextField.endEditing(true)
     }
@@ -112,7 +103,6 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "goToWebView", sender: indexPath.row)
         WebPageViewController.webShowRecipeURL = RecipeTableViewController.urlArray[indexPath.row]
-//        print(indexPath.row)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     

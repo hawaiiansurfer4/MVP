@@ -7,13 +7,6 @@
 
 import UIKit
 
-//struct AppSearchHistory {
-//    var historyStorage: [String]
-//
-//    init(historyStorage: [String]) {
-//        self.historyStorage = historyStorage
-//    }
-//}
 
 class SearchHistoryModel {
     private var historyStorage: [String] = []
@@ -25,26 +18,10 @@ class SearchHistoryModel {
         }
     }
     private let CAPACITY = 8
-//    var historyStorage = [String]()
-
-//    init() {}
-//    var historyStorage = AppSearchHistory.init(historyStorage: [])
-
-//    mutating func capacity() {
-//        var totalCapcity = historyStorage.count {
-//            didSet {
-//                if historyStorage.count == 8 {
-//                    self.pop()
-//                }
-//            }
-//        }
-//        print(historyStorage)
-//    }
 
     func push(_ recentlySearched: String) {
         historyStorage.append(recentlySearched)
         count+=1
-//        print(historyStorage)
     }
 
     func pop() -> Void {
@@ -53,11 +30,6 @@ class SearchHistoryModel {
     }
 
     func searchPopulation() -> [String] {
-//        var stackElements = Array(historyStorage.map{$0}.reversed())
-//        var stackElements = [String]()
-//        for search in historyStorage {
-//            stackElements.append(search)
-//        }
 
         return historyStorage.map{$0}.reversed()    }
 

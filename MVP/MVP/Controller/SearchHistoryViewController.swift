@@ -44,9 +44,6 @@ class SearchHistoryViewController: UIViewController, UITableViewDelegate, UISear
         } else {
             searchBar.placeholder = "Type Something!"
         }
-//        let recipeTableVC = RecipeTableViewController()
-//        recipeTableVC.status = .loading
-//        recipeTableVC.createSpinnerView()
     }
     
     func updateSearchHistory(_ latestSearch: String) {
@@ -64,10 +61,7 @@ class SearchHistoryViewController: UIViewController, UITableViewDelegate, UISear
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let searchCell = tableView.dequeueReusableCell(withIdentifier: "searchHistoryCell", for: indexPath)
-//        cell.textLabel?.text = testArray[indexPath.row] ?? "No Search History yet"
         searchCell.textLabel?.text = searchHistoryModel.searchPopulation()[indexPath.row] ?? "No search History"
-//        let tempArray = searchHistoryModel.searchPopulation()
-//        cell.textLabel?.text = tempArray[indexPath.row]  ?? "No Search History yet"
         searchCell.textLabel?.numberOfLines = 0
         searchCell.accessoryType = .none
         return searchCell
