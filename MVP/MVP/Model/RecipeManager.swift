@@ -48,7 +48,7 @@ struct RecipeManager {
     func fetchRecipe(typeOfFood: String) {
 
         let urlString = "\(recipeURL)&app_id=\(appID)&app_key=\(appKey)&q=\(typeOfFood)&from=0&to=\(maxNumberOfApiRequests)"
-//        print(urlString)
+        print(urlString)
         performRequest(urlString: urlString)
     }
 
