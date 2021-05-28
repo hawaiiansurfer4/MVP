@@ -9,9 +9,9 @@ import UIKit
 import SwiftUI
 
 class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
-    
-    var recipeManager = RecipeManager()
+
     var webPageModel = WebPageModel()
+    var searchHistoryModel = SearchHistoryModel()
     var tableRecipeItems: String = ""
     var recipeArray = [String]()
     var webPageViewController = WebPageViewController()
@@ -23,32 +23,43 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
         case none
         case loading
         case sucess
-//        case error
-        
+        case error
     }
     
     var status: Status = .none {
-        didSet {
-            UpdateUI()
-        }
+        didSet { UpdateUI() }
     }
     
     
     @IBOutlet weak var searchBarTextField: UISearchBar!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        RecipeManager.shared.delegateManager.multicast.add(self)
         
-        searchBarTextField.delegate = self
         tableView.delegate = self
-        recipeManager.delegate = self
+//        recipeManager.delegate = self
+        self.tableView.reloadData()
     }
     
     
+    @IBAction func searcButtonPressed(_ sender: UIBarButtonItem) {
+        performSegue(withIdentifier: "goToSearchHistory", sender: sender)
+        status = .loading
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let searchHistoryVC = segue.destination as? SearchHistoryViewController else { return }
+        searchHistoryVC.searchHistoryModel = searchHistoryModel
+    }
+
+    
+    @IBAction func unwindToRecipeTableVC(segue: UIStoryboardSegue) {
+    }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-//        print(searchBarTextField.text!)
-        
         tableView.reloadData()
         searchBarTextField.endEditing(true)
     }
@@ -65,17 +76,17 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
         }
     }
     
+    
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         if let recipe = searchBarTextField.text {
-            
-            recipeManager.fetchRecipe(typeOfFood: recipe)
+            RecipeManager.shared.fetchRecipe(typeOfFood: recipe)
         }
         
         searchBarTextField.text = ""
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
+        tableView.showsVerticalScrollIndicator = true
         return recipeArray.count
     }
     
@@ -84,6 +95,7 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
         cell.textLabel?.text = recipeArray[indexPath.row] ?? "Nothing searched yet"
         cell.textLabel?.numberOfLines = 0
         cell.accessoryType = .none
+//        scrollToTop()
         searchButtonPressed = false
         return cell
     }
@@ -91,8 +103,12 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "goToWebView", sender: indexPath.row)
         WebPageViewController.webShowRecipeURL = RecipeTableViewController.urlArray[indexPath.row]
-//        print(indexPath.row)
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func scrollToTop() {
+        let topRow = IndexPath(row: 0, section: 0)
+        tableView.scrollToRow(at: topRow, at: .top, animated: true)
     }
     
 }
@@ -101,20 +117,25 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
 //MARK: - RecipeManagerDelegate
     
 extension RecipeTableViewController: RecipeManagerDelegate {
-    func didUpdateRecipe(_ recipeManager: RecipeManager, recipe: RecipeModel) {
+    func didUpdateRecipe(_ recipeManager: RecipeManager, recipeModel: RecipeModel) {
+        print("Recipte Table VC noticed the update")
         DispatchQueue.main.async {
             self.recipeArray.removeAll()
             RecipeTableViewController.urlArray.removeAll()
-            self.recipeArray.append(contentsOf: recipe.recipeLabel)
-            
-            RecipeTableViewController.urlArray.append(contentsOf: recipe.urlString)
+            self.recipeArray.append(contentsOf: recipeModel.recipeLabel)
+
+            RecipeTableViewController.urlArray.append(contentsOf: recipeModel.urlString)
             self.tableView.reloadData()
+//            self.scrollToTop()
             self.status = .sucess
         }
     }
     
     func didFailWithError(error: Error) {
+        print("Recipte Table VC noticed the error")
         print(error)
+        
+        status = .error
     }
 
 }
@@ -123,12 +144,15 @@ extension RecipeTableViewController: RecipeManagerDelegate {
 
 extension RecipeTableViewController {
     func createSpinnerView() {
-        kid = SpinnerViewController()
-        // add the spinner view controller
-        addChild(kid)
-        kid.view.frame = view.frame
-        view.addSubview(kid.view)
-        kid.didMove(toParent: self)
+        DispatchQueue.main.async{
+            self.kid = SpinnerViewController()
+            // add the spinner view controller
+//            self.scrollToTop()
+            self.addChild(self.kid)
+            self.kid.view.frame = self.view.frame
+            self.view.addSubview(self.kid.view)
+            self.kid.didMove(toParent: self)
+        }
     }
     
     func removeSpinnerView() {
@@ -156,16 +180,21 @@ extension RecipeTableViewController {
             print("reset the state")
         case .loading:
             createSpinnerView()
+//            scrollToTop()
+//            tableView.scrollToRow(at: <#T##IndexPath#>, at: <#T##UITableView.ScrollPosition#>, animated: <#T##Bool#>)
+//            tableView.scrollRectToVisible(CGRect(x: 1, y: 1, width: 0, height: 0), animated: true)
+//            tableView.touchesCancelled(<#T##touches: Set<UITouch>##Set<UITouch>#>, with: <#T##UIEvent?#>)
+            
+            tableView.isUserInteractionEnabled = false
             print("loading state")
         case .sucess:
             removeSpinnerView()
+            tableView.isUserInteractionEnabled = true
             print("success")
-//            State.none
-//        case .error:
-//            print("Error with the switch statement for your enum in State Management")
+        case .error:
+            removeSpinnerView()
+            print("Error with the switch statement for your enum in State Management")
         }
     }
 }
-
-
 
