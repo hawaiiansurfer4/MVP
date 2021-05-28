@@ -23,8 +23,8 @@
 		C4B7BAC7265B5E08003FAAB8 /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B7BAC6265B5E08003FAAB8 /* MulticastDelegate.swift */; };
 		C4D60A8F2638D49000DA1E33 /* SpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D60A8E2638D49000DA1E33 /* SpinnerViewController.swift */; };
 		C4F6BC8F265C850A0014B3F8 /* SearchHistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F6BC8E265C850A0014B3F8 /* SearchHistoryModel.swift */; };
-		C4F6BC9226618B000014B3F8 /* RenderingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F6BC9026618B000014B3F8 /* RenderingCell.swift */; };
-		C4F6BC9326618B000014B3F8 /* RenderingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4F6BC9126618B000014B3F8 /* RenderingCell.xib */; };
+		C4F6BC9626618FB40014B3F8 /* RenderingCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F6BC9426618FB40014B3F8 /* RenderingCellTableViewCell.swift */; };
+		C4F6BC9726618FB40014B3F8 /* RenderingCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4F6BC9526618FB40014B3F8 /* RenderingCellTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,8 +47,8 @@
 		C4B7BAC6265B5E08003FAAB8 /* MulticastDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulticastDelegate.swift; sourceTree = "<group>"; };
 		C4D60A8E2638D49000DA1E33 /* SpinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerViewController.swift; sourceTree = "<group>"; };
 		C4F6BC8E265C850A0014B3F8 /* SearchHistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryModel.swift; sourceTree = "<group>"; };
-		C4F6BC9026618B000014B3F8 /* RenderingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderingCell.swift; sourceTree = "<group>"; };
-		C4F6BC9126618B000014B3F8 /* RenderingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RenderingCell.xib; sourceTree = "<group>"; };
+		C4F6BC9426618FB40014B3F8 /* RenderingCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderingCellTableViewCell.swift; sourceTree = "<group>"; };
+		C4F6BC9526618FB40014B3F8 /* RenderingCellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RenderingCellTableViewCell.xib; sourceTree = "<group>"; };
 		FFEBDCE37CA6ED9E5846CA03 /* Pods-MVP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MVP.debug.xcconfig"; path = "Target Support Files/Pods-MVP/Pods-MVP.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -134,8 +134,8 @@
 			isa = PBXGroup;
 			children = (
 				C46886462550E848000E72FF /* Main.storyboard */,
-				C4F6BC9026618B000014B3F8 /* RenderingCell.swift */,
-				C4F6BC9126618B000014B3F8 /* RenderingCell.xib */,
+				C4F6BC9426618FB40014B3F8 /* RenderingCellTableViewCell.swift */,
+				C4F6BC9526618FB40014B3F8 /* RenderingCellTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -214,7 +214,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C4F6BC9326618B000014B3F8 /* RenderingCell.xib in Resources */,
+				C4F6BC9726618FB40014B3F8 /* RenderingCellTableViewCell.xib in Resources */,
 				C468864D2550E848000E72FF /* LaunchScreen.storyboard in Resources */,
 				C468864A2550E848000E72FF /* Assets.xcassets in Resources */,
 				C46886482550E848000E72FF /* Main.storyboard in Resources */,
@@ -255,13 +255,13 @@
 			files = (
 				C4F6BC8F265C850A0014B3F8 /* SearchHistoryModel.swift in Sources */,
 				C4D60A8F2638D49000DA1E33 /* SpinnerViewController.swift in Sources */,
+				C4F6BC9626618FB40014B3F8 /* RenderingCellTableViewCell.swift in Sources */,
 				C484E16B255C292C0044A790 /* WebPageViewController.swift in Sources */,
 				C46886562550E985000E72FF /* RecipeTableViewController.swift in Sources */,
 				C484E168255B261E0044A790 /* WebPageModel.swift in Sources */,
 				C468865B2550EC80000E72FF /* RecipeManager.swift in Sources */,
 				C468865F2550F00A000E72FF /* RecipeData.swift in Sources */,
 				C46886412550E848000E72FF /* AppDelegate.swift in Sources */,
-				C4F6BC9226618B000014B3F8 /* RenderingCell.swift in Sources */,
 				C4B7BAC42655AB63003FAAB8 /* SearchHistoryViewController.swift in Sources */,
 				C4B7BAC7265B5E08003FAAB8 /* MulticastDelegate.swift in Sources */,
 				C46886432550E848000E72FF /* SceneDelegate.swift in Sources */,

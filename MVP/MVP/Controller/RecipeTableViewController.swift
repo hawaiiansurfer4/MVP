@@ -38,7 +38,7 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
         super.viewDidLoad()
 
         RecipeManager.shared.delegateManager.multicast.add(self)
-        
+        tableView.register(UINib(nibName: "RenderingCellTableViewCell", bundle: nil), forCellReuseIdentifier: "RenderingCell")
         tableView.delegate = self
 //        recipeManager.delegate = self
         self.tableView.reloadData()
@@ -91,8 +91,9 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "recipeCells", for: indexPath)
-        cell.textLabel?.text = recipeArray[indexPath.row] ?? "Nothing searched yet"
+        let cell = tableView.dequeueReusableCell(withIdentifier: "RenderingCell", for: indexPath) as! RenderingCellTableViewCell
+        cell.label.text = recipeArray[indexPath.row] ?? "Nothing searched yet"
+//        cell.textLabel?.text = recipeArray[indexPath.row] ?? "Nothing searched yet"
         cell.textLabel?.numberOfLines = 0
         cell.accessoryType = .none
 //        scrollToTop()
