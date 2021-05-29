@@ -85,6 +85,8 @@ struct RecipeManager {
         let decoder = JSONDecoder()
         var recipeList = [String]()
         var urlList = [String]()
+        var imageStringArray = [String]()
+        var imageArray = [UIImage]()
         do {
 //            recipeList.removeAll()
 //            urlList.removeAll()
@@ -94,15 +96,21 @@ struct RecipeManager {
             let decodedData = try decoder.decode(RecipeData.self, from: recipeData)
 
             for i in 0..<maxNumberOfApiRequests {
+                imageStringArray.append(contentsOf: [decodedData.hits[i].recipe.image])
+//                if let imageString = UIImage(named: decodedData.hits[i].recipe.image) {
+//                    imageArray.append(UIImage(imageLiteralResourceName: decodedData.hits[i].recipe.image))
+//                } else {
+//                    imageArray.append(#imageLiteral(resourceName: ).imageAsset.)
+//                }
                 recipeList.append(contentsOf: [decodedData.hits[i].recipe.label])
                 urlList.append(contentsOf: [decodedData.hits[i].recipe.url])
+//                imageArray.append(UIImage(imageLiteralResourceName: decodedData.hits[i].recipe.image))
+                
+//                imageArray.append(images)
             }
-
-//            for j in 0..<maxNumberOfApiRequests {
-//                urlList.append(contentsOf: [decodedData.hits[j].recipe.url])
-//            }
+            
 //            print(urlList)
-            var recipe = RecipeModel(recipeLabel: recipeList, urlString: urlList)
+            var recipe = RecipeModel(recipeLabel: recipeList, urlString: urlList, imageArray: imageStringArray)
 //            recipeList.removeAll()
 //            urlList.removeAll()
             return recipe

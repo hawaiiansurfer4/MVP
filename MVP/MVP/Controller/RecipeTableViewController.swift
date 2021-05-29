@@ -16,6 +16,7 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
     var recipeArray = [String]()
     var webPageViewController = WebPageViewController()
     static var urlArray = [String]()
+    var imageArray = [String]()
     var kid = SpinnerViewController()
     @State private var searchButtonPressed: Bool = false
     
@@ -93,8 +94,10 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "RenderingCell", for: indexPath) as! RenderingCellTableViewCell
         cell.label.text = recipeArray[indexPath.row] ?? "Nothing searched yet"
+        cell.previewImage.image = UIImage(named: imageArray[indexPath.row])
+            cell.label.numberOfLines = 0
 //        cell.textLabel?.text = recipeArray[indexPath.row] ?? "Nothing searched yet"
-        cell.textLabel?.numberOfLines = 0
+//        cell.textLabel?.numberOfLines = 0
         cell.accessoryType = .none
 //        scrollToTop()
         searchButtonPressed = false
@@ -123,8 +126,9 @@ extension RecipeTableViewController: RecipeManagerDelegate {
         DispatchQueue.main.async {
             self.recipeArray.removeAll()
             RecipeTableViewController.urlArray.removeAll()
+            
+//            RecipeTableViewController.imageArray.removeAll()
             self.recipeArray.append(contentsOf: recipeModel.recipeLabel)
-
             RecipeTableViewController.urlArray.append(contentsOf: recipeModel.urlString)
             self.tableView.reloadData()
 //            self.scrollToTop()
