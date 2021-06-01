@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireImage
 
 protocol RecipeManagerDelegate {
     func didUpdateRecipe(_ recipeManager: RecipeManager, recipeModel: RecipeModel)
@@ -35,6 +37,7 @@ struct RecipeManager {
     let appID = "3214dd26"
     let appKey = "24f428ea7ca46ce12a04eabda6c59909"
     let maxNumberOfApiRequests = 100
+//    var imageArray = [UIImage]()
 
     static let shared = RecipeManager()
     var delegateManager: ReceipeManagerMultiCastDelegate
@@ -55,9 +58,6 @@ struct RecipeManager {
 
     func performRequest(urlString: String) {
 
-//        let recipeTableVC = RecipeTableViewController()
-//        recipeTableVC.status = .loading
-
         if let url = URL(string: urlString) {
 
             let session = URLSession(configuration: .default)
@@ -68,7 +68,7 @@ struct RecipeManager {
                     delegateManager.didFailWithError(error: error!)
                     return
                 }
-
+                print("here is the data \(data)")
                 if let safeData = data {
                     if let recipeModel = parseJSON(safeData) {
 
@@ -108,7 +108,27 @@ struct RecipeManager {
                 
 //                imageArray.append(images)
             }
-            
+//            for j in 0..<imageStringArray.count {
+//                if let imageURL = imageStringArray[j] as? String {
+//                    AF.request(imageURL).responseImage { (response) in
+//                        print(response)
+//                        if let image = response.result.publisher {
+//                            
+//                        }
+////                        imageArray.append(response)
+//                    }
+//                }
+//                AF.request(imageStringArray[j]).responseImage(completionHandler: { response in
+//                    debugPrint(response)
+//                    print(response.result)
+//                    print(response.response)
+//                    debugPrint(response.result)
+//
+//                    if case .success(let image) = response.result {
+//                        print("image downloaded: \(image)")
+//                    }
+//                })
+//            }
 //            print(urlList)
             var recipe = RecipeModel(recipeLabel: recipeList, urlString: urlList, imageArray: imageStringArray)
 //            recipeList.removeAll()
@@ -120,5 +140,45 @@ struct RecipeManager {
         }
 
     }
+    
+//    func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+//        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
+//    }
+//
+//    func downloadImage(from url: URL) {
+//        print("Download Started")
+//        getData(from: url) { data, response, error in
+//            guard let data = data, error == nil else { return }
+//            print(response?.suggestedFilename ?? url.lastPathComponent)
+//            print("Download Finished")
+//            // always update the UI from the main thread
+//            DispatchQueue.main.async() {
+////                self?.imageArray.append(UIImage(data: data)!)
+////                self.imageArray.
+//            }
+//        }
+//    }
+//
+//}
+//
+//extension UIImageView {
+//    func downloaded(from url: URL, contentMode mode: ContentMode = .scaleAspectFit) {
+//        contentMode = mode
+//        URLSession.shared.dataTask(with: url) { data, response, error in
+//            guard
+//                let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
+//                let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
+//                let data = data, error == nil,
+//                let image = UIImage(data: data)
+//                else { return }
+//            DispatchQueue.main.async() { [weak self] in
+//                self?.image = image
+//            }
+//        }.resume()
+//    }
+//    func downloaded(from link: String, contentMode mode: ContentMode = .scaleAspectFit) {
+//        guard let url = URL(string: link) else { return }
+//        downloaded(from: url, contentMode: mode)
+//    }
 }
 

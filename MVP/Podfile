@@ -8,5 +8,6 @@ target 'MVP' do
   # Pods for MVP
 
  pod 'Alamofire'
+ pod 'AlamofireImage', '~> 4.1'
 
 end

@@ -7,6 +7,8 @@
 
 import UIKit
 import SwiftUI
+import Alamofire
+import AlamofireImage
 
 class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
 
@@ -16,7 +18,7 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
     var recipeArray = [String]()
     var webPageViewController = WebPageViewController()
     static var urlArray = [String]()
-    var imageArray = [String]()
+    var imageStringArray = [String]()
     var kid = SpinnerViewController()
     @State private var searchButtonPressed: Bool = false
     
@@ -94,8 +96,28 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "RenderingCell", for: indexPath) as! RenderingCellTableViewCell
         cell.label.text = recipeArray[indexPath.row] ?? "Nothing searched yet"
-        cell.previewImage.image = UIImage(named: imageArray[indexPath.row])
-            cell.label.numberOfLines = 0
+//        for image in imageStringArray {
+        if let imageURL = imageStringArray[indexPath.row] as? String {
+                AF.request(imageURL).responseImage { (response) in
+//                    print(response)
+                    if let image = try? response.result.get() {
+                        DispatchQueue.main.async {
+                            cell.previewImage.image = image
+                        }
+                    }
+                }
+            }
+//        }
+        
+//        cell.previewImage.image = UIImage(named: "https://www.edamam.com/web-img/e42/e42f9119813e890af34c259785ae1cfb.jpg")
+//        cell.previewImage.backgroundColor = .none 
+//        cell.previewImage.image = UIImage(contentsOfFile: "https://www.edamam.com/web-img/e42/e42f9119813e890af34c259785ae1cfb.jpg")
+//        let url = URL(string: "https://www.edamam.com/web-img/e42/e42f9119813e890af34c259785ae1cfb.jpg")
+//        cell.previewImage.image = downloa
+        cell.previewImage.isOpaque = false
+//        cell.previewImage.image = UIImage(data: <#T##Data#>)
+        
+        cell.label.numberOfLines = 0
 //        cell.textLabel?.text = recipeArray[indexPath.row] ?? "Nothing searched yet"
 //        cell.textLabel?.numberOfLines = 0
         cell.accessoryType = .none
@@ -126,10 +148,11 @@ extension RecipeTableViewController: RecipeManagerDelegate {
         DispatchQueue.main.async {
             self.recipeArray.removeAll()
             RecipeTableViewController.urlArray.removeAll()
-            
+            self.imageStringArray.removeAll()
 //            RecipeTableViewController.imageArray.removeAll()
             self.recipeArray.append(contentsOf: recipeModel.recipeLabel)
             RecipeTableViewController.urlArray.append(contentsOf: recipeModel.urlString)
+            self.imageStringArray.append(contentsOf: recipeModel.imageArray)
             self.tableView.reloadData()
 //            self.scrollToTop()
             self.status = .sucess
