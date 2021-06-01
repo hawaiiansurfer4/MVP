@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		66621766F5644C165F1BF5D3 /* libPods-MVP.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 567C1FC757C6F233F6F867DC /* libPods-MVP.a */; };
+		11C646FFCE0BEFFBA88DCC94 /* libPods-MVP.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E481B6FF078BE2ADC4AC2CAD /* libPods-MVP.a */; };
 		C46886412550E848000E72FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46886402550E848000E72FF /* AppDelegate.swift */; };
 		C46886432550E848000E72FF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46886422550E848000E72FF /* SceneDelegate.swift */; };
 		C46886482550E848000E72FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C46886462550E848000E72FF /* Main.storyboard */; };
@@ -21,13 +21,17 @@
 		C484E16B255C292C0044A790 /* WebPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C484E16A255C292C0044A790 /* WebPageViewController.swift */; };
 		C4B7BAC42655AB63003FAAB8 /* SearchHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B7BAC32655AB63003FAAB8 /* SearchHistoryViewController.swift */; };
 		C4B7BAC7265B5E08003FAAB8 /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B7BAC6265B5E08003FAAB8 /* MulticastDelegate.swift */; };
+		C4C8BF1326669B6C00257609 /* libAlamofire.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C4C8BF1226669B6C00257609 /* libAlamofire.a */; };
+		C4C8BF1526669B7100257609 /* libAlamofireImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C4C8BF1426669B7100257609 /* libAlamofireImage.a */; };
 		C4D60A8F2638D49000DA1E33 /* SpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D60A8E2638D49000DA1E33 /* SpinnerViewController.swift */; };
 		C4F6BC8F265C850A0014B3F8 /* SearchHistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F6BC8E265C850A0014B3F8 /* SearchHistoryModel.swift */; };
+		C4F6BC9626618FB40014B3F8 /* RenderingCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F6BC9426618FB40014B3F8 /* RenderingCellTableViewCell.swift */; };
+		C4F6BC9726618FB40014B3F8 /* RenderingCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4F6BC9526618FB40014B3F8 /* RenderingCellTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		567C1FC757C6F233F6F867DC /* libPods-MVP.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MVP.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		BF5C2770252BEAC9D03FE68C /* Pods-MVP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MVP.release.xcconfig"; path = "Target Support Files/Pods-MVP/Pods-MVP.release.xcconfig"; sourceTree = "<group>"; };
+		04EF289E19A27C77FE190BCC /* Pods-MVP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MVP.debug.xcconfig"; path = "Target Support Files/Pods-MVP/Pods-MVP.debug.xcconfig"; sourceTree = "<group>"; };
+		3E4B46564E07F47D3360C038 /* Pods-MVP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MVP.release.xcconfig"; path = "Target Support Files/Pods-MVP/Pods-MVP.release.xcconfig"; sourceTree = "<group>"; };
 		C468863D2550E848000E72FF /* MVP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MVP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C46886402550E848000E72FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C46886422550E848000E72FF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -43,9 +47,13 @@
 		C484E16A255C292C0044A790 /* WebPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPageViewController.swift; sourceTree = "<group>"; };
 		C4B7BAC32655AB63003FAAB8 /* SearchHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryViewController.swift; sourceTree = "<group>"; };
 		C4B7BAC6265B5E08003FAAB8 /* MulticastDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulticastDelegate.swift; sourceTree = "<group>"; };
+		C4C8BF1226669B6C00257609 /* libAlamofire.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libAlamofire.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		C4C8BF1426669B7100257609 /* libAlamofireImage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libAlamofireImage.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4D60A8E2638D49000DA1E33 /* SpinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerViewController.swift; sourceTree = "<group>"; };
 		C4F6BC8E265C850A0014B3F8 /* SearchHistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryModel.swift; sourceTree = "<group>"; };
-		FFEBDCE37CA6ED9E5846CA03 /* Pods-MVP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MVP.debug.xcconfig"; path = "Target Support Files/Pods-MVP/Pods-MVP.debug.xcconfig"; sourceTree = "<group>"; };
+		C4F6BC9426618FB40014B3F8 /* RenderingCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderingCellTableViewCell.swift; sourceTree = "<group>"; };
+		C4F6BC9526618FB40014B3F8 /* RenderingCellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RenderingCellTableViewCell.xib; sourceTree = "<group>"; };
+		E481B6FF078BE2ADC4AC2CAD /* libPods-MVP.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MVP.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,18 +61,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				66621766F5644C165F1BF5D3 /* libPods-MVP.a in Frameworks */,
+				C4C8BF1526669B7100257609 /* libAlamofireImage.a in Frameworks */,
+				C4C8BF1326669B6C00257609 /* libAlamofire.a in Frameworks */,
+				11C646FFCE0BEFFBA88DCC94 /* libPods-MVP.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1691441FFBCA6366F55CB2A0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C4C8BF1426669B7100257609 /* libAlamofireImage.a */,
+				C4C8BF1226669B6C00257609 /* libAlamofire.a */,
+				E481B6FF078BE2ADC4AC2CAD /* libPods-MVP.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		9EAE97426015BF36A74EDC83 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				FFEBDCE37CA6ED9E5846CA03 /* Pods-MVP.debug.xcconfig */,
-				BF5C2770252BEAC9D03FE68C /* Pods-MVP.release.xcconfig */,
+				04EF289E19A27C77FE190BCC /* Pods-MVP.debug.xcconfig */,
+				3E4B46564E07F47D3360C038 /* Pods-MVP.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -75,7 +95,7 @@
 				C468863F2550E848000E72FF /* MVP */,
 				C468863E2550E848000E72FF /* Products */,
 				9EAE97426015BF36A74EDC83 /* Pods */,
-				EE5EBA1C91318C4E89F901CA /* Frameworks */,
+				1691441FFBCA6366F55CB2A0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -130,6 +150,8 @@
 			isa = PBXGroup;
 			children = (
 				C46886462550E848000E72FF /* Main.storyboard */,
+				C4F6BC9426618FB40014B3F8 /* RenderingCellTableViewCell.swift */,
+				C4F6BC9526618FB40014B3F8 /* RenderingCellTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -142,14 +164,6 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		EE5EBA1C91318C4E89F901CA /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				567C1FC757C6F233F6F867DC /* libPods-MVP.a */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -157,7 +171,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C46886512550E848000E72FF /* Build configuration list for PBXNativeTarget "MVP" */;
 			buildPhases = (
-				707D12A4D8E0B3C891A4F16E /* [CP] Check Pods Manifest.lock */,
+				82AC4488BF60044FE3EFA59D /* [CP] Check Pods Manifest.lock */,
 				C46886392550E848000E72FF /* Sources */,
 				C468863A2550E848000E72FF /* Frameworks */,
 				C468863B2550E848000E72FF /* Resources */,
@@ -208,6 +222,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4F6BC9726618FB40014B3F8 /* RenderingCellTableViewCell.xib in Resources */,
 				C468864D2550E848000E72FF /* LaunchScreen.storyboard in Resources */,
 				C468864A2550E848000E72FF /* Assets.xcassets in Resources */,
 				C46886482550E848000E72FF /* Main.storyboard in Resources */,
@@ -217,7 +232,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		707D12A4D8E0B3C891A4F16E /* [CP] Check Pods Manifest.lock */ = {
+		82AC4488BF60044FE3EFA59D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -248,6 +263,7 @@
 			files = (
 				C4F6BC8F265C850A0014B3F8 /* SearchHistoryModel.swift in Sources */,
 				C4D60A8F2638D49000DA1E33 /* SpinnerViewController.swift in Sources */,
+				C4F6BC9626618FB40014B3F8 /* RenderingCellTableViewCell.swift in Sources */,
 				C484E16B255C292C0044A790 /* WebPageViewController.swift in Sources */,
 				C46886562550E985000E72FF /* RecipeTableViewController.swift in Sources */,
 				C484E168255B261E0044A790 /* WebPageModel.swift in Sources */,
@@ -401,7 +417,7 @@
 		};
 		C46886522550E848000E72FF /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FFEBDCE37CA6ED9E5846CA03 /* Pods-MVP.debug.xcconfig */;
+			baseConfigurationReference = 04EF289E19A27C77FE190BCC /* Pods-MVP.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -421,7 +437,7 @@
 		};
 		C46886532550E848000E72FF /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BF5C2770252BEAC9D03FE68C /* Pods-MVP.release.xcconfig */;
+			baseConfigurationReference = 3E4B46564E07F47D3360C038 /* Pods-MVP.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

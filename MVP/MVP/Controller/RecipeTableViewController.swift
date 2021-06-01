@@ -7,6 +7,8 @@
 
 import UIKit
 import SwiftUI
+import Alamofire
+import AlamofireImage
 
 class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
 
@@ -16,6 +18,7 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
     var recipeArray = [String]()
     var webPageViewController = WebPageViewController()
     static var urlArray = [String]()
+    var imageStringArray = [String]()
     var kid = SpinnerViewController()
     @State private var searchButtonPressed: Bool = false
     
@@ -38,7 +41,7 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
         super.viewDidLoad()
 
         RecipeManager.shared.delegateManager.multicast.add(self)
-        
+        tableView.register(UINib(nibName: "RenderingCellTableViewCell", bundle: nil), forCellReuseIdentifier: "RenderingCell")
         tableView.delegate = self
 //        recipeManager.delegate = self
         self.tableView.reloadData()
@@ -91,9 +94,22 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "recipeCells", for: indexPath)
-        cell.textLabel?.text = recipeArray[indexPath.row] ?? "Nothing searched yet"
-        cell.textLabel?.numberOfLines = 0
+        let cell = tableView.dequeueReusableCell(withIdentifier: "RenderingCell", for: indexPath) as! RenderingCellTableViewCell
+        cell.label.text = recipeArray[indexPath.row] ?? "Nothing searched yet"
+//        for image in imageStringArray {
+        if let imageURL = imageStringArray[indexPath.row] as? String {
+                AF.request(imageURL).responseImage { (response) in
+//                    print(response)
+                    if let image = try? response.result.get() {
+                        DispatchQueue.main.async {
+                            cell.previewImage.image = image
+                        }
+                    }
+                }
+            }
+        cell.previewImage.isOpaque = false
+        
+        cell.label.numberOfLines = 0
         cell.accessoryType = .none
 //        scrollToTop()
         searchButtonPressed = false
@@ -122,9 +138,10 @@ extension RecipeTableViewController: RecipeManagerDelegate {
         DispatchQueue.main.async {
             self.recipeArray.removeAll()
             RecipeTableViewController.urlArray.removeAll()
+            self.imageStringArray.removeAll()
             self.recipeArray.append(contentsOf: recipeModel.recipeLabel)
-
             RecipeTableViewController.urlArray.append(contentsOf: recipeModel.urlString)
+            self.imageStringArray.append(contentsOf: recipeModel.imageArray)
             self.tableView.reloadData()
 //            self.scrollToTop()
             self.status = .sucess

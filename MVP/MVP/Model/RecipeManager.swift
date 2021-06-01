@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireImage
 
 protocol RecipeManagerDelegate {
     func didUpdateRecipe(_ recipeManager: RecipeManager, recipeModel: RecipeModel)
@@ -35,6 +37,7 @@ struct RecipeManager {
     let appID = "3214dd26"
     let appKey = "24f428ea7ca46ce12a04eabda6c59909"
     let maxNumberOfApiRequests = 100
+//    var imageArray = [UIImage]()
 
     static let shared = RecipeManager()
     var delegateManager: ReceipeManagerMultiCastDelegate
@@ -48,15 +51,12 @@ struct RecipeManager {
     func fetchRecipe(typeOfFood: String) {
 
         let urlString = "\(recipeURL)&app_id=\(appID)&app_key=\(appKey)&q=\(typeOfFood)&from=0&to=\(maxNumberOfApiRequests)"
-//        print(urlString)
+        print(urlString)
         performRequest(urlString: urlString)
     }
 
 
     func performRequest(urlString: String) {
-
-//        let recipeTableVC = RecipeTableViewController()
-//        recipeTableVC.status = .loading
 
         if let url = URL(string: urlString) {
 
@@ -68,7 +68,7 @@ struct RecipeManager {
                     delegateManager.didFailWithError(error: error!)
                     return
                 }
-
+                print("here is the data \(data)")
                 if let safeData = data {
                     if let recipeModel = parseJSON(safeData) {
 
@@ -85,6 +85,8 @@ struct RecipeManager {
         let decoder = JSONDecoder()
         var recipeList = [String]()
         var urlList = [String]()
+        var imageStringArray = [String]()
+        var imageArray = [UIImage]()
         do {
 //            recipeList.removeAll()
 //            urlList.removeAll()
@@ -94,15 +96,12 @@ struct RecipeManager {
             let decodedData = try decoder.decode(RecipeData.self, from: recipeData)
 
             for i in 0..<maxNumberOfApiRequests {
+                imageStringArray.append(contentsOf: [decodedData.hits[i].recipe.image])
                 recipeList.append(contentsOf: [decodedData.hits[i].recipe.label])
                 urlList.append(contentsOf: [decodedData.hits[i].recipe.url])
             }
-
-//            for j in 0..<maxNumberOfApiRequests {
-//                urlList.append(contentsOf: [decodedData.hits[j].recipe.url])
-//            }
 //            print(urlList)
-            var recipe = RecipeModel(recipeLabel: recipeList, urlString: urlList)
+            var recipe = RecipeModel(recipeLabel: recipeList, urlString: urlList, imageArray: imageStringArray)
 //            recipeList.removeAll()
 //            urlList.removeAll()
             return recipe
@@ -112,5 +111,6 @@ struct RecipeManager {
         }
 
     }
+   
 }
 

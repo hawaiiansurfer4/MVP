@@ -10,9 +10,11 @@ import UIKit
 struct RecipeModel {
     var recipeLabel: [String]
     var urlString: [String]
+    var imageArray: [String]
     
     mutating func clearData() {
         self.recipeLabel.removeAll()
         self.urlString.removeAll()
+        self.imageArray.removeAll()
     }
 }
