@@ -107,19 +107,9 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate  {
                     }
                 }
             }
-//        }
-        
-//        cell.previewImage.image = UIImage(named: "https://www.edamam.com/web-img/e42/e42f9119813e890af34c259785ae1cfb.jpg")
-//        cell.previewImage.backgroundColor = .none 
-//        cell.previewImage.image = UIImage(contentsOfFile: "https://www.edamam.com/web-img/e42/e42f9119813e890af34c259785ae1cfb.jpg")
-//        let url = URL(string: "https://www.edamam.com/web-img/e42/e42f9119813e890af34c259785ae1cfb.jpg")
-//        cell.previewImage.image = downloa
         cell.previewImage.isOpaque = false
-//        cell.previewImage.image = UIImage(data: <#T##Data#>)
         
         cell.label.numberOfLines = 0
-//        cell.textLabel?.text = recipeArray[indexPath.row] ?? "Nothing searched yet"
-//        cell.textLabel?.numberOfLines = 0
         cell.accessoryType = .none
 //        scrollToTop()
         searchButtonPressed = false
@@ -149,7 +139,6 @@ extension RecipeTableViewController: RecipeManagerDelegate {
             self.recipeArray.removeAll()
             RecipeTableViewController.urlArray.removeAll()
             self.imageStringArray.removeAll()
-//            RecipeTableViewController.imageArray.removeAll()
             self.recipeArray.append(contentsOf: recipeModel.recipeLabel)
             RecipeTableViewController.urlArray.append(contentsOf: recipeModel.urlString)
             self.imageStringArray.append(contentsOf: recipeModel.imageArray)

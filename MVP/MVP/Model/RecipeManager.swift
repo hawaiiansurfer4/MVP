@@ -97,38 +97,9 @@ struct RecipeManager {
 
             for i in 0..<maxNumberOfApiRequests {
                 imageStringArray.append(contentsOf: [decodedData.hits[i].recipe.image])
-//                if let imageString = UIImage(named: decodedData.hits[i].recipe.image) {
-//                    imageArray.append(UIImage(imageLiteralResourceName: decodedData.hits[i].recipe.image))
-//                } else {
-//                    imageArray.append(#imageLiteral(resourceName: ).imageAsset.)
-//                }
                 recipeList.append(contentsOf: [decodedData.hits[i].recipe.label])
                 urlList.append(contentsOf: [decodedData.hits[i].recipe.url])
-//                imageArray.append(UIImage(imageLiteralResourceName: decodedData.hits[i].recipe.image))
-                
-//                imageArray.append(images)
             }
-//            for j in 0..<imageStringArray.count {
-//                if let imageURL = imageStringArray[j] as? String {
-//                    AF.request(imageURL).responseImage { (response) in
-//                        print(response)
-//                        if let image = response.result.publisher {
-//                            
-//                        }
-////                        imageArray.append(response)
-//                    }
-//                }
-//                AF.request(imageStringArray[j]).responseImage(completionHandler: { response in
-//                    debugPrint(response)
-//                    print(response.result)
-//                    print(response.response)
-//                    debugPrint(response.result)
-//
-//                    if case .success(let image) = response.result {
-//                        print("image downloaded: \(image)")
-//                    }
-//                })
-//            }
 //            print(urlList)
             var recipe = RecipeModel(recipeLabel: recipeList, urlString: urlList, imageArray: imageStringArray)
 //            recipeList.removeAll()
@@ -140,45 +111,6 @@ struct RecipeManager {
         }
 
     }
-    
-//    func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
-//        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
-//    }
-//
-//    func downloadImage(from url: URL) {
-//        print("Download Started")
-//        getData(from: url) { data, response, error in
-//            guard let data = data, error == nil else { return }
-//            print(response?.suggestedFilename ?? url.lastPathComponent)
-//            print("Download Finished")
-//            // always update the UI from the main thread
-//            DispatchQueue.main.async() {
-////                self?.imageArray.append(UIImage(data: data)!)
-////                self.imageArray.
-//            }
-//        }
-//    }
-//
-//}
-//
-//extension UIImageView {
-//    func downloaded(from url: URL, contentMode mode: ContentMode = .scaleAspectFit) {
-//        contentMode = mode
-//        URLSession.shared.dataTask(with: url) { data, response, error in
-//            guard
-//                let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
-//                let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
-//                let data = data, error == nil,
-//                let image = UIImage(data: data)
-//                else { return }
-//            DispatchQueue.main.async() { [weak self] in
-//                self?.image = image
-//            }
-//        }.resume()
-//    }
-//    func downloaded(from link: String, contentMode mode: ContentMode = .scaleAspectFit) {
-//        guard let url = URL(string: link) else { return }
-//        downloaded(from: url, contentMode: mode)
-//    }
+   
 }
 
