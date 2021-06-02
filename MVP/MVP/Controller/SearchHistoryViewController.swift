@@ -12,6 +12,7 @@ class SearchHistoryViewController: UIViewController, UITableViewDelegate, UISear
     
     var testArray = ["Chicken","Country","Steak","Shrimp","Scallop","Banana","Nutella","Whip Cream"]
     var searchHistoryModel = SearchHistoryModel()
+    var searchHistoryArray = [SearchHistoryData]()
     
     
     @IBOutlet weak var historyTable: UITableView!
