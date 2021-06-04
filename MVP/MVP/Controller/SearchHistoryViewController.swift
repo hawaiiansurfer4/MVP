@@ -16,6 +16,18 @@ class SearchHistoryViewController: UIViewController, UITableViewDelegate, UISear
     var searchHistoryModel = SearchHistoryModel()
     var historyArray = [SearchHistoryData]()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var count = 0 {
+        didSet {
+            if count > CAPACITY {
+                context.delete(historyArray.removeFirst())
+//                historyArray.removeFirst()
+//                        historyTable.reloadData()
+                saveItems()
+//                loadItems()
+            }
+        }
+    }
+    let CAPACITY = 8
     
     
     
@@ -31,7 +43,8 @@ class SearchHistoryViewController: UIViewController, UITableViewDelegate, UISear
         historySearchBar.delegate = self
         historyTable.dataSource = self
         RecipeManager.shared.delegateManager.multicast.add(self)
-        print("Here is the location: \(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))")
+//        print("Here is the location: \(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))")
+//        historyTable.isScrollEnabled = false
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
@@ -60,20 +73,6 @@ class SearchHistoryViewController: UIViewController, UITableViewDelegate, UISear
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         if let recipe = historySearchBar.text {
             RecipeManager.shared.fetchRecipe(typeOfFood: recipe)
-            var capcity = historyArray.count {
-                didSet {
-                    if capcity > 8 {
-    //                    updatingCapcity(indexPath)
-    //                    context.delete(historyArray.remove(at: 0))
-                        context.delete(historyArray.removeFirst())
-                        historyArray.removeFirst()
-//                        historyTable.reloadData()
-                        saveItems()
-                        loadItems()
-                    }
-                }
-            }
-//            context.delete(historyArray.removeFirst())
             updateSearchHistory(recipe)
         }
         
@@ -103,10 +102,10 @@ class SearchHistoryViewController: UIViewController, UITableViewDelegate, UISear
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         historySearchBar.text = historyArray.map{$0}.reversed()[indexPath.row].text
-        context.delete(historyArray.map{$0}.reversed()[indexPath.row])
-        saveItems()
-        loadItems()
-        tableView.deselectRow(at: indexPath, animated: true)
+//        context.delete(historyArray.map{$0}.reversed()[indexPath.row])
+//        saveItems()
+//        loadItems()
+//        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -146,6 +145,8 @@ class SearchHistoryViewController: UIViewController, UITableViewDelegate, UISear
         
         do {
             historyArray = try context.fetch(request)
+            count = historyArray.count
+            print("Here is the count \(count)")
         } catch {
             print("Error fetching data from context \(error)")
         }
