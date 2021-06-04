@@ -7,7 +7,7 @@
 
 import UIKit
 import CoreData
-import IQKeyboardManagerSwift
+//import IQKeyboardManagerSwift
 
 class SearchHistoryViewController: UIViewController, UITableViewDelegate, UISearchBarDelegate, UITableViewDataSource {
     
@@ -32,8 +32,30 @@ class SearchHistoryViewController: UIViewController, UITableViewDelegate, UISear
         historyTable.dataSource = self
         RecipeManager.shared.delegateManager.multicast.add(self)
         print("Here is the location: \(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))")
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         loadItems()
     }
+    
+    @objc func adjustForKeyboard(notification: Notification) {
+        guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+
+        let keyboardScreenEndFrame = keyboardValue.cgRectValue
+        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
+
+        if notification.name == UIResponder.keyboardWillHideNotification {
+            historyTable.contentInset = .zero
+        } else {
+            historyTable.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height - view.safeAreaInsets.bottom, right: 0)
+        }
+
+        historyTable.scrollIndicatorInsets = historyTable.contentInset
+
+//        let selectedRange = yourTextView.selectedRange
+//        yourTextView.scrollRangeToVisible(selectedRange)
+    }
+
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         if let recipe = historySearchBar.text {
