@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreData
+import IQKeyboardManagerSwift
 
 class SearchHistoryViewController: UIViewController, UITableViewDelegate, UISearchBarDelegate, UITableViewDataSource {
     
@@ -15,6 +16,7 @@ class SearchHistoryViewController: UIViewController, UITableViewDelegate, UISear
     var searchHistoryModel = SearchHistoryModel()
     var historyArray = [SearchHistoryData]()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
     
     
     @IBOutlet weak var historyTable: UITableView!
@@ -29,12 +31,27 @@ class SearchHistoryViewController: UIViewController, UITableViewDelegate, UISear
         historySearchBar.delegate = self
         historyTable.dataSource = self
         RecipeManager.shared.delegateManager.multicast.add(self)
-//        loadItems()
+        print("Here is the location: \(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))")
+        loadItems()
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         if let recipe = historySearchBar.text {
             RecipeManager.shared.fetchRecipe(typeOfFood: recipe)
+            var capcity = historyArray.count {
+                didSet {
+                    if capcity > 8 {
+    //                    updatingCapcity(indexPath)
+    //                    context.delete(historyArray.remove(at: 0))
+                        context.delete(historyArray.removeFirst())
+                        historyArray.removeFirst()
+//                        historyTable.reloadData()
+                        saveItems()
+                        loadItems()
+                    }
+                }
+            }
+//            context.delete(historyArray.removeFirst())
             updateSearchHistory(recipe)
         }
         
@@ -53,27 +70,42 @@ class SearchHistoryViewController: UIViewController, UITableViewDelegate, UISear
     func updateSearchHistory(_ latestSearch: String) {
         let newSearch = SearchHistoryData(context: context)
         newSearch.text = latestSearch
-        searchHistoryModel.push(latestSearch)
+//        searchHistoryModel.push(latestSearch)
         self.saveItems()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchHistoryModel.searchPopulation().count
+//        return searchHistoryModel.searchPopulation().count
+        return historyArray.count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        historySearchBar.text = searchHistoryModel.searchPopulation()[indexPath.row]
+        historySearchBar.text = historyArray.map{$0}.reversed()[indexPath.row].text
+        context.delete(historyArray.map{$0}.reversed()[indexPath.row])
+        saveItems()
+        loadItems()
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+//        print(capcity)
         let searchCell = tableView.dequeueReusableCell(withIdentifier: "searchHistoryCell", for: indexPath)
 //        searchCell.textLabel?.text = searchHistoryModel.searchPopulation()[indexPath.row] ?? "No search History"
-        let history = historyArray[indexPath.row]
+        updatingCapcity(indexPath)
+        let history = historyArray.map{$0}.reversed()[indexPath.row]
+//        context.delete(indexPath.row)
         searchCell.textLabel?.text = history.text
         searchCell.textLabel?.numberOfLines = 0
         searchCell.accessoryType = .none
         return searchCell
+    }
+    
+    func updatingCapcity(_ indexPath: IndexPath) {
+        DispatchQueue.main.async {
+            var idxPath = indexPath
+            
+        }
     }
     
     //MARK: - Model Manipulation Methods
@@ -85,21 +117,10 @@ class SearchHistoryViewController: UIViewController, UITableViewDelegate, UISear
         } catch {
            print("Error saving context \(error)")
         }
-        
-//        self.tableView.reloadData()
         historyTable.reloadData()
     }
     
     func loadItems(with request: NSFetchRequest<SearchHistoryData> = SearchHistoryData.fetchRequest(), predicate: NSPredicate? = nil) {
-        
-//        let categoryPredicate = NSPredicate(format: "parentCategory.name MATCHES %@", selectedCategory!.name!)
-        
-//        if let addtionalPredicate = predicate {
-//            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate, addtionalPredicate])
-//        } else {
-//            request.predicate = categoryPredicate
-//        }
-
         
         do {
             historyArray = try context.fetch(request)
