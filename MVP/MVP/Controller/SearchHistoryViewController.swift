@@ -20,10 +20,7 @@ class SearchHistoryViewController: UIViewController, UITableViewDelegate, UISear
         didSet {
             if count > CAPACITY {
                 context.delete(historyArray.removeFirst())
-//                historyArray.removeFirst()
-//                        historyTable.reloadData()
                 saveItems()
-//                loadItems()
             }
         }
     }
@@ -43,8 +40,7 @@ class SearchHistoryViewController: UIViewController, UITableViewDelegate, UISear
         historySearchBar.delegate = self
         historyTable.dataSource = self
         RecipeManager.shared.delegateManager.multicast.add(self)
-//        print("Here is the location: \(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))")
-//        historyTable.isScrollEnabled = false
+        historyTable.isScrollEnabled = false
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
@@ -109,13 +105,9 @@ class SearchHistoryViewController: UIViewController, UITableViewDelegate, UISear
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-//        print(capcity)
         let searchCell = tableView.dequeueReusableCell(withIdentifier: "searchHistoryCell", for: indexPath)
-//        searchCell.textLabel?.text = searchHistoryModel.searchPopulation()[indexPath.row] ?? "No search History"
         updatingCapcity(indexPath)
         let history = historyArray.map{$0}.reversed()[indexPath.row]
-//        context.delete(indexPath.row)
         searchCell.textLabel?.text = history.text
         searchCell.textLabel?.numberOfLines = 0
         searchCell.accessoryType = .none
