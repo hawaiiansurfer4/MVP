@@ -7,7 +7,6 @@
 
 import UIKit
 import CoreData
-//import IQKeyboardManagerSwift
 
 class SearchHistoryViewController: UIViewController, UITableViewDelegate, UISearchBarDelegate, UITableViewDataSource {
     
@@ -98,9 +97,6 @@ class SearchHistoryViewController: UIViewController, UITableViewDelegate, UISear
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         historySearchBar.text = historyArray.map{$0}.reversed()[indexPath.row].text
-//        context.delete(historyArray.map{$0}.reversed()[indexPath.row])
-//        saveItems()
-//        loadItems()
         tableView.deselectRow(at: indexPath, animated: true)
     }
     

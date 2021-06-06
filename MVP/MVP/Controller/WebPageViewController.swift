@@ -11,11 +11,9 @@ import SafariServices
 
 class WebPageViewController: UIViewController, WKUIDelegate {
     
-//    var webPageModel = WebPageModel()
     static var webShowRecipeURL = String()
     var webView: WKWebView!
     let child = SpinnerViewController()
-//    var recipeTableViewController = RecipeTableViewController()
     
     override func loadView() {
         let webConfiguration = WKWebViewConfiguration()
