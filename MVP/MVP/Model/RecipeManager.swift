@@ -14,6 +14,10 @@ protocol RecipeManagerDelegate {
     func didFailWithError(error: Error)
 }
 
+protocol ErrorUpdate {
+    func updateError(_ errorBool: Bool)
+}
+
 class ReceipeManagerMultiCastDelegate: NSObject, RecipeManagerDelegate {
 
     let multicast = MulticastDelegate<RecipeManagerDelegate>()
@@ -47,11 +51,12 @@ struct RecipeManager {
 
     static var recipeArray = [String]()
     var delegate: RecipeManagerDelegate?
+    var errorUpdate: ErrorUpdate?
 
     func fetchRecipe(typeOfFood: String) {
 
         let urlString = "\(recipeURL)&app_id=\(appID)&app_key=\(appKey)&q=\(typeOfFood)&from=0&to=\(maxNumberOfApiRequests)"
-        print(urlString)
+//        print(urlString)
         performRequest(urlString: urlString)
     }
 
@@ -68,7 +73,7 @@ struct RecipeManager {
                     delegateManager.didFailWithError(error: error!)
                     return
                 }
-                print("here is the data \(data)")
+//                print("here is the data \(data)")
                 if let safeData = data {
                     if let recipeModel = parseJSON(safeData) {
 
@@ -88,29 +93,40 @@ struct RecipeManager {
         var imageStringArray = [String]()
         var imageArray = [UIImage]()
         do {
-//            recipeList.removeAll()
-//            urlList.removeAll()
-
 //            print("This is my recipe list \(recipeList)")
 //            print("This is my url list \(urlList)")
             let decodedData = try decoder.decode(RecipeData.self, from: recipeData)
-
-            for i in 0..<maxNumberOfApiRequests {
-                imageStringArray.append(contentsOf: [decodedData.hits[i].recipe.image])
-                recipeList.append(contentsOf: [decodedData.hits[i].recipe.label])
-                urlList.append(contentsOf: [decodedData.hits[i].recipe.url])
-            }
+//             else {
+                for i in 0..<maxNumberOfApiRequests {
+//                    if decodedData.hits[i].recipe.label == nil || decodedData.hits[i].recipe.label.isEmpty {
+//                        self.errorUpdate?.updateError(true)
+//                    }
+                    if decodedData.count <= 100 {
+                        self.errorUpdate?.updateError(true)
+                        return RecipeModel(recipeLabel: [], urlString: [], imageArray: [])
+                    }
+                    imageStringArray.append(contentsOf: [decodedData.hits[i].recipe.image])
+                    recipeList.append(contentsOf: [decodedData.hits[i].recipe.label])
+                    urlList.append(contentsOf: [decodedData.hits[i].recipe.url])
+                }
+//            }
+            
+            
+            
 //            print(urlList)
             var recipe = RecipeModel(recipeLabel: recipeList, urlString: urlList, imageArray: imageStringArray)
 //            recipeList.removeAll()
 //            urlList.removeAll()
             return recipe
         } catch {
-            self.delegate?.didFailWithError(error: error)
+//            self.delegate?.didFailWithError(error: error)
+            delegateManager.didFailWithError(error: error)
+            self.errorUpdate?.updateError(false)
             return nil
         }
 
     }
+    
    
 }
 

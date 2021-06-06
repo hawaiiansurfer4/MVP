@@ -101,12 +101,11 @@ class SearchHistoryViewController: UIViewController, UITableViewDelegate, UISear
 //        context.delete(historyArray.map{$0}.reversed()[indexPath.row])
 //        saveItems()
 //        loadItems()
-//        tableView.deselectRow(at: indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let searchCell = tableView.dequeueReusableCell(withIdentifier: "searchHistoryCell", for: indexPath)
-        updatingCapcity(indexPath)
         let history = historyArray.map{$0}.reversed()[indexPath.row]
         searchCell.textLabel?.text = history.text
         searchCell.textLabel?.numberOfLines = 0
@@ -114,12 +113,7 @@ class SearchHistoryViewController: UIViewController, UITableViewDelegate, UISear
         return searchCell
     }
     
-    func updatingCapcity(_ indexPath: IndexPath) {
-        DispatchQueue.main.async {
-            var idxPath = indexPath
-            
-        }
-    }
+    
     
     //MARK: - Model Manipulation Methods
     
@@ -138,7 +132,7 @@ class SearchHistoryViewController: UIViewController, UITableViewDelegate, UISear
         do {
             historyArray = try context.fetch(request)
             count = historyArray.count
-            print("Here is the count \(count)")
+//            print("Here is the count \(count)")
         } catch {
             print("Error fetching data from context \(error)")
         }
