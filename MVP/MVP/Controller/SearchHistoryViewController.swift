@@ -6,12 +6,25 @@
 //
 
 import UIKit
+import CoreData
 
 class SearchHistoryViewController: UIViewController, UITableViewDelegate, UISearchBarDelegate, UITableViewDataSource {
     
     
     var testArray = ["Chicken","Country","Steak","Shrimp","Scallop","Banana","Nutella","Whip Cream"]
     var searchHistoryModel = SearchHistoryModel()
+    var historyArray = [SearchHistoryData]()
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var count = 0 {
+        didSet {
+            if count > CAPACITY {
+                context.delete(historyArray.removeFirst())
+                saveItems()
+            }
+        }
+    }
+    let CAPACITY = 8
+    
     
     
     @IBOutlet weak var historyTable: UITableView!
@@ -26,7 +39,31 @@ class SearchHistoryViewController: UIViewController, UITableViewDelegate, UISear
         historySearchBar.delegate = self
         historyTable.dataSource = self
         RecipeManager.shared.delegateManager.multicast.add(self)
+        historyTable.isScrollEnabled = false
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+        loadItems()
     }
+    
+    @objc func adjustForKeyboard(notification: Notification) {
+        guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+
+        let keyboardScreenEndFrame = keyboardValue.cgRectValue
+        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
+
+        if notification.name == UIResponder.keyboardWillHideNotification {
+            historyTable.contentInset = .zero
+        } else {
+            historyTable.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height - view.safeAreaInsets.bottom, right: 0)
+        }
+
+        historyTable.scrollIndicatorInsets = historyTable.contentInset
+
+//        let selectedRange = yourTextView.selectedRange
+//        yourTextView.scrollRangeToVisible(selectedRange)
+    }
+
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         if let recipe = historySearchBar.text {
@@ -47,24 +84,57 @@ class SearchHistoryViewController: UIViewController, UITableViewDelegate, UISear
     }
     
     func updateSearchHistory(_ latestSearch: String) {
-        searchHistoryModel.push(latestSearch)
+        let newSearch = SearchHistoryData(context: context)
+        newSearch.text = latestSearch
+//        searchHistoryModel.push(latestSearch)
+        self.saveItems()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchHistoryModel.searchPopulation().count
+//        return searchHistoryModel.searchPopulation().count
+        return historyArray.count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        historySearchBar.text = searchHistoryModel.searchPopulation()[indexPath.row]
+        historySearchBar.text = historyArray.map{$0}.reversed()[indexPath.row].text
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let searchCell = tableView.dequeueReusableCell(withIdentifier: "searchHistoryCell", for: indexPath)
-        searchCell.textLabel?.text = searchHistoryModel.searchPopulation()[indexPath.row] ?? "No search History"
+        let history = historyArray.map{$0}.reversed()[indexPath.row]
+        searchCell.textLabel?.text = history.text
         searchCell.textLabel?.numberOfLines = 0
         searchCell.accessoryType = .none
         return searchCell
+    }
+    
+    
+    
+    //MARK: - Model Manipulation Methods
+    
+    func saveItems() {
+        
+        do {
+          try context.save()
+        } catch {
+           print("Error saving context \(error)")
+        }
+        historyTable.reloadData()
+    }
+    
+    func loadItems(with request: NSFetchRequest<SearchHistoryData> = SearchHistoryData.fetchRequest(), predicate: NSPredicate? = nil) {
+        
+        do {
+            historyArray = try context.fetch(request)
+            count = historyArray.count
+//            print("Here is the count \(count)")
+        } catch {
+            print("Error fetching data from context \(error)")
+        }
+        
+        historyTable.reloadData()
+        
     }
     
 }
