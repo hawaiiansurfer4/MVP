@@ -11,8 +11,6 @@ import CoreData
 class SearchHistoryViewController: UIViewController, UITableViewDelegate, UISearchBarDelegate, UITableViewDataSource {
     
     
-    var testArray = ["Chicken","Country","Steak","Shrimp","Scallop","Banana","Nutella","Whip Cream"]
-    var searchHistoryModel = SearchHistoryModel()
     var historyArray = [SearchHistoryData]()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var count = 0 {
@@ -59,9 +57,6 @@ class SearchHistoryViewController: UIViewController, UITableViewDelegate, UISear
         }
 
         historyTable.scrollIndicatorInsets = historyTable.contentInset
-
-//        let selectedRange = yourTextView.selectedRange
-//        yourTextView.scrollRangeToVisible(selectedRange)
     }
 
     
@@ -86,12 +81,10 @@ class SearchHistoryViewController: UIViewController, UITableViewDelegate, UISear
     func updateSearchHistory(_ latestSearch: String) {
         let newSearch = SearchHistoryData(context: context)
         newSearch.text = latestSearch
-//        searchHistoryModel.push(latestSearch)
         self.saveItems()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return searchHistoryModel.searchPopulation().count
         return historyArray.count
     }
     
@@ -128,7 +121,6 @@ class SearchHistoryViewController: UIViewController, UITableViewDelegate, UISear
         do {
             historyArray = try context.fetch(request)
             count = historyArray.count
-//            print("Here is the count \(count)")
         } catch {
             print("Error fetching data from context \(error)")
         }

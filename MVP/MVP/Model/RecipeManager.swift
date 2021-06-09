@@ -41,7 +41,6 @@ struct RecipeManager {
     let appID = "3214dd26"
     let appKey = "24f428ea7ca46ce12a04eabda6c59909"
     let maxNumberOfApiRequests = 100
-//    var imageArray = [UIImage]()
 
     static let shared = RecipeManager()
     var delegateManager: ReceipeManagerMultiCastDelegate
@@ -56,7 +55,6 @@ struct RecipeManager {
     func fetchRecipe(typeOfFood: String) {
 
         let urlString = "\(recipeURL)&app_id=\(appID)&app_key=\(appKey)&q=\(typeOfFood)&from=0&to=\(maxNumberOfApiRequests)"
-//        print(urlString)
         performRequest(urlString: urlString)
     }
 
@@ -69,15 +67,12 @@ struct RecipeManager {
 
             let task = session.dataTask(with: url) { (data, response, error) in
                 if error != nil {
-//                    self.delegate?.didFailWithError(error: error!)
                     delegateManager.didFailWithError(error: error!)
                     return
                 }
-//                print("here is the data \(data)")
                 if let safeData = data {
                     if let recipeModel = parseJSON(safeData) {
 
-//                        self.delegate?.didUpdateRecipe(self, recipeModel: recipeModel)
                         delegateManager.didUpdateRecipe(self, recipeModel: recipeModel)
                     }
                 }
@@ -93,14 +88,8 @@ struct RecipeManager {
         var imageStringArray = [String]()
         var imageArray = [UIImage]()
         do {
-//            print("This is my recipe list \(recipeList)")
-//            print("This is my url list \(urlList)")
             let decodedData = try decoder.decode(RecipeData.self, from: recipeData)
-//             else {
                 for i in 0..<maxNumberOfApiRequests {
-//                    if decodedData.hits[i].recipe.label == nil || decodedData.hits[i].recipe.label.isEmpty {
-//                        self.errorUpdate?.updateError(true)
-//                    }
                     if decodedData.count <= 100 {
                         self.errorUpdate?.updateError(true)
                         return RecipeModel(recipeLabel: [], urlString: [], imageArray: [])
@@ -109,17 +98,10 @@ struct RecipeManager {
                     recipeList.append(contentsOf: [decodedData.hits[i].recipe.label])
                     urlList.append(contentsOf: [decodedData.hits[i].recipe.url])
                 }
-//            }
             
-            
-            
-//            print(urlList)
             var recipe = RecipeModel(recipeLabel: recipeList, urlString: urlList, imageArray: imageStringArray)
-//            recipeList.removeAll()
-//            urlList.removeAll()
             return recipe
         } catch {
-//            self.delegate?.didFailWithError(error: error)
             delegateManager.didFailWithError(error: error)
             self.errorUpdate?.updateError(false)
             return nil

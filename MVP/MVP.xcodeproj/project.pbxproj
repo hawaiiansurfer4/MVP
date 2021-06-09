@@ -24,7 +24,6 @@
 		C4C8BF1326669B6C00257609 /* libAlamofire.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C4C8BF1226669B6C00257609 /* libAlamofire.a */; };
 		C4C8BF1526669B7100257609 /* libAlamofireImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C4C8BF1426669B7100257609 /* libAlamofireImage.a */; };
 		C4D60A8F2638D49000DA1E33 /* SpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D60A8E2638D49000DA1E33 /* SpinnerViewController.swift */; };
-		C4F6BC8F265C850A0014B3F8 /* SearchHistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F6BC8E265C850A0014B3F8 /* SearchHistoryModel.swift */; };
 		C4F6BC9626618FB40014B3F8 /* RenderingCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F6BC9426618FB40014B3F8 /* RenderingCellTableViewCell.swift */; };
 		C4F6BC9726618FB40014B3F8 /* RenderingCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4F6BC9526618FB40014B3F8 /* RenderingCellTableViewCell.xib */; };
 /* End PBXBuildFile section */
@@ -50,7 +49,6 @@
 		C4C8BF1226669B6C00257609 /* libAlamofire.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libAlamofire.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4C8BF1426669B7100257609 /* libAlamofireImage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libAlamofireImage.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4D60A8E2638D49000DA1E33 /* SpinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerViewController.swift; sourceTree = "<group>"; };
-		C4F6BC8E265C850A0014B3F8 /* SearchHistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryModel.swift; sourceTree = "<group>"; };
 		C4F6BC9426618FB40014B3F8 /* RenderingCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderingCellTableViewCell.swift; sourceTree = "<group>"; };
 		C4F6BC9526618FB40014B3F8 /* RenderingCellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RenderingCellTableViewCell.xib; sourceTree = "<group>"; };
 		E481B6FF078BE2ADC4AC2CAD /* libPods-MVP.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MVP.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -130,7 +128,6 @@
 				C468865A2550EC80000E72FF /* RecipeManager.swift */,
 				C468865E2550F00A000E72FF /* RecipeData.swift */,
 				C46886862551D076000E72FF /* RecipeModel.swift */,
-				C4F6BC8E265C850A0014B3F8 /* SearchHistoryModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -261,7 +258,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C4F6BC8F265C850A0014B3F8 /* SearchHistoryModel.swift in Sources */,
 				C4D60A8F2638D49000DA1E33 /* SpinnerViewController.swift in Sources */,
 				C4F6BC9626618FB40014B3F8 /* RenderingCellTableViewCell.swift in Sources */,
 				C484E16B255C292C0044A790 /* WebPageViewController.swift in Sources */,
@@ -421,6 +417,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = X28T8ZG28R;
 				INFOPLIST_FILE = MVP/Info.plist;
@@ -430,6 +427,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = sdminternetdiversityventures.MVP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -441,6 +439,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = X28T8ZG28R;
 				INFOPLIST_FILE = MVP/Info.plist;
@@ -450,6 +449,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = sdminternetdiversityventures.MVP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

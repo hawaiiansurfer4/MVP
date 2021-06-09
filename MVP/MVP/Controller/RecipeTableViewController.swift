@@ -12,8 +12,6 @@ import AlamofireImage
 
 class RecipeTableViewController: UITableViewController, UISearchBarDelegate {
 
-//    var webPageModel = WebPageModel()
-    var searchHistoryModel = SearchHistoryModel()
     var tableRecipeItems: String = ""
     var recipeArray = [String]()
     var webPageViewController = WebPageViewController()
@@ -50,7 +48,6 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate {
         RecipeManager.shared.delegateManager.multicast.add(self)
         tableView.register(UINib(nibName: "RenderingCellTableViewCell", bundle: nil), forCellReuseIdentifier: "RenderingCell")
         tableView.delegate = self
-//        recipeManager.delegate = self
         self.tableView.reloadData()
     }
 
@@ -62,7 +59,6 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let searchHistoryVC = segue.destination as? SearchHistoryViewController else { return }
-        searchHistoryVC.searchHistoryModel = searchHistoryModel
     }
 
 
@@ -80,7 +76,6 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate {
         cell.label.text = recipeArray[indexPath.row] ?? "Nothing searched yet"
         if let imageURL = imageStringArray[indexPath.row] as? String {
             AF.request(imageURL).responseImage { (response) in
-//                    print(response)
                 if let image = try? response.result.get() {
                     DispatchQueue.main.async {
                         cell.previewImage.image = image
@@ -92,7 +87,6 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate {
 
         cell.label.numberOfLines = 0
         cell.accessoryType = .none
-//        scrollToTop()
         searchButtonPressed = false
         return cell
     }
@@ -115,7 +109,6 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate {
 
 extension RecipeTableViewController: RecipeManagerDelegate {
     func didUpdateRecipe(_ recipeManager: RecipeManager, recipeModel: RecipeModel) {
-//        print("Recipte Table VC noticed the update")
         DispatchQueue.main.async {
             self.recipeArray.removeAll()
             RecipeTableViewController.urlArray.removeAll()
@@ -127,7 +120,6 @@ extension RecipeTableViewController: RecipeManagerDelegate {
             RecipeTableViewController.urlArray.append(contentsOf: recipeModel.urlString)
             self.imageStringArray.append(contentsOf: recipeModel.imageArray)
             self.tableView.reloadData()
-//            self.scrollToTop()
             self.status = .sucess
         }
     }
@@ -147,8 +139,6 @@ extension RecipeTableViewController {
     func createSpinnerView() {
         DispatchQueue.main.async {
             self.kid = SpinnerViewController()
-            // add the spinner view controller
-//            self.scrollToTop()
             self.addChild(self.kid)
             self.kid.view.frame = self.view.frame
             self.view.addSubview(self.kid.view)
@@ -158,9 +148,7 @@ extension RecipeTableViewController {
 
     func removeSpinnerView() {
 
-        // simulate some work happening
         DispatchQueue.main.asyncAfter(deadline: .now()) {
-            // then remove the spinner view controller
             self.kid.willMove(toParent: nil)
             self.kid.view.removeFromSuperview()
             self.kid.removeFromParent()
@@ -181,17 +169,10 @@ extension RecipeTableViewController {
             print("reset the state")
         case .loading:
             createSpinnerView()
-//            scrollToTop()
-//            tableView.scrollToRow(at: <#T##IndexPath#>, at: <#T##UITableView.ScrollPosition#>, animated: <#T##Bool#>)
-//            tableView.scrollRectToVisible(CGRect(x: 1, y: 1, width: 0, height: 0), animated: true)
-//            tableView.touchesCancelled(<#T##touches: Set<UITouch>##Set<UITouch>#>, with: <#T##UIEvent?#>)
-
             tableView.isUserInteractionEnabled = false
-//            print("loading state")
         case .sucess:
             removeSpinnerView()
             tableView.isUserInteractionEnabled = true
-//            print("success")
         case .error:
             removeSpinnerView()
             errorMessages(errorIsSet)
@@ -205,12 +186,9 @@ extension RecipeTableViewController {
 extension RecipeTableViewController: ErrorUpdate {
 
     func updateError(_ errorBool: Bool) {
-//        errorMessages(errorBool)
         self.errorIsSet = errorBool
         status = .error
     }
-
-
 
     func errorMessages(_ errorBoolean: Bool) {
 
@@ -225,12 +203,10 @@ extension RecipeTableViewController: ErrorUpdate {
 
         
         DispatchQueue.main.async {
-//            var textField = UITextField()
             let alert = UIAlertController(title: "Error", message: errorString, preferredStyle: .alert)
             
 
             let action = UIAlertAction(title: "Dismiss", style: .default) { (action) in
-                //what will happen once the user clicks the Add Item button on our UIAlert
                 self.status = .sucess
             }
 

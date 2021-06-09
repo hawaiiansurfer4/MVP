@@ -11,7 +11,6 @@ struct RecipeModel {
     var recipeLabel: [String]
     var urlString: [String]
     var imageArray: [String]
-//    var errorBool: Bool
     
     mutating func clearData() {
         self.recipeLabel.removeAll()
