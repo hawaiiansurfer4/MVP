@@ -176,7 +176,6 @@ extension RecipeTableViewController {
         case .error:
             removeSpinnerView()
             errorMessages(errorIsSet)
-            print("Error with the switch statement for your enum in State Management")
         }
     }
 }
