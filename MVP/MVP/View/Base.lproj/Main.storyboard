@@ -8,6 +8,37 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Scanner View Controller-->
+        <scene sceneID="JA9-CT-3XO">
+            <objects>
+                <viewController id="bTw-lO-VXy" customClass="ScannerViewController" customModule="MVP" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Hf2-wi-DIf">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fGk-TA-RaD">
+                                <rect key="frame" x="0.0" y="798" width="414" height="49"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <items>
+                                    <tabBarItem image="scanner" catalog="system" selectedImage="scanner" id="MoG-KN-H74"/>
+                                </items>
+                            </tabBar>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cyg-sr-clz">
+                                <rect key="frame" x="0.0" y="79" width="414" height="719"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="2pM-d2-3L6"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="lkc-7W-esd"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8gC-mg-xc5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2824.6376811594205" y="-619.41964285714278"/>
+        </scene>
         <!--Recipe Search-->
         <scene sceneID="nr8-uF-HDf">
             <objects>
@@ -32,6 +63,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Recipe Search" id="R7t-4T-BTX">
+                        <barButtonItem key="leftBarButtonItem" title="scanner" image="scanner" catalog="system" id="b4T-c2-Bcd"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="h6a-lk-W2T">
                             <connections>
                                 <action selector="searcButtonPressed:" destination="faX-Pu-1FP" id="UQw-zX-CBS"/>
@@ -41,6 +73,7 @@
                     <connections>
                         <segue destination="szW-5T-Kl5" kind="show" identifier="goToWebView" id="EDc-IH-Cw7"/>
                         <segue destination="2c7-LZ-QFT" kind="presentation" identifier="goToSearchHistory" id="Wue-0x-ySR"/>
+                        <segue destination="bTw-lO-VXy" kind="show" id="g68-HM-ajt"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lMc-eE-B4B" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -162,6 +195,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="scanner" catalog="system" width="128" height="93"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
