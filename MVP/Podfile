@@ -9,5 +9,6 @@ target 'MVP' do
 
  pod 'Alamofire'
  pod 'AlamofireImage', '~> 4.1'
+ pod 'PPBlinkOCR', '~> 4.0.0'
  
 end
