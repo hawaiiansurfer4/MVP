@@ -16,24 +16,31 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fGk-TA-RaD">
-                                <rect key="frame" x="0.0" y="798" width="414" height="49"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <items>
-                                    <tabBarItem image="scanner" catalog="system" selectedImage="scanner" id="MoG-KN-H74"/>
-                                </items>
-                            </tabBar>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cyg-sr-clz">
                                 <rect key="frame" x="0.0" y="79" width="414" height="719"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nfh-mC-feH" userLabel="scannerButton">
+                                <rect key="frame" x="169" y="823" width="30" height="39"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="Im4-hr-Q3j"/>
+                                    <constraint firstAttribute="height" constant="30" id="gJS-vU-Ebz"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="37"/>
+                                <state key="normal" title="Button" image="scanner" catalog="system"/>
+                                <connections>
+                                    <action selector="scannnerButtonPressed:" destination="bTw-lO-VXy" eventType="touchUpInside" id="CRF-kv-fOV"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="2pM-d2-3L6"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="lkc-7W-esd"/>
+                    <connections>
+                        <outlet property="cameraScanner" destination="cyg-sr-clz" id="ZCg-hy-iQB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8gC-mg-xc5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
