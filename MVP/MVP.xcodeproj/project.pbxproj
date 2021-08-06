@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -19,7 +19,7 @@
 		C468865F2550F00A000E72FF /* RecipeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C468865E2550F00A000E72FF /* RecipeData.swift */; };
 		C46886872551D076000E72FF /* RecipeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46886862551D076000E72FF /* RecipeModel.swift */; };
 		C484E16B255C292C0044A790 /* WebPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C484E16A255C292C0044A790 /* WebPageViewController.swift */; };
-		C4A374C426684C270022F2AC /* SearchHistoryData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C4A374C226684C270022F2AC /* SearchHistoryData.xcdatamodeld */; };
+		C4A374C426684C270022F2AC /* DataModels.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C4A374C226684C270022F2AC /* DataModels.xcdatamodeld */; };
 		C4B7BAC42655AB63003FAAB8 /* SearchHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B7BAC32655AB63003FAAB8 /* SearchHistoryViewController.swift */; };
 		C4B7BAC7265B5E08003FAAB8 /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B7BAC6265B5E08003FAAB8 /* MulticastDelegate.swift */; };
 		C4C8BF1326669B6C00257609 /* libAlamofire.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C4C8BF1226669B6C00257609 /* libAlamofire.a */; };
@@ -126,7 +126,7 @@
 		C46886592550EC6D000E72FF /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C4A374C226684C270022F2AC /* SearchHistoryData.xcdatamodeld */,
+				C4A374C226684C270022F2AC /* DataModels.xcdatamodeld */,
 				C468865A2550EC80000E72FF /* RecipeManager.swift */,
 				C468865E2550F00A000E72FF /* RecipeData.swift */,
 				C46886862551D076000E72FF /* RecipeModel.swift */,
@@ -267,7 +267,7 @@
 				C46886562550E985000E72FF /* RecipeTableViewController.swift in Sources */,
 				C468865B2550EC80000E72FF /* RecipeManager.swift in Sources */,
 				C468865F2550F00A000E72FF /* RecipeData.swift in Sources */,
-				C4A374C426684C270022F2AC /* SearchHistoryData.xcdatamodeld in Sources */,
+				C4A374C426684C270022F2AC /* DataModels.xcdatamodeld in Sources */,
 				C46886412550E848000E72FF /* AppDelegate.swift in Sources */,
 				C4B7BAC42655AB63003FAAB8 /* SearchHistoryViewController.swift in Sources */,
 				C4B7BAC7265B5E08003FAAB8 /* MulticastDelegate.swift in Sources */,
@@ -483,14 +483,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		C4A374C226684C270022F2AC /* SearchHistoryData.xcdatamodeld */ = {
+		C4A374C226684C270022F2AC /* DataModels.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				C4A374C326684C270022F2AC /* SearchHistoryData.xcdatamodel */,
 			);
 			currentVersion = C4A374C326684C270022F2AC /* SearchHistoryData.xcdatamodel */;
-			name = SearchHistoryData.xcdatamodeld;
-			path = ../SearchHistoryData.xcdatamodeld;
+			name = DataModels.xcdatamodeld;
+			path = ../DataModels.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
