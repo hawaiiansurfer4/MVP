@@ -14,7 +14,11 @@ class ScannerViewController: UITableViewController, UIImagePickerControllerDeleg
     
     let imagePicker = UIImagePickerController()
     var savedReceipeArray = [SavedReceipes]()
+//    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+//    let context = NSEntityDescription.insertNewObject(forEntityName: "SavedReceipes", into: NSManagedObjectContext) as! RecipeContext
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var scannedText = ""
+    
     var count = 0 {
         didSet {
             if count > CAPACITY {
@@ -85,36 +89,83 @@ class ScannerViewController: UITableViewController, UIImagePickerControllerDeleg
 //    }
     
     func recognizeText(image: UIImage?) {
-        guard let cgImage = image?.cgImage else { return }
+//        guard let cgImage = image?.cgImage else { return }
         
-        let handler = VNImageRequestHandler(cgImage: cgImage, options: [:])
+//        let handler = VNImageRequestHandler(cgImage: cgImage, options: [:])
         
-        let request = VNRecognizeTextRequest { request, error in
+        
+        let request = VNRecognizeTextRequest { [weak self] request, error in
             guard let observations = request.results as? [VNRecognizedTextObservation],
                   error == nil else {
-                return
+                fatalError("Received invalid observations \(error)")
             }
+            var compactedString: [String] = []
+            for observation in observations {
+                guard let text = observation.topCandidates(1).first else {
+                    print("No candidate")
+                    continue
+                }
+                
+//                print("Found this candidate: \(text.string)")
+                compactedString.append(text.string)
+//                self?.updateReceipe()
+            }
+            self?.scannedText = compactedString.joined(separator: " ")
+            print("Here is the completed scan \(self?.scannedText)")
             
-            let text = observations.compactMap({
-                $0.topCandidates(1).first?.string
-            }).joined(separator: " ")
-            print("###################   here is the text that should be printed \(text)")
-            self.updateReceipe(text)
+//            let text = observations.compactMap({
+//                $0.topCandidates(1).first?.string
+//            }).joined(separator: " ")
+//            print("###################   here is the text that should be printed \(text)")
+//            DispatchQueue.main.async {
+//                self?.updateReceipe(text)
+//            }
+//            self.updateReceipe(text)
         }
-        
-        do {
-            let statementToPrint = try handler.perform([request])
-//            print("Here is the translated text \(statementToPrint)")
-        } catch {
-            print(error)
+//        guard let completedScan = scannedText else { return }
+        request.recognitionLevel = .accurate
+        let requests = [request]
+        DispatchQueue.global(qos: .userInitiated).async {
+            guard let cgImage = image?.cgImage else {
+                fatalError("Missing image to scan")
+            }
+            let handler = VNImageRequestHandler(cgImage: cgImage, options: [ : ])
+            let testing = try? handler.perform(requests)
+//            print("HERE IS THE TESTING $$$$%%%#%#%#%$%$%$%$%#%#%$%$%$% \(testing)")
+            self.updateReceipe(self.scannedText)
         }
+
+//        let convert = request.results
+//        print("Here is the conversion @@@@@@@@@ \(convert)")
+//        do {
+//            let statementToPrint = try handler.perform([request])
+//            print("$$$$$$$$$$$$$$$$$$    Here is the translated text \(statementToPrint)")
+//        } catch {
+//            print(error)
+//        }
     }
     
     func updateReceipe(_ latestScan: String) {
-        let newReceipe = SavedReceipes(context: context)
-        newReceipe.receipe = latestScan
-        self.saveReceipes()
-        self.loadReceipes()
+        DispatchQueue.main.async {
+            let newReceipe = SavedReceipes(context: self.context)
+            newReceipe.receipe = latestScan
+//            do {
+//                try self.context.save()
+//            } catch {
+//                print("You done fucked up")
+//            }
+            self.saveReceipes()
+            self.loadReceipes()
+        }
+//        let newReceipe = SavedReceipes(context: context)
+//        newReceipe.receipe = latestScan
+//        do {
+//            try context.save()
+//        } catch {
+//            print("You done fucked up")
+//        }
+////        self.saveReceipes()
+//        self.loadReceipes()
     }
     
     //MARK: - TableView Methods
@@ -150,7 +201,7 @@ class ScannerViewController: UITableViewController, UIImagePickerControllerDeleg
     func loadReceipes(with request: NSFetchRequest<SavedReceipes> = SavedReceipes.fetchRequest(), predicate: NSPredicate? = nil) {
         
         do {
-            savedReceipeArray = try context.fetch(request)
+            savedReceipeArray = try context.fetch(SavedReceipes.fetchRequest())
             count = savedReceipeArray.count
         } catch {
             print("Error fetching data from context \(error)")
