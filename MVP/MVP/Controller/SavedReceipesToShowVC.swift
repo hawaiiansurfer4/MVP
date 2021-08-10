@@ -8,17 +8,37 @@
 import UIKit
 import CoreData
 
-class SavedReceipesToShowVC: UIViewController, UITextFieldDelegate {
+protocol RecipeToShowDelegate {
+    func didUpdateEditableRecipe(recipeToShowVC: SavedReceipesToShowVC)
+    func errorUpdatingEditableRecipe(error: Error)
+}
+
+class SavedReceipesToShowVC: UIViewController, UITextFieldDelegate, RecipeToShowDelegate {
+    func didUpdateEditableRecipe(recipeToShowVC: SavedReceipesToShowVC) {
+        <#code#>
+    }
+    
+    
     
     @IBOutlet weak var editableReceipeText: UITextView!
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var savedEditableReceipeArray = [SavedReceipes]()
-    var recipeTitle = [SavedReceipes]()
+    var recipeTitle: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         loadReceipes()
-//        navigationController?.title =
+        navigationController?.title = recipeTitle
+    }
+    
+    func didUpdateEditableRecipe(recipeToShowVC: String, recipe: String) {
+        editableReceipeText.text = recipe
+        self.recipeTitle = recipeToShowVC
+        editableReceipeText.reloadInputViews()
+    }
+    
+    func errorUpdatingEditableRecipe(error: Error) {
+        print("Error updating Editable Recipe \(error)")
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -43,10 +63,14 @@ class SavedReceipesToShowVC: UIViewController, UITextFieldDelegate {
         loadReceipes()
     }
     
-    func loadReceipes(with request: NSFetchRequest<SavedReceipes> = SavedReceipes.fetchRequest(), predicate: NSPredicate? = nil) {
+    func loadReceipes(with request: NSFetchRequest<SavedReceipes> = SavedReceipes.fetchRequest() , predicate: NSPredicate? = nil) {
         
         do {
+            
             savedEditableReceipeArray = try context.fetch(SavedReceipes.fetchRequest())
+//            recipeTitle
+//            savedEditableReceipeArray[0].
+//            recipeTitle = try context.fetch(Sa)
         } catch {
             print("Error fetching data from context \(error)")
         }
@@ -55,3 +79,4 @@ class SavedReceipesToShowVC: UIViewController, UITextFieldDelegate {
     }
     
 }
+

@@ -17,7 +17,7 @@ class ScannerViewController: UIViewController, UIImagePickerControllerDelegate, 
     var savedReceipeArray = [SavedReceipes]()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var scannedText = ""
-    let stupid = ["you", "should", "focus", "stupid"]
+    var savedRecipeToShowVC = SavedReceipesToShowVC()
     
     var count = 0 {
         didSet {
@@ -133,6 +133,13 @@ class ScannerViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if let recipeBody = savedReceipeArray[indexPath.row].receipe {
+            if let recipeTitle = savedReceipeArray[indexPath.row].receipeName {
+//                savedRecipeToShowVC.showFullRecipe(recipeTitle: recipeTitle, recipe: recipeBody)
+            }
+        }
+        performSegue(withIdentifier: "goToSavedReceipe", sender: indexPath.row)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
@@ -161,7 +168,21 @@ class ScannerViewController: UIViewController, UIImagePickerControllerDelegate, 
         savedReceipesTableOverlay.reloadData()
         
     }
+    
+    
 }
 
+//MARK: - DidUpdateRecipesToShow
+
+extension ScannerViewController: RecipeToShowDelegate {
+    func didUpdateEditableRecipe(recipeToShowVC: SavedReceipesToShowVC) {
+        <#code#>
+    }
     
+    func errorUpdatingEditableRecipe(error: Error) {
+        print(error)
+    }
+    
+    
+}
 
