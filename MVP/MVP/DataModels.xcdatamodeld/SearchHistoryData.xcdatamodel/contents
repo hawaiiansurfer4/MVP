@@ -2,6 +2,7 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20D91" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="SavedReceipes" representedClassName=".SavedReceipes" syncable="YES" codeGenerationType="class">
         <attribute name="receipe" attributeType="String"/>
+        <attribute name="receipeName" optional="YES" attributeType="String"/>
         <relationship name="relationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SavedReceipes" inverseName="relationship" inverseEntity="SavedReceipes"/>
     </entity>
     <entity name="SearchHistoryData" representedClassName=".SearchHistoryData" syncable="YES" codeGenerationType="class">
@@ -9,7 +10,7 @@
         <relationship name="relationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SearchHistoryData" inverseName="relationship" inverseEntity="SearchHistoryData"/>
     </entity>
     <elements>
-        <element name="SavedReceipes" positionX="-54" positionY="9" width="128" height="59"/>
+        <element name="SavedReceipes" positionX="-54" positionY="9" width="128" height="74"/>
         <element name="SearchHistoryData" positionX="-63" positionY="-18" width="128" height="59"/>
     </elements>
 </model>

@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="savedReceipeCell" id="yq6-W1-JFK">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="savedReceipeCell" id="yq6-W1-JFK">
                                 <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yq6-W1-JFK" id="db6-Jv-m9A">
@@ -48,60 +48,62 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="savedReceipesTable" destination="zBv-8q-djo" id="bmv-qE-qbh"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ioC-nd-Xfh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2053.6231884057975" y="-619.41964285714278"/>
         </scene>
-        <!--View Controller-->
+        <!--Saved Receipes-->
         <scene sceneID="JA9-CT-3XO">
             <objects>
-                <viewController id="bTw-lO-VXy" sceneMemberID="viewController">
+                <viewController id="bTw-lO-VXy" customClass="ScannerViewController" customModule="MVP" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Hf2-wi-DIf">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Error" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xMn-uM-ae3">
-                                <rect key="frame" x="63" y="422" width="288" height="53"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zaw-gz-dA6" userLabel="PhotoLibrary">
-                                <rect key="frame" x="207" y="840" width="207" height="22"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="207" id="5im-9R-cKz"/>
-                                </constraints>
-                                <state key="normal" image="photo" catalog="system"/>
-                                <connections>
-                                    <action selector="photoLibraryButtonPressed:" destination="bTw-lO-VXy" eventType="touchUpInside" id="GfZ-xV-sQW"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vkz-RC-GFe" userLabel="CameraScanner">
-                                <rect key="frame" x="0.0" y="840" width="207" height="22"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="207" id="aMj-7r-cOO"/>
-                                </constraints>
-                                <state key="normal" image="camera" catalog="system"/>
-                                <connections>
-                                    <action selector="cameraScannerButtonPressed:" destination="bTw-lO-VXy" eventType="touchUpInside" id="Msl-Xz-MaJ"/>
-                                </connections>
-                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="csK-Mp-9GU">
+                                <rect key="frame" x="0.0" y="71" width="414" height="791"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="savedReceipeCell" id="nQ8-KD-qyG">
+                                        <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nQ8-KD-qyG" id="2ed-NY-eMq">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="2pM-d2-3L6"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="vkz-RC-GFe" firstAttribute="leading" secondItem="2pM-d2-3L6" secondAttribute="leading" id="7dc-KL-PVz"/>
-                            <constraint firstItem="vkz-RC-GFe" firstAttribute="bottom" secondItem="2pM-d2-3L6" secondAttribute="bottom" id="Dz5-xJ-fen"/>
-                            <constraint firstItem="2pM-d2-3L6" firstAttribute="trailing" secondItem="Zaw-gz-dA6" secondAttribute="trailing" id="h9x-pV-DZH"/>
-                            <constraint firstItem="2pM-d2-3L6" firstAttribute="bottom" secondItem="Zaw-gz-dA6" secondAttribute="bottom" id="vFZ-Ax-ebr"/>
-                            <constraint firstItem="Zaw-gz-dA6" firstAttribute="leading" secondItem="vkz-RC-GFe" secondAttribute="trailing" id="y3g-bW-522"/>
+                            <constraint firstItem="csK-Mp-9GU" firstAttribute="bottom" secondItem="2pM-d2-3L6" secondAttribute="bottom" id="7zA-E0-nSZ"/>
+                            <constraint firstItem="csK-Mp-9GU" firstAttribute="centerX" secondItem="Hf2-wi-DIf" secondAttribute="centerX" id="DKl-mZ-EAD"/>
+                            <constraint firstItem="csK-Mp-9GU" firstAttribute="top" secondItem="Hf2-wi-DIf" secondAttribute="topMargin" constant="-17" id="HqH-jY-86V"/>
+                            <constraint firstItem="csK-Mp-9GU" firstAttribute="leading" secondItem="2pM-d2-3L6" secondAttribute="leading" id="aDq-m8-7cg"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="lkc-7W-esd"/>
+                    <navigationItem key="navigationItem" title="Saved Receipes" id="lkc-7W-esd">
+                        <rightBarButtonItems>
+                            <barButtonItem title="Item" image="photo" catalog="system" id="eOj-Rx-jYE">
+                                <connections>
+                                    <action selector="photoLibraryButtonPressed:" destination="bTw-lO-VXy" id="3EA-Iy-6Eb"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Item" image="camera" catalog="system" id="SaE-1Y-sgn">
+                                <connections>
+                                    <action selector="cameraScannerButtonPressed:" destination="bTw-lO-VXy" id="ZT3-xa-aBl"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
                     <connections>
-                        <outlet property="tellUser" destination="xMn-uM-ae3" id="U1V-OM-2aW"/>
+                        <outlet property="savedReceipesTableOverlay" destination="csK-Mp-9GU" id="Pxu-l3-J9F"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8gC-mg-xc5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -135,7 +137,7 @@
                         <barButtonItem key="leftBarButtonItem" title="scanner" image="scanner" catalog="system" id="b4T-c2-Bcd">
                             <connections>
                                 <action selector="scanButtonPressed:" destination="faX-Pu-1FP" id="2vx-1H-5nT"/>
-                                <segue destination="cvR-Nr-4h3" kind="show" identifier="GoToScanner" id="aC6-Nv-lj9"/>
+                                <segue destination="bTw-lO-VXy" kind="show" identifier="GoToScanner" id="xNs-7o-mCO"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="h6a-lk-W2T">
