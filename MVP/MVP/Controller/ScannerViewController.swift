@@ -145,7 +145,7 @@ class ScannerViewController: UIViewController, UIImagePickerControllerDelegate, 
         } catch {
            print("Error saving context \(error)")
         }
-//        loadReceipes()
+        loadReceipes()
         savedReceipesTableOverlay.reloadData()
     }
     

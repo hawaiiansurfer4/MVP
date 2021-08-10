@@ -9,54 +9,6 @@
     </dependencies>
     <scenes>
         <!--Saved Receipes-->
-        <scene sceneID="aaM-fZ-cKg">
-            <objects>
-                <tableViewController id="cvR-Nr-4h3" customClass="ScannerViewController" customModule="MVP" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="zBv-8q-djo">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="savedReceipeCell" id="yq6-W1-JFK">
-                                <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yq6-W1-JFK" id="db6-Jv-m9A">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="cvR-Nr-4h3" id="Akn-Rn-5ZI"/>
-                            <outlet property="delegate" destination="cvR-Nr-4h3" id="piK-LH-N0H"/>
-                        </connections>
-                    </tableView>
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Saved Receipes" id="xR1-TC-Kn0">
-                        <barButtonItem key="leftBarButtonItem" title="Item" image="chevron.left" catalog="system" id="UUG-dF-ZMB"/>
-                        <rightBarButtonItems>
-                            <barButtonItem title="Item" image="photo" catalog="system" id="bVz-x0-zu1">
-                                <connections>
-                                    <action selector="photoLibraryButtonPressed:" destination="cvR-Nr-4h3" id="GeK-Y0-NcR"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem title="Item" image="camera" catalog="system" id="c7G-Ik-Qva">
-                                <connections>
-                                    <action selector="cameraScannerButtonPressed:" destination="cvR-Nr-4h3" id="xzW-Wh-EAI"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
-                    </navigationItem>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
-                    <connections>
-                        <outlet property="savedReceipesTable" destination="zBv-8q-djo" id="bmv-qE-qbh"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ioC-nd-Xfh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2053.6231884057975" y="-619.41964285714278"/>
-        </scene>
-        <!--Saved Receipes-->
         <scene sceneID="JA9-CT-3XO">
             <objects>
                 <viewController id="bTw-lO-VXy" customClass="ScannerViewController" customModule="MVP" customModuleProvider="target" sceneMemberID="viewController">
@@ -104,11 +56,42 @@
                     </navigationItem>
                     <connections>
                         <outlet property="savedReceipesTableOverlay" destination="csK-Mp-9GU" id="Pxu-l3-J9F"/>
+                        <segue destination="eRO-gg-UrE" kind="show" identifier="goToSavedReceipe" id="y11-Q0-sew"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8gC-mg-xc5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2824.6376811594205" y="-619.41964285714278"/>
+        </scene>
+        <!--Saved Receipes To ShowVC-->
+        <scene sceneID="oOi-ME-QdP">
+            <objects>
+                <viewController id="eRO-gg-UrE" customClass="SavedReceipesToShowVC" customModule="MVP" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Sgt-li-Upm">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="FjZ-2j-SLk">
+                                <rect key="frame" x="0.0" y="98" width="414" height="441"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="CB6-nm-jSv"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="sUx-sd-JAk"/>
+                    <connections>
+                        <outlet property="editableReceipeText" destination="FjZ-2j-SLk" id="dVm-JH-LWn"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pcM-UV-HQG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3646.376811594203" y="-616.07142857142856"/>
         </scene>
         <!--Recipe Search-->
         <scene sceneID="nr8-uF-HDf">
@@ -271,9 +254,11 @@
     </scenes>
     <resources>
         <image name="camera" catalog="system" width="128" height="94"/>
-        <image name="chevron.left" catalog="system" width="96" height="128"/>
         <image name="photo" catalog="system" width="128" height="93"/>
         <image name="scanner" catalog="system" width="128" height="93"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
