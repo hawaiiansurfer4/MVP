@@ -71,22 +71,37 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="FjZ-2j-SLk">
-                                <rect key="frame" x="0.0" y="98" width="414" height="441"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="FjZ-2j-SLk">
+                                <rect key="frame" x="0.0" y="142" width="414" height="452"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9W8-3E-gIf">
+                                <rect key="frame" x="0.0" y="98" width="414" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="CB6-nm-jSv"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="CB6-nm-jSv" firstAttribute="bottom" secondItem="FjZ-2j-SLk" secondAttribute="bottom" constant="268" id="IOB-m1-2ON"/>
+                            <constraint firstItem="CB6-nm-jSv" firstAttribute="trailing" secondItem="9W8-3E-gIf" secondAttribute="trailing" id="kay-CZ-7BS"/>
+                            <constraint firstItem="FjZ-2j-SLk" firstAttribute="trailing" secondItem="9W8-3E-gIf" secondAttribute="trailing" id="lbD-yF-Tqm"/>
+                            <constraint firstItem="FjZ-2j-SLk" firstAttribute="top" secondItem="9W8-3E-gIf" secondAttribute="bottom" constant="10" id="nZn-kh-ul0"/>
+                            <constraint firstItem="9W8-3E-gIf" firstAttribute="leading" secondItem="CB6-nm-jSv" secondAttribute="leading" id="sNF-0f-Zaa"/>
+                            <constraint firstItem="9W8-3E-gIf" firstAttribute="top" secondItem="CB6-nm-jSv" secondAttribute="top" constant="10" id="yiF-cu-Atc"/>
+                            <constraint firstItem="FjZ-2j-SLk" firstAttribute="leading" secondItem="9W8-3E-gIf" secondAttribute="leading" id="zm2-f5-gVX"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="sUx-sd-JAk"/>
                     <connections>
                         <outlet property="editableReceipeText" destination="FjZ-2j-SLk" id="dVm-JH-LWn"/>
+                        <outlet property="recipeNavBar" destination="sUx-sd-JAk" id="m13-Ep-mkx"/>
+                        <outlet property="recipeTitleLabel" destination="9W8-3E-gIf" id="v1j-CK-cOL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pcM-UV-HQG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

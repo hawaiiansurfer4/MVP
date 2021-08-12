@@ -17,7 +17,9 @@ class ScannerViewController: UIViewController, UIImagePickerControllerDelegate, 
     var savedReceipeArray = [SavedReceipes]()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var scannedText = ""
-    var savedRecipeToShowVC = SavedReceipesToShowVC()
+    var recipeTitleToShow = String()
+    var recipeBodyToShow = String()
+    var rowNumberToShow = Int()
     
     var count = 0 {
         didSet {
@@ -119,9 +121,16 @@ class ScannerViewController: UIViewController, UIImagePickerControllerDelegate, 
     //MARK: - TableView Methods
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("Table view called \(indexPath)")
         let cell = tableView.dequeueReusableCell(withIdentifier: "savedReceipeCell", for: indexPath)
         cell.textLabel?.text = savedReceipeArray[indexPath.row].receipe ?? "NOthing to show for the table"
+        DispatchQueue.main.async {
+            if let recipeBody = self.savedReceipeArray[indexPath.row].receipe {
+                self.recipeBodyToShow = recipeBody
+            }
+            if let recipeTitle = self.savedReceipeArray[indexPath.row].receipeName {
+                self.recipeTitleToShow = recipeTitle
+            }
+        }
         cell.textLabel?.numberOfLines = 0
         cell.textLabel?.adjustsFontForContentSizeCategory = true
         cell.accessoryType = .none
@@ -133,11 +142,8 @@ class ScannerViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        if let recipeBody = savedReceipeArray[indexPath.row].receipe {
-            if let recipeTitle = savedReceipeArray[indexPath.row].receipeName {
-//                savedRecipeToShowVC.showFullRecipe(recipeTitle: recipeTitle, recipe: recipeBody)
-            }
+        DispatchQueue.main.async {
+            self.rowNumberToShow = indexPath.row
         }
         performSegue(withIdentifier: "goToSavedReceipe", sender: indexPath.row)
         tableView.deselectRow(at: indexPath, animated: true)
@@ -166,23 +172,23 @@ class ScannerViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
         
         savedReceipesTableOverlay.reloadData()
-        
     }
-    
-    
 }
 
 //MARK: - DidUpdateRecipesToShow
 
 extension ScannerViewController: RecipeToShowDelegate {
-    func didUpdateEditableRecipe(recipeToShowVC: SavedReceipesToShowVC) {
-        <#code#>
+    func didUpdateEditableRecipe(recipeToShowVC: SavedReceipesToShowVC, rowNumber: Int) {
+        DispatchQueue.main.async {
+            recipeToShowVC.recipeDetailsToShow(recipeBody: self.recipeBodyToShow, recipeTitle: self.recipeTitleToShow)
+            recipeToShowVC.recipeRowNumberToShow = self.rowNumberToShow
+        }
     }
     
     func errorUpdatingEditableRecipe(error: Error) {
+        print("Error updating Editable Recipe")
         print(error)
     }
-    
     
 }
 
