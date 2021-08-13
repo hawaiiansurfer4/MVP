@@ -13,7 +13,7 @@ protocol RecipeToShowDelegate {
     func errorUpdatingEditableRecipe(error: Error)
 }
 
-class SavedReceipesToShowVC: UIViewController, UITextViewDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+class SavedReceipesToShowVC: UIViewController, UITextViewDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate {
     
     
     @IBOutlet weak var recipeTitleLabel: UITextField!
@@ -47,15 +47,87 @@ class SavedReceipesToShowVC: UIViewController, UITextViewDelegate, UINavigationC
         print("Error updating Editable Recipe \(error)")
     }
     
+    //MARK: - GestureLongPressRecognition
+    
+    @IBAction func longPressEditableReceipeText(_ sender: UILongPressGestureRecognizer) {
+        if sender.state == .began {
+            sender.minimumPressDuration = 3
+        }
+        if sender.minimumPressDuration == 3 {
+            editableReceipeText.becomeFirstResponder()
+        }
+    }
+    
+    @IBAction func longPressRecipeTitleLabel(_ sender: UILongPressGestureRecognizer) {
+        if sender.state == .began {
+            sender.minimumPressDuration = 3
+        }
+        if sender.minimumPressDuration == 3 {
+            recipeTitleLabel.becomeFirstResponder()
+        }
+//        func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+//            return true
+//        }
+    }
+    
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return false
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive press: UIPress) -> Bool {
+        return true
+    }
+    
+    //MARK: - UITextField
+    
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        editableReceipeText.becomeFirstResponder()
+        recipeTitleLabel.becomeFirstResponder()
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//        recipeTitleLabel.resignFirstResponder()
+//        saveReceipes()
+        return true
+    }
+    
+    
+    
+    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
         
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        editableReceipeText.resignFirstResponder()
+        recipeTitleLabel.resignFirstResponder()
+//        editableReceipeText.resignFirstResponder()
         saveReceipes()
     }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        return true
+    }
+    
+    
+    //MARK: - UITextView
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        editableReceipeText.becomeFirstResponder()
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        editableReceipeText.resignFirstResponder()
+    }
+    
+    
+    func textViewDidChange(_ textView: UITextView) {
+        saveReceipes()
+    }
+    
+    
     
     //MARK: - Model Manipulation Methods
     
