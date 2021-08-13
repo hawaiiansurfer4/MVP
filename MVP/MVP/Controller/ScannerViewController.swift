@@ -19,7 +19,8 @@ class ScannerViewController: UIViewController, UIImagePickerControllerDelegate, 
     var scannedText = ""
     var recipeTitleToShow = String()
     var recipeBodyToShow = String()
-    var rowNumberToShow = Int()
+    var rowNumberToShow = 0
+//    var savedRecipesToShowVC = SavedReceipesToShowVC()
     
     var count = 0 {
         didSet {
@@ -141,11 +142,26 @@ class ScannerViewController: UIViewController, UIImagePickerControllerDelegate, 
         return savedReceipeArray.count
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        DispatchQueue.main.async {
-            self.rowNumberToShow = indexPath.row
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let savedRecipesTSVC = segue.destination as! SavedReceipesToShowVC
+        if let indexPath = savedReceipesTableOverlay.indexPathForSelectedRow {
+            guard let savedTextToPass = savedReceipeArray[indexPath.row].receipe else {
+                print("%%%%% Here is whats being passed \(savedReceipeArray[indexPath.row].receipe)")
+                return
+            }
+            savedRecipesTSVC.showThisRecipe = savedTextToPass
+            savedRecipesTSVC.recipeTitle = savedReceipeArray[indexPath.row].receipeName ?? "Name this recipe"
         }
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        prepare(for: <#T##UIStoryboardSegue#>, sender: <#T##Any?#>)
+//        DispatchQueue.main.async {
+//            self.rowNumberToShow = indexPath.row
+//        }
         performSegue(withIdentifier: "goToSavedReceipe", sender: indexPath.row)
+//        savedRecipesToShowVC.recipeRowNumberToShow = savedReceipesTableOverlay[indexPath.row]
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
@@ -177,18 +193,18 @@ class ScannerViewController: UIViewController, UIImagePickerControllerDelegate, 
 
 //MARK: - DidUpdateRecipesToShow
 
-extension ScannerViewController: RecipeToShowDelegate {
-    func didUpdateEditableRecipe(recipeToShowVC: SavedReceipesToShowVC, rowNumber: Int) {
-        DispatchQueue.main.async {
-            recipeToShowVC.recipeDetailsToShow(recipeBody: self.recipeBodyToShow, recipeTitle: self.recipeTitleToShow)
-            recipeToShowVC.recipeRowNumberToShow = self.rowNumberToShow
-        }
-    }
-    
-    func errorUpdatingEditableRecipe(error: Error) {
-        print("Error updating Editable Recipe")
-        print(error)
-    }
-    
-}
+//extension ScannerViewController: RecipeToShowDelegate {
+//    func didUpdateEditableRecipe(recipeToShowVC: SavedReceipesToShowVC, rowNumber: Int) {
+//        DispatchQueue.main.async {
+////            recipeToShowVC.recipeDetailsToShow(recipeBody: self.recipeBodyToShow, recipeTitle: self.recipeTitleToShow)
+//            recipeToShowVC.recipeRowNumberToShow = self.rowNumberToShow
+//        }
+//    }
+//    
+//    func errorUpdatingEditableRecipe(error: Error) {
+//        print("Error updating Editable Recipe")
+//        print(error)
+//    }
+//    
+//}
 

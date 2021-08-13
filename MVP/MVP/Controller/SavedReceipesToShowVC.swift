@@ -19,23 +19,22 @@ class SavedReceipesToShowVC: UIViewController, UITextViewDelegate, UINavigationC
     @IBOutlet weak var recipeTitleLabel: UITextField!
     @IBOutlet weak var recipeNavBar: UINavigationItem!
     @IBOutlet weak var editableReceipeText: UITextView!
+    var scannerVC = ScannerViewController()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var savedEditableReceipeArray = [SavedReceipes]()
-    var recipeTitle: String = "Name This Recipe"
-    var recipeRowNumberToShow = 0
+    var recipeTitle: String?
+    var recipeRowNumberToShow: Int?
+    var showThisRecipe: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         editableReceipeText.delegate = self
+        
         recipeTitleLabel.isUserInteractionEnabled = true
+        
         loadReceipes()
-        editableReceipeText.text = savedEditableReceipeArray[recipeRowNumberToShow].receipe
-        recipeTitleLabel.text = savedEditableReceipeArray[recipeRowNumberToShow].receipeName ?? "Name this recipe"
-//        navigationController?.delegate = self
-//        recipeNavBar.title = recipeTitle
-//        recipeTitleLabel.text = recipeTitle
-//        editableReceipeText.text = "Testing 1.2.3"
-//        recipeNavBar.titleView?.isUserInteractionEnabled = true
+        editableReceipeText.text = showThisRecipe
+        recipeTitleLabel.text = recipeTitle
     }
     
     func updateUI(label: String, textViewContent: String) {
@@ -43,19 +42,6 @@ class SavedReceipesToShowVC: UIViewController, UITextViewDelegate, UINavigationC
         recipeTitleLabel.text = label
     }
     
-    func recipeDetailsToShow(recipeBody: String, recipeTitle: String) {
-        DispatchQueue.main.async {
-            self.editableReceipeText.text = recipeTitle
-            self.recipeTitle = recipeBody
-            self.updateUI(label: recipeTitle, textViewContent: recipeBody)
-//            self.recipeNavBar.title = recipeTitle
-            self.recipeTitleLabel.text = recipeTitle
-            print("Here is the recipeDetailsToShow \(recipeBody), \(recipeTitle)")
-            self.editableReceipeText.reloadInputViews()
-            self.navigationController?.reloadInputViews()
-        }
-        
-    }
     
     func errorUpdatingEditableRecipe(error: Error) {
         print("Error updating Editable Recipe \(error)")
@@ -84,16 +70,18 @@ class SavedReceipesToShowVC: UIViewController, UITextViewDelegate, UINavigationC
     }
     
     func loadReceipes(with request: NSFetchRequest<SavedReceipes> = SavedReceipes.fetchRequest() , predicate: NSPredicate? = nil) {
-        
-        do {
-            savedEditableReceipeArray = try context.fetch(SavedReceipes.fetchRequest())
-        } catch {
-            print("Error fetching data from context \(error)")
+        DispatchQueue.main.async {
+            do {
+                self.savedEditableReceipeArray = try self.context.fetch(SavedReceipes.fetchRequest())
+            } catch {
+                print("Error fetching data from context \(error)")
+            }
+            
+//            self.editableReceipeText.text = self.savedEditableReceipeArray[self.recipeRowNumberToShow].receipe
+//            self.recipeTitleLabel.text = self.savedEditableReceipeArray[self.recipeRowNumberToShow].receipeName ?? "Name this recipe"
+            self.editableReceipeText.reloadInputViews()
         }
         
-        editableReceipeText.text = savedEditableReceipeArray[recipeRowNumberToShow].receipe
-        recipeTitleLabel.text = savedEditableReceipeArray[recipeRowNumberToShow].receipeName ?? "Name this recipe"
-        editableReceipeText.reloadInputViews()
     }
     
 }
