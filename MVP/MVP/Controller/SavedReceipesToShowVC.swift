@@ -22,16 +22,31 @@ class SavedReceipesToShowVC: UIViewController, UITextViewDelegate, UINavigationC
     var scannerVC = ScannerViewController()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var savedEditableReceipeArray = [SavedReceipes]()
-    var recipeTitle: String?
+//    let savedEditableReceipeID = 
+    var recipeTitle: String? {
+        didSet {
+            print("Line 27")
+//            saveReceipes()
+        }
+    }
     var recipeRowNumberToShow: Int?
-    var showThisRecipe: String?
+    var showThisRecipe: String? {
+        didSet {
+            print("Line 34")
+//            saveReceipes()
+        }
+    }
+    var labelLongPressEnabled = false
+    var editableLongPressEnabled = false
+    var uniqueID = UUID()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         editableReceipeText.delegate = self
-        
+        recipeTitleLabel.delegate = self
         recipeTitleLabel.isUserInteractionEnabled = true
-        
+        recipeTitleLabel.snapshotView(afterScreenUpdates: false)
+        editableReceipeText.snapshotView(afterScreenUpdates: false)
         loadReceipes()
         editableReceipeText.text = showThisRecipe
         recipeTitleLabel.text = recipeTitle
@@ -52,10 +67,12 @@ class SavedReceipesToShowVC: UIViewController, UITextViewDelegate, UINavigationC
     @IBAction func longPressEditableReceipeText(_ sender: UILongPressGestureRecognizer) {
         if sender.state == .began {
             sender.minimumPressDuration = 3
+            editableLongPressEnabled = true
         }
         if sender.minimumPressDuration == 3 {
             editableReceipeText.becomeFirstResponder()
         }
+        
     }
     
     @IBAction func longPressRecipeTitleLabel(_ sender: UILongPressGestureRecognizer) {
@@ -64,11 +81,12 @@ class SavedReceipesToShowVC: UIViewController, UITextViewDelegate, UINavigationC
         }
         if sender.minimumPressDuration == 3 {
             recipeTitleLabel.becomeFirstResponder()
+            recipeTitleLabel.clearsContextBeforeDrawing = true
+            sender.state = .ended
         }
-//        func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-//            return true
-//        }
     }
+    
+    
     
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
@@ -88,27 +106,53 @@ class SavedReceipesToShowVC: UIViewController, UITextViewDelegate, UINavigationC
     func textFieldDidBeginEditing(_ textField: UITextField) {
         recipeTitleLabel.becomeFirstResponder()
     }
-    
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
 //        recipeTitleLabel.resignFirstResponder()
 //        saveReceipes()
         return true
     }
-    
-    
-    
+
+
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
-        
+        if let text = textField.text {
+            print("Line 116 ################### \(text)")
+            if let recipeBody = editableReceipeText.text {
+                print("Line 118 \(showThisRecipe)")
+                updateUI(label: text, textViewContent: recipeBody)
+                updateEditedRecipe(text, recipeBody)
+            }
+        }
     }
-    
+
     func textFieldDidEndEditing(_ textField: UITextField) {
-        recipeTitleLabel.resignFirstResponder()
-//        editableReceipeText.resignFirstResponder()
+//        if let text = textField.text {
+//            print("Line 120 @@@@@@@@@@@@@ \(text)")
+//            recipeTitle = text
+//            updateEditedTitle(text)
+//            recipeTitleLabel.resignFirstResponder()
+//        }
         saveReceipes()
+//        editableReceipeText.resignFirstResponder()
     }
-    
+
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         return true
+    }
+    
+//    func updateEditedRecipeBody(_ editedRecipe: String) {
+//        let recipeUpdate = SavedReceipes(context: context)
+//        recipeUpdate.receipe = editedRecipe
+//        saveReceipes()
+//    }
+    
+    func updateEditedRecipe(_ newName: String, _ newBody: String) {
+        let titleUpdate = SavedReceipes(context: context)
+        titleUpdate.receipeName = newName
+        titleUpdate.receipe = newBody
+//        titleUpdate.uniqueID
+        saveReceipes()
     }
     
     
@@ -117,21 +161,38 @@ class SavedReceipesToShowVC: UIViewController, UITextViewDelegate, UINavigationC
     func textViewDidBeginEditing(_ textView: UITextView) {
         editableReceipeText.becomeFirstResponder()
     }
-    
+
     func textViewDidEndEditing(_ textView: UITextView) {
+        if let body = textView.text {
+//            updatedEditedRecipeBody(body)
+        }
         editableReceipeText.resignFirstResponder()
     }
     
-    
-    func textViewDidChange(_ textView: UITextView) {
-        saveReceipes()
+    func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
+//        editableReceipeText.resignFirstResponder()
+        return true
     }
     
+//    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+//        <#code#>
+//    }
+
+
+    func textViewDidChange(_ textView: UITextView) {
+//        saveReceipes()
+    }
+
     
     
     //MARK: - Model Manipulation Methods
     
     func saveReceipes() {
+        
+//        let savedRecipesEntity = NSEntityDescription.entity(forEntityName: "SavedReceipes", in: context)!
+//        let updatedValue = NSManagedObject(entity: savedRecipesEntity, insertInto: context)
+//        updatedValue.setValue(recipeTitle, forKeyPath: "receipeName")
+//        updatedValue.setValue(showThisRecipe, forKey: "receipe")
         
         do {
           try context.save()
@@ -149,8 +210,8 @@ class SavedReceipesToShowVC: UIViewController, UITextViewDelegate, UINavigationC
                 print("Error fetching data from context \(error)")
             }
             
-//            self.editableReceipeText.text = self.savedEditableReceipeArray[self.recipeRowNumberToShow].receipe
-//            self.recipeTitleLabel.text = self.savedEditableReceipeArray[self.recipeRowNumberToShow].receipeName ?? "Name this recipe"
+//            self.editableReceipeText.text = self.savedEditableReceipeArray[self.recipeRowNumberToShow!].receipe
+//            self.recipeTitleLabel.text = self.savedEditableReceipeArray[self.recipeRowNumberToShow!].receipeName
             self.editableReceipeText.reloadInputViews()
         }
         

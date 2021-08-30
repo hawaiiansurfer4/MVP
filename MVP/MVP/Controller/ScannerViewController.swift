@@ -20,6 +20,8 @@ class ScannerViewController: UIViewController, UIImagePickerControllerDelegate, 
     var recipeTitleToShow = String()
     var recipeBodyToShow = String()
     var rowNumberToShow = 0
+//    let uniqueID: String = UUID().uuidString
+    let uniqueID = UUID()
 //    var savedRecipesToShowVC = SavedReceipesToShowVC()
     
     var count = 0 {
@@ -115,7 +117,8 @@ class ScannerViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     func updateReceipe(_ latestScan: String) {
         let newReceipe = SavedReceipes(context: context)
-        newReceipe.receipe = latestScan
+        newReceipe.uniqueID = uniqueID
+        newReceipe.receipe = latestScan 
         self.saveReceipes()
     }
     
@@ -123,7 +126,8 @@ class ScannerViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "savedReceipeCell", for: indexPath)
-        cell.textLabel?.text = savedReceipeArray[indexPath.row].receipe ?? "NOthing to show for the table"
+        cell.textLabel?.text = savedReceipeArray[indexPath.row].receipeName ?? "Name this recipe"
+
         DispatchQueue.main.async {
             if let recipeBody = self.savedReceipeArray[indexPath.row].receipe {
                 self.recipeBodyToShow = recipeBody
@@ -149,6 +153,11 @@ class ScannerViewController: UIViewController, UIImagePickerControllerDelegate, 
                 print("%%%%% Here is whats being passed \(savedReceipeArray[indexPath.row].receipe)")
                 return
             }
+            guard let uniqueIDToPass = savedReceipeArray[indexPath.row].uniqueID else {
+                print("Line 157 here is whats being passed \(savedReceipeArray[indexPath.row].uniqueID)")
+                return
+            }
+            savedRecipesTSVC.uniqueID = uniqueIDToPass
             savedRecipesTSVC.showThisRecipe = savedTextToPass
             savedRecipesTSVC.recipeTitle = savedReceipeArray[indexPath.row].receipeName ?? "Name this recipe"
         }
@@ -156,10 +165,6 @@ class ScannerViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        prepare(for: <#T##UIStoryboardSegue#>, sender: <#T##Any?#>)
-//        DispatchQueue.main.async {
-//            self.rowNumberToShow = indexPath.row
-//        }
         performSegue(withIdentifier: "goToSavedReceipe", sender: indexPath.row)
 //        savedRecipesToShowVC.recipeRowNumberToShow = savedReceipesTableOverlay[indexPath.row]
         tableView.deselectRow(at: indexPath, animated: true)

@@ -105,7 +105,10 @@
                             <constraint firstItem="FjZ-2j-SLk" firstAttribute="leading" secondItem="9W8-3E-gIf" secondAttribute="leading" id="zm2-f5-gVX"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="sUx-sd-JAk"/>
+                    <navigationItem key="navigationItem" leftItemsSupplementBackButton="YES" id="sUx-sd-JAk">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="rJ6-ff-kFM"/>
+                        <barButtonItem key="rightBarButtonItem" title="Back" image="chevron.left" catalog="system" id="Lst-um-JGe"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="editableReceipeText" destination="FjZ-2j-SLk" id="dVm-JH-LWn"/>
                         <outlet property="recipeNavBar" destination="sUx-sd-JAk" id="m13-Ep-mkx"/>
@@ -260,7 +263,9 @@
                             <constraint firstItem="H7O-4D-ivs" firstAttribute="leading" secondItem="9n8-Sq-8q3" secondAttribute="leading" id="yek-7Y-1TP"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="pY5-SM-hb8"/>
+                    <navigationItem key="navigationItem" id="pY5-SM-hb8">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="cWn-KU-aP9"/>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o3B-LJ-mP0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -287,6 +292,7 @@
     </scenes>
     <resources>
         <image name="camera" catalog="system" width="128" height="94"/>
+        <image name="chevron.left" catalog="system" width="96" height="128"/>
         <image name="photo" catalog="system" width="128" height="93"/>
         <image name="scanner" catalog="system" width="128" height="93"/>
         <systemColor name="labelColor">
