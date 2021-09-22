@@ -87,7 +87,6 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate {
             }
         }
         cell.previewImage.isOpaque = false
-
         cell.label.numberOfLines = 0
         cell.accessoryType = .none
         searchButtonPressed = false

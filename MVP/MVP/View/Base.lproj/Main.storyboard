@@ -8,60 +8,50 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Saved Receipes-->
-        <scene sceneID="JA9-CT-3XO">
+        <!--Scanned Recipes-->
+        <scene sceneID="SFr-JC-buc">
             <objects>
-                <viewController id="bTw-lO-VXy" customClass="ScannerViewController" customModule="MVP" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Hf2-wi-DIf">
+                <tableViewController id="Hvp-JF-2fK" customClass="ScannerViewController" customModule="MVP" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="nVK-8B-AhP">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="csK-Mp-9GU">
-                                <rect key="frame" x="0.0" y="71" width="414" height="791"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="savedReceipeCell" id="nQ8-KD-qyG">
-                                        <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nQ8-KD-qyG" id="2ed-NY-eMq">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="2pM-d2-3L6"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="csK-Mp-9GU" firstAttribute="bottom" secondItem="2pM-d2-3L6" secondAttribute="bottom" id="7zA-E0-nSZ"/>
-                            <constraint firstItem="csK-Mp-9GU" firstAttribute="centerX" secondItem="Hf2-wi-DIf" secondAttribute="centerX" id="DKl-mZ-EAD"/>
-                            <constraint firstItem="csK-Mp-9GU" firstAttribute="top" secondItem="Hf2-wi-DIf" secondAttribute="topMargin" constant="-17" id="HqH-jY-86V"/>
-                            <constraint firstItem="csK-Mp-9GU" firstAttribute="leading" secondItem="2pM-d2-3L6" secondAttribute="leading" id="aDq-m8-7cg"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Saved Receipes" id="lkc-7W-esd">
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="scannedRecipeCells" rowHeight="90" id="gns-fj-P3G">
+                                <rect key="frame" x="0.0" y="24.5" width="414" height="90"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gns-fj-P3G" id="YZK-AE-UUl">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="90"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Hvp-JF-2fK" id="cna-3C-g2m"/>
+                            <outlet property="delegate" destination="Hvp-JF-2fK" id="HJy-cC-sAZ"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Scanned Recipes" id="L8y-Mk-3eC">
                         <rightBarButtonItems>
-                            <barButtonItem title="Item" image="photo" catalog="system" id="eOj-Rx-jYE">
+                            <barButtonItem title="Item" image="photo" catalog="system" id="GzD-bn-8Bg" userLabel="PhotoLibrary">
                                 <connections>
-                                    <action selector="photoLibraryButtonPressed:" destination="bTw-lO-VXy" id="3EA-Iy-6Eb"/>
+                                    <action selector="photoLibraryButtonPressed:" destination="Hvp-JF-2fK" id="YEm-hK-JWh"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem title="Item" image="camera" catalog="system" id="SaE-1Y-sgn">
+                            <barButtonItem title="Item" image="camera" catalog="system" id="CW2-bj-wW0" userLabel="Camera">
                                 <connections>
-                                    <action selector="cameraScannerButtonPressed:" destination="bTw-lO-VXy" id="ZT3-xa-aBl"/>
+                                    <action selector="cameraScannerButtonPressed:" destination="Hvp-JF-2fK" id="do2-wA-YhD"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
-                        <outlet property="savedReceipesTableOverlay" destination="csK-Mp-9GU" id="Pxu-l3-J9F"/>
-                        <segue destination="eRO-gg-UrE" kind="show" identifier="goToSavedReceipe" id="y11-Q0-sew"/>
+                        <segue destination="eRO-gg-UrE" kind="show" identifier="goToSavedReceipe" id="Mvl-PZ-rhk"/>
                     </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8gC-mg-xc5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yim-kC-YyW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2824.6376811594205" y="-619.41964285714278"/>
+            <point key="canvasLocation" x="2825" y="-616"/>
         </scene>
         <!--Saved Receipes To ShowVC-->
         <scene sceneID="oOi-ME-QdP">
@@ -79,18 +69,12 @@
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="5DO-SL-Wts" appends="YES" id="1zV-B3-Kdr"/>
-                                </connections>
                             </textView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9W8-3E-gIf">
                                 <rect key="frame" x="0.0" y="98" width="414" height="34"/>
                                 <gestureRecognizers/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="nhx-hV-yC8" appends="YES" id="MFU-IY-gDp"/>
-                                </connections>
                             </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="CB6-nm-jSv"/>
@@ -105,9 +89,20 @@
                             <constraint firstItem="FjZ-2j-SLk" firstAttribute="leading" secondItem="9W8-3E-gIf" secondAttribute="leading" id="zm2-f5-gVX"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" leftItemsSupplementBackButton="YES" id="sUx-sd-JAk">
+                    <navigationItem key="navigationItem" id="sUx-sd-JAk">
                         <barButtonItem key="backBarButtonItem" title="Back" id="rJ6-ff-kFM"/>
-                        <barButtonItem key="rightBarButtonItem" title="Back" image="chevron.left" catalog="system" id="Lst-um-JGe"/>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Save" id="9SC-bs-LDP">
+                                <connections>
+                                    <action selector="saveAction:" destination="eRO-gg-UrE" id="ull-4g-rXU"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Edit" id="x8d-Vt-FgI">
+                                <connections>
+                                    <action selector="editAction:" destination="eRO-gg-UrE" id="pey-aZ-Oun"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="editableReceipeText" destination="FjZ-2j-SLk" id="dVm-JH-LWn"/>
@@ -116,16 +111,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pcM-UV-HQG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="5DO-SL-Wts" userLabel="LongPressEditableReceipeText">
-                    <connections>
-                        <action selector="longPressEditableReceipeText:" destination="eRO-gg-UrE" id="xc4-Xg-cDz"/>
-                    </connections>
-                </pongPressGestureRecognizer>
-                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="nhx-hV-yC8" userLabel="LongPressRecipeTitleLabel">
-                    <connections>
-                        <action selector="longPressRecipeTitleLabel:" destination="eRO-gg-UrE" id="TdZ-Ja-ZNJ"/>
-                    </connections>
-                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3646.376811594203" y="-616.07142857142856"/>
         </scene>
@@ -156,7 +141,7 @@
                         <barButtonItem key="leftBarButtonItem" title="scanner" image="scanner" catalog="system" id="b4T-c2-Bcd">
                             <connections>
                                 <action selector="scanButtonPressed:" destination="faX-Pu-1FP" id="2vx-1H-5nT"/>
-                                <segue destination="bTw-lO-VXy" kind="show" identifier="GoToScanner" id="xNs-7o-mCO"/>
+                                <segue destination="Hvp-JF-2fK" kind="show" identifier="GoToScanner" id="0BE-oG-oap"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="h6a-lk-W2T">
@@ -292,7 +277,6 @@
     </scenes>
     <resources>
         <image name="camera" catalog="system" width="128" height="94"/>
-        <image name="chevron.left" catalog="system" width="96" height="128"/>
         <image name="photo" catalog="system" width="128" height="93"/>
         <image name="scanner" catalog="system" width="128" height="93"/>
         <systemColor name="labelColor">

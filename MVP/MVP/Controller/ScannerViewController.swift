@@ -9,42 +9,36 @@ import UIKit
 import Vision
 import CoreData
 
-class ScannerViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDelegate, UITableViewDataSource  {
+var savedReceipeList = [SavedReceipes]()
+
+class ScannerViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    
-    @IBOutlet weak var savedReceipesTableOverlay: UITableView!
     let imagePicker = UIImagePickerController()
-    var savedReceipeArray = [SavedReceipes]()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var scannedText = ""
     var recipeTitleToShow = String()
     var recipeBodyToShow = String()
     var rowNumberToShow = 0
-//    let uniqueID: String = UUID().uuidString
-    let uniqueID = UUID()
-//    var savedRecipesToShowVC = SavedReceipesToShowVC()
-    
-    var count = 0 {
-        didSet {
-            if count > CAPACITY {
-                context.delete(savedReceipeArray.removeFirst())
-                saveReceipes()
-            }
-        }
-    }
+    let uniqueID = UUID().uuidString
+    var count = 0
     let CAPACITY = 8
     
-//    @IBOutlet weak var tellUser: UILabel!
+    func nonDeletedRecipes() -> [SavedReceipes] {
+        var savedReceipeArray = [SavedReceipes]()
+        for savedRecipe in savedReceipeList {
+            savedReceipeArray.append(savedRecipe)
+        }
+        return savedReceipeArray
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         imagePicker.delegate = self
         imagePicker.allowsEditing = false
-        savedReceipesTableOverlay.delegate = self
-        savedReceipesTableOverlay.dataSource = self
-        savedReceipesTableOverlay.becomeFirstResponder()
-        savedReceipesTableOverlay.reloadInputViews()
+        tableView.register(UINib(nibName: "ScannerTableViewCell", bundle: nil), forCellReuseIdentifier: "scannedRecipeDetailsCell")
+        tableView.delegate = self
         loadReceipes()
+        tableView.reloadData()
     }
     
     @IBAction func cameraScannerButtonPressed(_ sender: UIBarButtonItem) {
@@ -124,51 +118,42 @@ class ScannerViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     //MARK: - TableView Methods
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "savedReceipeCell", for: indexPath)
-        cell.textLabel?.text = savedReceipeArray[indexPath.row].receipeName ?? "Name this recipe"
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "scannedRecipeDetailsCell", for: indexPath) as! ScannerTableViewCell
+        let thisRecipe: SavedReceipes!
+        thisRecipe = nonDeletedRecipes()[indexPath.row]
+        cell.titleLabel.text = thisRecipe.receipeName ?? "Testing name"
+        cell.descriptionLabel.text = thisRecipe.receipe ?? "Testing description"
 
-        DispatchQueue.main.async {
-            if let recipeBody = self.savedReceipeArray[indexPath.row].receipe {
-                self.recipeBodyToShow = recipeBody
-            }
-            if let recipeTitle = self.savedReceipeArray[indexPath.row].receipeName {
-                self.recipeTitleToShow = recipeTitle
-            }
-        }
-        cell.textLabel?.numberOfLines = 0
-        cell.textLabel?.adjustsFontForContentSizeCategory = true
         cell.accessoryType = .none
         return cell
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return savedReceipeArray.count
+    override func viewDidAppear(_ animated: Bool) {
+        tableView.reloadData()
     }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return nonDeletedRecipes().count
+    }
+        
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "goToSavedReceipe", sender: self)
+    }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let savedRecipesTSVC = segue.destination as! SavedReceipesToShowVC
-        if let indexPath = savedReceipesTableOverlay.indexPathForSelectedRow {
-            guard let savedTextToPass = savedReceipeArray[indexPath.row].receipe else {
-                print("%%%%% Here is whats being passed \(savedReceipeArray[indexPath.row].receipe)")
-                return
-            }
-            guard let uniqueIDToPass = savedReceipeArray[indexPath.row].uniqueID else {
-                print("Line 157 here is whats being passed \(savedReceipeArray[indexPath.row].uniqueID)")
-                return
-            }
-            savedRecipesTSVC.uniqueID = uniqueIDToPass
-            savedRecipesTSVC.showThisRecipe = savedTextToPass
-            savedRecipesTSVC.recipeTitle = savedReceipeArray[indexPath.row].receipeName ?? "Name this recipe"
+        if(segue.identifier == "goToSavedReceipe") {
+            let indexPath = tableView.indexPathForSelectedRow!
+            let savedRecipesTSVC = segue.destination as? SavedReceipesToShowVC
+            let selectedRecipe: SavedReceipes!
+            selectedRecipe = nonDeletedRecipes()[indexPath.row]
+            savedRecipesTSVC?.selectedRecipe = selectedRecipe
+            
+            tableView.deselectRow(at: indexPath, animated: true)
         }
-        
     }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "goToSavedReceipe", sender: indexPath.row)
-//        savedRecipesToShowVC.recipeRowNumberToShow = savedReceipesTableOverlay[indexPath.row]
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
+
     
     //MARK: - Model Manipulation Methods
     
@@ -180,36 +165,28 @@ class ScannerViewController: UIViewController, UIImagePickerControllerDelegate, 
            print("Error saving context \(error)")
         }
         loadReceipes()
-        savedReceipesTableOverlay.reloadData()
+        tableView.reloadData()
     }
     
-    func loadReceipes(with request: NSFetchRequest<SavedReceipes> = SavedReceipes.fetchRequest(), predicate: NSPredicate? = nil) {
+    func loadReceipes(with request: NSFetchRequest<NSFetchRequestResult> = SavedReceipes.fetchRequest(), predicate: NSPredicate? = nil) {
         
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "SavedReceipes")
         do {
-            savedReceipeArray = try context.fetch(SavedReceipes.fetchRequest())
-            count = savedReceipeArray.count
+            let results: NSArray = try context.fetch(request) as NSArray
+            for result in results {
+                let newRecipe = result as! SavedReceipes
+//                savedReceipeArray.append(newRecipe)
+                savedReceipeList.append(newRecipe)
+            }
+//            savedReceipeArray = try context.fetch([SavedReceipes.fetchRequest())
+            count = nonDeletedRecipes().count
+            tableView.reloadData()
         } catch {
             print("Error fetching data from context \(error)")
         }
         
-        savedReceipesTableOverlay.reloadData()
     }
 }
 
-//MARK: - DidUpdateRecipesToShow
 
-//extension ScannerViewController: RecipeToShowDelegate {
-//    func didUpdateEditableRecipe(recipeToShowVC: SavedReceipesToShowVC, rowNumber: Int) {
-//        DispatchQueue.main.async {
-////            recipeToShowVC.recipeDetailsToShow(recipeBody: self.recipeBodyToShow, recipeTitle: self.recipeTitleToShow)
-//            recipeToShowVC.recipeRowNumberToShow = self.rowNumberToShow
-//        }
-//    }
-//    
-//    func errorUpdatingEditableRecipe(error: Error) {
-//        print("Error updating Editable Recipe")
-//        print(error)
-//    }
-//    
-//}
 
