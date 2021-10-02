@@ -14,17 +14,13 @@ protocol RecipeToShowDelegate {
 }
 
 class SavedReceipesToShowVC: UIViewController, UITextViewDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate {
-    
-    
+
+
     @IBOutlet weak var recipeTitleLabel: UITextField!
     @IBOutlet weak var recipeNavBar: UINavigationItem!
     @IBOutlet weak var editableReceipeText: UITextView!
     var scannerVC = ScannerViewController()
-//    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-//    var savedEditableReceipeArray = [SavedReceipes]()
-//    var selectedRecipe: SavedReceipes? = nil
-    var selectedRecipeTitle: String?
-    var selectedRecipeDescription: String?
+    var selectedRecipe: SavedReceipes? = nil
     var uniqueID: String = ""
     var recipeTitle: String? {
         didSet {
@@ -40,101 +36,62 @@ class SavedReceipesToShowVC: UIViewController, UITextViewDelegate, UINavigationC
     var savedRecipes = [SavedReceipes]()
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let request = NSFetchRequest<NSFetchRequestResult>(entityName: "SavedReceipes")
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        if(selectedRecipeDescription != nil) {
-            recipeTitleLabel.text = selectedRecipeTitle
-            editableReceipeText.text = selectedRecipeDescription
-            print("Here is the id for this recipe \(uniqueID)")
+        if(selectedRecipe != nil) {
+            recipeTitleLabel.text = selectedRecipe?.receipeName
+            editableReceipeText.text = selectedRecipe?.receipe
         }
-//        editableReceipeText.delegate = self
-//        recipeTitleLabel.delegate = self
         recipeTitleLabel.isUserInteractionEnabled = false
         editableReceipeText.isUserInteractionEnabled = false
         recipeTitleLabel.borderStyle = .none
     }
-    
-//    func updateUI(label: String, textViewContent: String) {
-//        editableReceipeText.text = textViewContent
-//        recipeTitleLabel.text = label
-//    }
-    
+
     @IBAction func saveAction(_ sender: UIBarButtonItem) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
-        if recipeTitleLabel.text != selectedRecipeTitle || editableReceipeText.text != selectedRecipeDescription {
-            for recipe in savedRecipes {
-                if recipe.uniqueID == uniqueID {
-                    let entity = NSEntityDescription.
-//                    let recipeUpdate = SavedReceipes(entity: <#T##NSEntityDescription#>, insertInto: <#T##NSManagedObjectContext?#>)
-                    recipe.receipe = editableReceipeText.text
-                    recipe.receipeName = recipeTitleLabel.text
-                    recipeTitleLabel.borderStyle = .none
-                    do {
-                        try context.save()
-                    } catch {
-                        print("Failed to update the save")
-                    }
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "SavedReceipes")
+        do {
+            let results: NSArray = try context.fetch(request) as NSArray
+            for result in results {
+                let newRecipe = result as! SavedReceipes
+                if(newRecipe == selectedRecipe) {
+                    newRecipe.receipeName = recipeTitleLabel.text
+                    newRecipe.receipe = editableReceipeText.text
+                    try context.save()
+                    scannerVC.tableView.reloadData()
+                    navigationController?.popViewController(animated: true)
                 }
             }
+        } catch {
+            print("Fetch failed")
         }
-//        if(selectedRecipeDescription == nil) {
-//            let entity = NSEntityDescription.entity(forEntityName: "SavedReceipes", in: context)
-//            let newRecipe = SavedReceipes(entity: entity!, insertInto: context)
-//            newRecipe.receipe = editableReceipeText.text
-//            newRecipe.receipeName = recipeTitleLabel.text
-//            newRecipe.uniqueID = //Figure out where the count is coming from
-//            do {
-//                try context.save()
-//                navigationController?.popViewController(animated: true)
-//            } catch {
-//                print("context save error")
-//            }
-//        } else {
-//            let request = NSFetchRequest<NSFetchRequestResult>(entityName: "SavedReceipes")
-//            do {
-//                let results: NSArray = try context.fetch(request) as NSArray
-//                for result in results {
-//                    let recipe = result as! SavedReceipes
-//                    if(recipe == selectedRecipe) {
-//                        recipe.receipeName = recipeTitleLabel.text
-//                        recipe.receipe = editableReceipeText.text
-//                        try context.save()
-//                        navigationController?.popViewController(animated: true)
-//                    }
-//                }
-//            } catch {
-//                print("Fetch failed")
-//            }
-//        }
         recipeTitleLabel.isUserInteractionEnabled = false
         editableReceipeText.isUserInteractionEnabled = false
-        
+
     }
     @IBAction func editAction(_ sender: UIBarButtonItem) {
         recipeTitleLabel.isUserInteractionEnabled = true
         editableReceipeText.isUserInteractionEnabled = true
         recipeTitleLabel.borderStyle = .bezel
     }
-    
+
     func errorUpdatingEditableRecipe(error: Error) {
         print("Error updating Editable Recipe \(error)")
     }
-    
 
-    
-    //MARK: - UITextField
-    
-    
+
+
+//MARK: - UITextField
+
+
     func textFieldDidBeginEditing(_ textField: UITextField) {
         recipeTitleLabel.becomeFirstResponder()
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-//        recipeTitleLabel.resignFirstResponder()
-//        saveReceipes()
         return true
     }
 
@@ -144,32 +101,17 @@ class SavedReceipesToShowVC: UIViewController, UITextViewDelegate, UINavigationC
             print("Line 116 ################### \(text)")
             if let recipeBody = editableReceipeText.text {
                 print("Line 118 \(showThisRecipe)")
-//                updateUI(label: text, textViewContent: recipeBody)
-//                updateEditedRecipe(text, recipeBody)
             }
         }
-    }
-
-    func textFieldDidEndEditing(_ textField: UITextField) {
-//        saveReceipes()
-//        editableReceipeText.resignFirstResponder()
     }
 
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         return true
     }
-    
-//    func updateEditedRecipe(_ newName: String, _ newBody: String) {
-//        let titleUpdate = SavedReceipes(context: context)
-//        titleUpdate.receipeName = newName
-//        titleUpdate.receipe = newBody
-////        titleUpdate.uniqueID
-//        saveReceipes()
-//    }
-    
-    
-    //MARK: - UITextView
-    
+
+
+//MARK: - UITextView
+
     func textViewDidBeginEditing(_ textView: UITextView) {
         editableReceipeText.becomeFirstResponder()
     }
@@ -180,7 +122,7 @@ class SavedReceipesToShowVC: UIViewController, UITextViewDelegate, UINavigationC
         }
         editableReceipeText.resignFirstResponder()
     }
-    
+
     func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
 //        editableReceipeText.resignFirstResponder()
         return true
@@ -191,17 +133,17 @@ class SavedReceipesToShowVC: UIViewController, UITextViewDelegate, UINavigationC
 //        saveReceipes()
     }
 
-    
-    
-    //MARK: - Model Manipulation Methods
-    
+
+
+//MARK: - Model Manipulation Methods
+
 //    func saveReceipes() {
-//        
+//
 ////        let savedRecipesEntity = NSEntityDescription.entity(forEntityName: "SavedReceipes", in: context)!
 ////        let updatedValue = NSManagedObject(entity: savedRecipesEntity, insertInto: context)
 ////        updatedValue.setValue(recipeTitle, forKeyPath: "receipeName")
 ////        updatedValue.setValue(showThisRecipe, forKey: "receipe")
-//        
+//
 //        do {
 //          try context.save()
 //        } catch {
@@ -209,7 +151,7 @@ class SavedReceipesToShowVC: UIViewController, UITextViewDelegate, UINavigationC
 //        }
 ////        loadReceipes()
 //    }
-//    
+//
 //    func loadReceipes(with request: NSFetchRequest<NSFetchRequestResult> = SavedReceipes.fetchRequest() , predicate: NSPredicate? = nil) {
 //        DispatchQueue.main.async {
 //            do {
@@ -217,13 +159,13 @@ class SavedReceipesToShowVC: UIViewController, UITextViewDelegate, UINavigationC
 //            } catch {
 //                print("Error fetching data from context \(error)")
 //            }
-//            
+//
 ////            self.editableReceipeText.text = self.savedEditableReceipeArray[self.recipeRowNumberToShow!].receipe
 ////            self.recipeTitleLabel.text = self.savedEditableReceipeArray[self.recipeRowNumberToShow!].receipeName
 //            self.editableReceipeText.reloadInputViews()
 //        }
-//        
+//
 //    }
-    
+
 }
 
