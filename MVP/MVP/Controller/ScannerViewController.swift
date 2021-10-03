@@ -13,14 +13,10 @@ var savedReceipeList = [SavedReceipes]()
 
 class ScannerViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    var titleArray = [String]()
-    var descriptionArray = [String]()
     let imagePicker = UIImagePickerController()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var scannedText = ""
-    var recipeBodyToShow = String()
     var rowNumberToShow = 0
-    var uniqueIDArray = [String]()
     var count = 0
     let CAPACITY = 8
     var firstLoad = true
@@ -130,27 +126,13 @@ class ScannerViewController: UITableViewController, UIImagePickerControllerDeleg
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "scannedRecipeDetailsCell", for: indexPath) as! ScannerTableViewCell
-        let thisRecipe: SavedReceipes!
-        cell.titleLabel.text = titleArray[indexPath.row]
-        cell.descriptionLabel.text = descriptionArray[indexPath.row]
+        cell.titleLabel.text = savedReceipeList[indexPath.row].receipeName
+        cell.descriptionLabel.text = savedReceipeList[indexPath.row].receipe
         cell.accessoryType = .none
         return cell
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "SavedReceipes")
-        savedReceipeList.removeAll()
-        do {
-            let results: NSArray = try context.fetch(request) as NSArray
-            for result in results {
-                let savedRecipe = result as! SavedReceipes
-                savedReceipeList.append(savedRecipe)
-            }
-        } catch {
-            print("Fetch Failed")
-        }
         tableView.reloadData()
     }
     
@@ -159,7 +141,7 @@ class ScannerViewController: UITableViewController, UIImagePickerControllerDeleg
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return descriptionArray.count
+        return savedReceipeList.count
     }
         
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -195,14 +177,6 @@ class ScannerViewController: UITableViewController, UIImagePickerControllerDeleg
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "SavedReceipes")
         do {
             let results: NSArray = try context.fetch(request) as NSArray
-            titleArray.removeAll()
-            descriptionArray.removeAll()
-            uniqueIDArray.removeAll()
-            for result in results {
-                let newRecipe = result as! SavedReceipes
-                titleArray.append(newRecipe.receipeName ?? "Name this Recipe")
-                descriptionArray.append(newRecipe.receipe)
-            }
             tableView.reloadData()
         } catch {
             print("Error fetching data from context \(error)")

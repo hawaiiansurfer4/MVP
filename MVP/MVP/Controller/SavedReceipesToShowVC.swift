@@ -54,16 +54,25 @@ class SavedReceipesToShowVC: UIViewController, UITextViewDelegate, UINavigationC
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "SavedReceipes")
         do {
             let results: NSArray = try context.fetch(request) as NSArray
+//            savedReceipeList.removeAll()
+            savedRecipes.removeAll()
             for result in results {
                 let newRecipe = result as! SavedReceipes
                 if(newRecipe == selectedRecipe) {
                     newRecipe.receipeName = recipeTitleLabel.text
                     newRecipe.receipe = editableReceipeText.text
                     try context.save()
-                    scannerVC.tableView.reloadData()
-                    navigationController?.popViewController(animated: true)
+//                    savedReceipeList.append(newRecipe)
+                    savedRecipes.append(newRecipe)
+//                    navigationController?.popViewController(animated: true)
+                } else {
+//                    savedReceipeList.append(newRecipe)
+                    savedRecipes.append(newRecipe)
                 }
             }
+            savedReceipeList.removeAll()
+            savedReceipeList = savedRecipes
+            navigationController?.popViewController(animated: true)
         } catch {
             print("Fetch failed")
         }
