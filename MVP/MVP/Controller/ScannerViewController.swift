@@ -17,7 +17,14 @@ class ScannerViewController: UITableViewController, UIImagePickerControllerDeleg
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var scannedText = ""
     var rowNumberToShow = 0
-    var count = 0
+    var count = 0 {
+        didSet {
+            if count > CAPACITY {
+                context.delete(savedReceipeList.removeFirst())
+                saveReceipes()
+            }
+        }
+    }
     let CAPACITY = 8
     var firstLoad = true
     
@@ -39,6 +46,7 @@ class ScannerViewController: UITableViewController, UIImagePickerControllerDeleg
                     let savedRecipe = result as! SavedReceipes
                     savedReceipeList.append(savedRecipe)
                 }
+                count = savedReceipeList.count
             } catch {
                 print("Fetch Failed")
             }
@@ -77,7 +85,6 @@ class ScannerViewController: UITableViewController, UIImagePickerControllerDeleg
     
     func recognizeText(image: UIImage?) {
         
-        
         let request = VNRecognizeTextRequest { [weak self] request, error in
             guard let observations = request.results as? [VNRecognizedTextObservation],
                   error == nil else {
@@ -112,6 +119,7 @@ class ScannerViewController: UITableViewController, UIImagePickerControllerDeleg
         newReceipe.receipe = latestScan
         newReceipe.receipeName = "Name this recipe"
         savedReceipeList.append(newReceipe)
+        count = savedReceipeList.count
         self.saveReceipes()
     }
     
