@@ -21,18 +21,7 @@ class SavedReceipesToShowVC: UIViewController, UITextViewDelegate, UINavigationC
     @IBOutlet weak var editableReceipeText: UITextView!
     var scannerVC = ScannerViewController()
     var selectedRecipe: SavedReceipes? = nil
-    var uniqueID: String = ""
-    var recipeTitle: String? {
-        didSet {
-            print("Line 27")
-        }
-    }
     var recipeRowNumberToShow: Int?
-    var showThisRecipe: String? {
-        didSet {
-            print("Line 34")
-        }
-    }
     var savedRecipes = [SavedReceipes]()
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let request = NSFetchRequest<NSFetchRequestResult>(entityName: "SavedReceipes")
@@ -55,7 +44,6 @@ class SavedReceipesToShowVC: UIViewController, UITextViewDelegate, UINavigationC
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "SavedReceipes")
         do {
             let results: NSArray = try context.fetch(request) as NSArray
-//            savedReceipeList.removeAll()
             savedRecipes.removeAll()
             for result in results {
                 let newRecipe = result as! SavedReceipes
@@ -63,11 +51,8 @@ class SavedReceipesToShowVC: UIViewController, UITextViewDelegate, UINavigationC
                     newRecipe.receipeName = recipeTitleLabel.text
                     newRecipe.receipe = editableReceipeText.text
                     try context.save()
-//                    savedReceipeList.append(newRecipe)
                     savedRecipes.append(newRecipe)
-//                    navigationController?.popViewController(animated: true)
                 } else {
-//                    savedReceipeList.append(newRecipe)
                     savedRecipes.append(newRecipe)
                 }
             }
@@ -105,16 +90,6 @@ class SavedReceipesToShowVC: UIViewController, UITextViewDelegate, UINavigationC
         return true
     }
 
-
-    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
-        if let text = textField.text {
-            print("Line 116 ################### \(text)")
-            if let recipeBody = editableReceipeText.text {
-                print("Line 118 \(showThisRecipe)")
-            }
-        }
-    }
-
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         return true
     }
@@ -127,55 +102,13 @@ class SavedReceipesToShowVC: UIViewController, UITextViewDelegate, UINavigationC
     }
 
     func textViewDidEndEditing(_ textView: UITextView) {
-        if let body = textView.text {
-//            updatedEditedRecipeBody(body)
-        }
         editableReceipeText.resignFirstResponder()
     }
 
     func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
-//        editableReceipeText.resignFirstResponder()
         return true
     }
 
-
-    func textViewDidChange(_ textView: UITextView) {
-//        saveReceipes()
-    }
-
-
-
-//MARK: - Model Manipulation Methods
-
-//    func saveReceipes() {
-//
-////        let savedRecipesEntity = NSEntityDescription.entity(forEntityName: "SavedReceipes", in: context)!
-////        let updatedValue = NSManagedObject(entity: savedRecipesEntity, insertInto: context)
-////        updatedValue.setValue(recipeTitle, forKeyPath: "receipeName")
-////        updatedValue.setValue(showThisRecipe, forKey: "receipe")
-//
-//        do {
-//          try context.save()
-//        } catch {
-//           print("Error saving context \(error)")
-//        }
-////        loadReceipes()
-//    }
-//
-//    func loadReceipes(with request: NSFetchRequest<NSFetchRequestResult> = SavedReceipes.fetchRequest() , predicate: NSPredicate? = nil) {
-//        DispatchQueue.main.async {
-//            do {
-//                self.savedEditableReceipeArray = try self.context.fetch(NSFetchRequest<SavedReceipes>)
-//            } catch {
-//                print("Error fetching data from context \(error)")
-//            }
-//
-////            self.editableReceipeText.text = self.savedEditableReceipeArray[self.recipeRowNumberToShow!].receipe
-////            self.recipeTitleLabel.text = self.savedEditableReceipeArray[self.recipeRowNumberToShow!].receipeName
-//            self.editableReceipeText.reloadInputViews()
-//        }
-//
-//    }
 
 }
 

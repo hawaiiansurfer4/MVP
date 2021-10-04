@@ -32,18 +32,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Scanned Recipes" id="L8y-Mk-3eC">
-                        <rightBarButtonItems>
-                            <barButtonItem title="Item" image="photo" catalog="system" id="GzD-bn-8Bg" userLabel="PhotoLibrary">
-                                <connections>
-                                    <action selector="photoLibraryButtonPressed:" destination="Hvp-JF-2fK" id="YEm-hK-JWh"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem title="Item" image="camera" catalog="system" id="CW2-bj-wW0" userLabel="Camera">
-                                <connections>
-                                    <action selector="cameraScannerButtonPressed:" destination="Hvp-JF-2fK" id="do2-wA-YhD"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="photo" catalog="system" id="GzD-bn-8Bg" userLabel="PhotoLibrary">
+                            <connections>
+                                <action selector="photoLibraryButtonPressed:" destination="Hvp-JF-2fK" id="YEm-hK-JWh"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <segue destination="eRO-gg-UrE" kind="show" identifier="goToSavedReceipe" id="Mvl-PZ-rhk"/>
@@ -276,7 +269,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="camera" catalog="system" width="128" height="94"/>
         <image name="photo" catalog="system" width="128" height="93"/>
         <image name="scanner" catalog="system" width="128" height="93"/>
         <systemColor name="labelColor">

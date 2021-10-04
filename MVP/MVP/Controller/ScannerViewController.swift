@@ -43,12 +43,8 @@ class ScannerViewController: UITableViewController, UIImagePickerControllerDeleg
                 print("Fetch Failed")
             }
         }
-        loadReceipes()
     }
     
-    @IBAction func cameraScannerButtonPressed(_ sender: UIBarButtonItem) {
-        getImage(fromSourceType: .camera)
-    }
    
     @IBAction func photoLibraryButtonPressed(_ sender: UIBarButtonItem) {
         getImage(fromSourceType: .photoLibrary)
@@ -78,10 +74,6 @@ class ScannerViewController: UITableViewController, UIImagePickerControllerDeleg
             }
         }
     }
-
-//    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-//        picker.dismiss(animated: true, completion: nil)
-//    }
     
     func recognizeText(image: UIImage?) {
         
@@ -118,6 +110,7 @@ class ScannerViewController: UITableViewController, UIImagePickerControllerDeleg
         let entity = NSEntityDescription.entity(forEntityName: "SavedReceipes", in: context)
         let newReceipe = SavedReceipes(entity: entity!, insertInto: context)
         newReceipe.receipe = latestScan
+        newReceipe.receipeName = "Name this recipe"
         savedReceipeList.append(newReceipe)
         self.saveReceipes()
     }
@@ -168,20 +161,7 @@ class ScannerViewController: UITableViewController, UIImagePickerControllerDeleg
         } catch {
            print("Error saving context \(error)")
         }
-        loadReceipes()
         tableView.reloadData()
-    }
-    
-    func loadReceipes(with request: NSFetchRequest<NSFetchRequestResult> = SavedReceipes.fetchRequest(), predicate: NSPredicate? = nil) {
-        
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "SavedReceipes")
-        do {
-            let results: NSArray = try context.fetch(request) as NSArray
-            tableView.reloadData()
-        } catch {
-            print("Error fetching data from context \(error)")
-        }
-        
     }
 }
 
