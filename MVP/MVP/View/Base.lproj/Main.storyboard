@@ -8,6 +8,105 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Scanned Recipes-->
+        <scene sceneID="SFr-JC-buc">
+            <objects>
+                <tableViewController id="Hvp-JF-2fK" customClass="ScannerViewController" customModule="MVP" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="nVK-8B-AhP">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="scannedRecipeCells" rowHeight="90" id="gns-fj-P3G">
+                                <rect key="frame" x="0.0" y="24.5" width="414" height="90"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gns-fj-P3G" id="YZK-AE-UUl">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="90"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Hvp-JF-2fK" id="cna-3C-g2m"/>
+                            <outlet property="delegate" destination="Hvp-JF-2fK" id="HJy-cC-sAZ"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Scanned Recipes" id="L8y-Mk-3eC">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="photo" catalog="system" id="GzD-bn-8Bg" userLabel="PhotoLibrary">
+                            <connections>
+                                <action selector="photoLibraryButtonPressed:" destination="Hvp-JF-2fK" id="YEm-hK-JWh"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="eRO-gg-UrE" kind="show" identifier="goToSavedReceipe" id="Mvl-PZ-rhk"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yim-kC-YyW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2825" y="-616"/>
+        </scene>
+        <!--Saved Receipes To ShowVC-->
+        <scene sceneID="oOi-ME-QdP">
+            <objects>
+                <viewController id="eRO-gg-UrE" customClass="SavedReceipesToShowVC" customModule="MVP" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Sgt-li-Upm">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="FjZ-2j-SLk">
+                                <rect key="frame" x="0.0" y="142" width="414" height="452"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <gestureRecognizers/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9W8-3E-gIf">
+                                <rect key="frame" x="0.0" y="98" width="414" height="34"/>
+                                <gestureRecognizers/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="CB6-nm-jSv"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="CB6-nm-jSv" firstAttribute="bottom" secondItem="FjZ-2j-SLk" secondAttribute="bottom" constant="268" id="IOB-m1-2ON"/>
+                            <constraint firstItem="CB6-nm-jSv" firstAttribute="trailing" secondItem="9W8-3E-gIf" secondAttribute="trailing" id="kay-CZ-7BS"/>
+                            <constraint firstItem="FjZ-2j-SLk" firstAttribute="trailing" secondItem="9W8-3E-gIf" secondAttribute="trailing" id="lbD-yF-Tqm"/>
+                            <constraint firstItem="FjZ-2j-SLk" firstAttribute="top" secondItem="9W8-3E-gIf" secondAttribute="bottom" constant="10" id="nZn-kh-ul0"/>
+                            <constraint firstItem="9W8-3E-gIf" firstAttribute="leading" secondItem="CB6-nm-jSv" secondAttribute="leading" id="sNF-0f-Zaa"/>
+                            <constraint firstItem="9W8-3E-gIf" firstAttribute="top" secondItem="CB6-nm-jSv" secondAttribute="top" constant="10" id="yiF-cu-Atc"/>
+                            <constraint firstItem="FjZ-2j-SLk" firstAttribute="leading" secondItem="9W8-3E-gIf" secondAttribute="leading" id="zm2-f5-gVX"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="sUx-sd-JAk">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="rJ6-ff-kFM"/>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Save" id="9SC-bs-LDP">
+                                <connections>
+                                    <action selector="saveAction:" destination="eRO-gg-UrE" id="ull-4g-rXU"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Edit" id="x8d-Vt-FgI">
+                                <connections>
+                                    <action selector="editAction:" destination="eRO-gg-UrE" id="pey-aZ-Oun"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="editableReceipeText" destination="FjZ-2j-SLk" id="dVm-JH-LWn"/>
+                        <outlet property="recipeNavBar" destination="sUx-sd-JAk" id="m13-Ep-mkx"/>
+                        <outlet property="recipeTitleLabel" destination="9W8-3E-gIf" id="v1j-CK-cOL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pcM-UV-HQG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3646.376811594203" y="-616.07142857142856"/>
+        </scene>
         <!--Recipe Search-->
         <scene sceneID="nr8-uF-HDf">
             <objects>
@@ -32,6 +131,15 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Recipe Search" id="R7t-4T-BTX">
+                        <leftBarButtonItems>
+                            <barButtonItem title="scanner" image="scanner" catalog="system" id="b4T-c2-Bcd">
+                                <connections>
+                                    <action selector="scanButtonPressed:" destination="faX-Pu-1FP" id="2vx-1H-5nT"/>
+                                    <segue destination="Hvp-JF-2fK" kind="show" identifier="GoToScanner" id="0BE-oG-oap"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Filter" image="slider.horizontal.3" catalog="system" id="ZkF-vZ-lOK"/>
+                        </leftBarButtonItems>
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="h6a-lk-W2T">
                             <connections>
                                 <action selector="searcButtonPressed:" destination="faX-Pu-1FP" id="UQw-zX-CBS"/>
@@ -136,7 +244,9 @@
                             <constraint firstItem="H7O-4D-ivs" firstAttribute="leading" secondItem="9n8-Sq-8q3" secondAttribute="leading" id="yek-7Y-1TP"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="pY5-SM-hb8"/>
+                    <navigationItem key="navigationItem" id="pY5-SM-hb8">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="cWn-KU-aP9"/>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o3B-LJ-mP0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -162,6 +272,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="photo" catalog="system" width="128" height="93"/>
+        <image name="scanner" catalog="system" width="128" height="93"/>
+        <image name="slider.horizontal.3" catalog="system" width="128" height="100"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -57,6 +57,9 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate {
         status = .loading
     }
 
+    @IBAction func scanButtonPressed(_ sender: UIBarButtonItem) {
+        performSegue(withIdentifier: "GoToScanner", sender: sender)
+    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let searchHistoryVC = segue.destination as? SearchHistoryViewController else { return }
     }
@@ -84,7 +87,6 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate {
             }
         }
         cell.previewImage.isOpaque = false
-
         cell.label.numberOfLines = 0
         cell.accessoryType = .none
         searchButtonPressed = false
