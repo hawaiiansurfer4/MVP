@@ -32,9 +32,9 @@ class SavedReceipesToShowVC: UIViewController, UITextViewDelegate, UINavigationC
             recipeTitleLabel.text = selectedRecipe?.receipeName
             editableReceipeText.text = selectedRecipe?.receipe
         }
+//        editableReceipeText.isUserInteractionEnabled = false
         editableReceipeText.isScrollEnabled = true
         recipeTitleLabel.isUserInteractionEnabled = false
-        editableReceipeText.isUserInteractionEnabled = false
         recipeTitleLabel.borderStyle = .none
     }
 

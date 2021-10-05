@@ -131,12 +131,15 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Recipe Search" id="R7t-4T-BTX">
-                        <barButtonItem key="leftBarButtonItem" title="scanner" image="scanner" catalog="system" id="b4T-c2-Bcd">
-                            <connections>
-                                <action selector="scanButtonPressed:" destination="faX-Pu-1FP" id="2vx-1H-5nT"/>
-                                <segue destination="Hvp-JF-2fK" kind="show" identifier="GoToScanner" id="0BE-oG-oap"/>
-                            </connections>
-                        </barButtonItem>
+                        <leftBarButtonItems>
+                            <barButtonItem title="scanner" image="scanner" catalog="system" id="b4T-c2-Bcd">
+                                <connections>
+                                    <action selector="scanButtonPressed:" destination="faX-Pu-1FP" id="2vx-1H-5nT"/>
+                                    <segue destination="Hvp-JF-2fK" kind="show" identifier="GoToScanner" id="0BE-oG-oap"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Filter" image="slider.horizontal.3" catalog="system" id="ZkF-vZ-lOK"/>
+                        </leftBarButtonItems>
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="h6a-lk-W2T">
                             <connections>
                                 <action selector="searcButtonPressed:" destination="faX-Pu-1FP" id="UQw-zX-CBS"/>
@@ -271,6 +274,7 @@
     <resources>
         <image name="photo" catalog="system" width="128" height="93"/>
         <image name="scanner" catalog="system" width="128" height="93"/>
+        <image name="slider.horizontal.3" catalog="system" width="128" height="100"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
