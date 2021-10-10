@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		11C646FFCE0BEFFBA88DCC94 /* libPods-MVP.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E481B6FF078BE2ADC4AC2CAD /* libPods-MVP.a */; };
 		C409185F26C21413009A7AAF /* SavedReceipesToShowVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C409185E26C21413009A7AAF /* SavedReceipesToShowVC.swift */; };
+		C4363EBB27124DDA0002658A /* FilterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4363EBA27124DDA0002658A /* FilterVC.swift */; };
 		C45EF73F269B7621002E1642 /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45EF73E269B7621002E1642 /* ScannerViewController.swift */; };
 		C46886412550E848000E72FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46886402550E848000E72FF /* AppDelegate.swift */; };
 		C46886432550E848000E72FF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46886422550E848000E72FF /* SceneDelegate.swift */; };
@@ -38,6 +39,7 @@
 		04EF289E19A27C77FE190BCC /* Pods-MVP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MVP.debug.xcconfig"; path = "Target Support Files/Pods-MVP/Pods-MVP.debug.xcconfig"; sourceTree = "<group>"; };
 		3E4B46564E07F47D3360C038 /* Pods-MVP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MVP.release.xcconfig"; path = "Target Support Files/Pods-MVP/Pods-MVP.release.xcconfig"; sourceTree = "<group>"; };
 		C409185E26C21413009A7AAF /* SavedReceipesToShowVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedReceipesToShowVC.swift; sourceTree = "<group>"; };
+		C4363EBA27124DDA0002658A /* FilterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterVC.swift; sourceTree = "<group>"; };
 		C45EF73E269B7621002E1642 /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
 		C468863D2550E848000E72FF /* MVP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MVP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C46886402550E848000E72FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 				C4B7BAC32655AB63003FAAB8 /* SearchHistoryViewController.swift */,
 				C45EF73E269B7621002E1642 /* ScannerViewController.swift */,
 				C409185E26C21413009A7AAF /* SavedReceipesToShowVC.swift */,
+				C4363EBA27124DDA0002658A /* FilterVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -279,6 +282,7 @@
 			files = (
 				C4D60A8F2638D49000DA1E33 /* SpinnerViewController.swift in Sources */,
 				C4F6BC9626618FB40014B3F8 /* RenderingCellTableViewCell.swift in Sources */,
+				C4363EBB27124DDA0002658A /* FilterVC.swift in Sources */,
 				C484E16B255C292C0044A790 /* WebPageViewController.swift in Sources */,
 				C4AB810E26EAA322008B1ECA /* ScannerTableViewCell.swift in Sources */,
 				C46886562550E985000E72FF /* RecipeTableViewController.swift in Sources */,
