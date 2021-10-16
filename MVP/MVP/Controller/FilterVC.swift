@@ -7,12 +7,9 @@
 
 import UIKit
 
-class FilterVC: UIViewController, UIScrollViewDelegate {
+class FilterVC: UITableViewController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
     }
 }

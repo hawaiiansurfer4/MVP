@@ -140,7 +140,7 @@
                             </barButtonItem>
                             <barButtonItem title="Filter" image="slider.horizontal.3" catalog="system" id="ZkF-vZ-lOK">
                                 <connections>
-                                    <segue destination="zoD-UN-zdn" kind="show" id="JBl-iF-dju"/>
+                                    <segue destination="aAg-0U-3EO" kind="show" id="dsA-Ah-3y9"/>
                                 </connections>
                             </barButtonItem>
                         </leftBarButtonItems>
@@ -256,61 +256,100 @@
             </objects>
             <point key="canvasLocation" x="3639.130434782609" y="127.90178571428571"/>
         </scene>
+        <!--FilterVC-->
+        <scene sceneID="k8V-9B-hlB">
+            <objects>
+                <tableViewController id="aAg-0U-3EO" customClass="FilterVC" customModule="MVP" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="AaS-K5-CCa">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="9SJ-KG-Kt0">
+                                <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9SJ-KG-Kt0" id="oUd-dU-Qxu">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="aAg-0U-3EO" id="gGF-dt-V1x"/>
+                            <outlet property="delegate" destination="aAg-0U-3EO" id="AuR-sv-L9P"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="I66-5w-kSl"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YKM-xI-NWg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1071" y="-887"/>
+        </scene>
         <!--Recipe Filter-->
         <scene sceneID="K7I-b6-VQT">
             <objects>
-                <viewController id="zoD-UN-zdn" customClass="FilterVC" customModule="MVP" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="UJM-Hb-cub">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="1385"/>
+                <viewController id="zoD-UN-zdn" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="UJM-Hb-cub">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="1500"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wOZ-As-kKa">
-                                <rect key="frame" x="0.0" y="88" width="414" height="1297"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wOZ-As-kKa">
+                                <rect key="frame" x="0.0" y="44" width="414" height="1456"/>
                                 <subviews>
-                                    <view contentMode="scaleAspectFill" id="isa-3P-9CD">
-                                        <rect key="frame" x="0.0" y="0.0" width="308" height="1120"/>
+                                    <view contentMode="scaleAspectFit" ambiguous="YES" id="isa-3P-9CD">
+                                        <rect key="frame" x="0.0" y="0.0" width="308" height="1456"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="egP-eb-gnA">
-                                                <rect key="frame" x="0.0" y="0.0" width="308" height="1120"/>
+                                            <stackView opaque="NO" contentMode="scaleAspectFill" axis="vertical" distribution="fillProportionally" spacing="5" id="egP-eb-gnA">
+                                                <rect key="frame" x="0.0" y="0.0" width="409" height="1456"/>
+                                                <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
                                                 <subviews>
-                                                    <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="WSJ-5c-0IM" userLabel="Allergy View">
-                                                        <rect key="frame" x="0.0" y="0.0" width="308" height="220"/>
+                                                    <view contentMode="scaleAspectFill" id="WSJ-5c-0IM" userLabel="Allergy View">
+                                                        <rect key="frame" x="0.0" y="0.0" width="409" height="1436"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
-                                                            <stackView opaque="NO" contentMode="scaleAspectFill" axis="vertical" distribution="fillProportionally" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="wZr-SA-seV" userLabel="Allergy Stack">
-                                                                <rect key="frame" x="5" y="5" width="298" height="210"/>
+                                                            <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" distribution="fillProportionally" spacing="4" id="wZr-SA-seV" userLabel="Allergy Stack">
+                                                                <rect key="frame" x="5" y="-1" width="399" height="2469"/>
+                                                                <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
                                                                 <subviews>
-                                                                    <stackView opaque="NO" contentMode="scaleAspectFill" axis="vertical" distribution="equalSpacing" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="GVa-cw-mMa" userLabel="Title Stack">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="298" height="30"/>
+                                                                    <stackView opaque="NO" contentMode="scaleAspectFit" layoutMarginsFollowReadableWidth="YES" axis="vertical" distribution="fillEqually" alignment="top" spacing="8" baselineRelativeArrangement="YES" id="GVa-cw-mMa" userLabel="Title Stack">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="399" height="268.5"/>
+                                                                        <autoresizingMask key="autoresizingMask"/>
                                                                         <subviews>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Allergies" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V1A-nm-U8y">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="92.5" height="30"/>
-                                                                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Allergies" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" id="V1A-nm-U8y">
+                                                                                <rect key="frame" x="8" y="8" width="92.5" height="252.5"/>
+                                                                                <autoresizingMask key="autoresizingMask"/>
+                                                                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="25"/>
                                                                                 <nil key="textColor"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                         </subviews>
                                                                         <constraints>
-                                                                            <constraint firstItem="V1A-nm-U8y" firstAttribute="top" secondItem="GVa-cw-mMa" secondAttribute="top" id="Xmc-PM-bd1"/>
-                                                                            <constraint firstAttribute="bottom" secondItem="V1A-nm-U8y" secondAttribute="bottom" id="rLr-lV-A25"/>
+                                                                            <constraint firstItem="V1A-nm-U8y" firstAttribute="top" secondItem="GVa-cw-mMa" secondAttribute="top" constant="5" id="Xmc-PM-bd1"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="V1A-nm-U8y" secondAttribute="bottom" constant="5" id="rLr-lV-A25"/>
                                                                             <constraint firstItem="V1A-nm-U8y" firstAttribute="leading" secondItem="GVa-cw-mMa" secondAttribute="leading" id="uQJ-VE-5Mf"/>
                                                                             <constraint firstAttribute="trailing" secondItem="V1A-nm-U8y" secondAttribute="trailing" constant="205.5" id="z9v-yu-wvm"/>
                                                                         </constraints>
+                                                                        <directionalEdgeInsets key="directionalLayoutMargins" top="8" leading="8" bottom="8" trailing="8"/>
                                                                     </stackView>
-                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="cNT-vj-4eo" userLabel="Button Stack">
-                                                                        <rect key="frame" x="0.0" y="34" width="298" height="176"/>
+                                                                    <stackView opaque="NO" contentMode="scaleAspectFill" axis="vertical" distribution="fillEqually" spacing="8" id="cNT-vj-4eo" userLabel="Button Stack">
+                                                                        <rect key="frame" x="0.0" y="273" width="399" height="3345"/>
+                                                                        <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
                                                                         <subviews>
-                                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="Fjj-La-C8m" userLabel="Top Half Stack">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="298" height="84"/>
+                                                                            <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" distribution="fillEqually" spacing="9" id="Fjj-La-C8m" userLabel="Top Half Stack">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="399" height="1670"/>
+                                                                                <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
                                                                                 <subviews>
-                                                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="qjQ-6w-inO" userLabel="FirstRowStack">
-                                                                                        <rect key="frame" x="0.0" y="0.0" width="298" height="37.5"/>
+                                                                                    <stackView opaque="NO" contentMode="scaleAspectFill" distribution="fillProportionally" spacing="8" id="qjQ-6w-inO" userLabel="FirstRowStack">
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="399" height="256"/>
+                                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                                                         <subviews>
-                                                                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Ki2-7g-pqD">
-                                                                                                <rect key="frame" x="0.0" y="0.0" width="145" height="37.5"/>
+                                                                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="8" id="Ki2-7g-pqD">
+                                                                                                <rect key="frame" x="0.0" y="0.0" width="243" height="256"/>
+                                                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                                                                 <subviews>
                                                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BzR-Qv-I36">
-                                                                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="37.5"/>
+                                                                                                        <rect key="frame" x="0.0" y="0.0" width="84" height="255.5"/>
                                                                                                         <color key="backgroundColor" red="0.60592025520000004" green="0.11053956299999999" blue="0.1215394065" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                                                         <rect key="contentStretch" x="1" y="0.0" width="1" height="1"/>
                                                                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -319,7 +358,7 @@
                                                                                                         </state>
                                                                                                     </button>
                                                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Z7-14-Ut8">
-                                                                                                        <rect key="frame" x="58" y="0.0" width="87" height="37.5"/>
+                                                                                                        <rect key="frame" x="92" y="0.0" width="151" height="255.5"/>
                                                                                                         <color key="backgroundColor" red="0.60592025520000004" green="0.11053956299999999" blue="0.1215394065" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                                                         <state key="normal" title="Crustceans">
@@ -328,11 +367,12 @@
                                                                                                     </button>
                                                                                                 </subviews>
                                                                                             </stackView>
-                                                                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="3nj-3H-Cgj">
-                                                                                                <rect key="frame" x="153" y="0.0" width="145" height="37.5"/>
+                                                                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="8" id="3nj-3H-Cgj">
+                                                                                                <rect key="frame" x="251" y="0.0" width="148" height="255.5"/>
+                                                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                                                                 <subviews>
                                                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="giZ-Tj-bnu">
-                                                                                                        <rect key="frame" x="0.0" y="0.0" width="68" height="37.5"/>
+                                                                                                        <rect key="frame" x="0.0" y="0.0" width="69.5" height="255.5"/>
                                                                                                         <color key="backgroundColor" red="0.60592025520000004" green="0.11053956299999999" blue="0.1215394065" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                                                         <state key="normal" title="Dairy">
@@ -340,7 +380,7 @@
                                                                                                         </state>
                                                                                                     </button>
                                                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fKh-Pu-DiC">
-                                                                                                        <rect key="frame" x="76" y="0.0" width="69" height="37.5"/>
+                                                                                                        <rect key="frame" x="77.5" y="0.0" width="70.5" height="255.5"/>
                                                                                                         <color key="backgroundColor" red="0.60592025520000004" green="0.11053956299999999" blue="0.1215394065" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                                                         <state key="normal" title="Eggs">
@@ -351,14 +391,16 @@
                                                                                             </stackView>
                                                                                         </subviews>
                                                                                     </stackView>
-                                                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="6yi-2Q-qwz" userLabel="SecondRowStack">
-                                                                                        <rect key="frame" x="0.0" y="46.5" width="298" height="37.5"/>
+                                                                                    <stackView opaque="NO" contentMode="scaleAspectFill" distribution="fillProportionally" spacing="7" id="6yi-2Q-qwz" userLabel="SecondRowStack">
+                                                                                        <rect key="frame" x="0.0" y="264.5" width="399" height="255.5"/>
+                                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                                                         <subviews>
-                                                                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="thL-qr-qe9">
-                                                                                                <rect key="frame" x="0.0" y="0.0" width="179" height="37.5"/>
+                                                                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="7" id="thL-qr-qe9">
+                                                                                                <rect key="frame" x="0.0" y="0.0" width="240" height="255"/>
+                                                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                                                                 <subviews>
                                                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DHv-RA-4ZA">
-                                                                                                        <rect key="frame" x="0.0" y="0.0" width="118" height="37.5"/>
+                                                                                                        <rect key="frame" x="0.0" y="0.0" width="158" height="255.5"/>
                                                                                                         <color key="backgroundColor" red="0.60592025520000004" green="0.11053956299999999" blue="0.1215394065" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                                                         <state key="normal" title="FODMAP Free">
@@ -366,7 +408,7 @@
                                                                                                         </state>
                                                                                                     </button>
                                                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cHy-km-px5">
-                                                                                                        <rect key="frame" x="125" y="0.0" width="54" height="37.5"/>
+                                                                                                        <rect key="frame" x="165" y="0.0" width="75" height="255.5"/>
                                                                                                         <color key="backgroundColor" red="0.60592025520000004" green="0.11053956299999999" blue="0.1215394065" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                                                         <state key="normal" title="Gluten">
@@ -375,11 +417,12 @@
                                                                                                     </button>
                                                                                                 </subviews>
                                                                                             </stackView>
-                                                                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="GNb-bo-4PA">
-                                                                                                <rect key="frame" x="186" y="0.0" width="112" height="37.5"/>
+                                                                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="8" id="GNb-bo-4PA">
+                                                                                                <rect key="frame" x="247" y="0.0" width="152" height="255"/>
+                                                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                                                                 <subviews>
                                                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a0h-We-3U8">
-                                                                                                        <rect key="frame" x="0.0" y="0.0" width="67" height="37.5"/>
+                                                                                                        <rect key="frame" x="0.0" y="0.0" width="90.5" height="255.5"/>
                                                                                                         <color key="backgroundColor" red="0.60592025520000004" green="0.11053956299999999" blue="0.1215394065" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                                                         <state key="normal" title="Peanuts">
@@ -387,7 +430,7 @@
                                                                                                         </state>
                                                                                                     </button>
                                                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8VX-bW-0Or">
-                                                                                                        <rect key="frame" x="75" y="0.0" width="37" height="37.5"/>
+                                                                                                        <rect key="frame" x="98.5" y="0.0" width="53.5" height="255.5"/>
                                                                                                         <color key="backgroundColor" red="0.60592025520000004" green="0.11053956299999999" blue="0.1215394065" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                                                         <state key="normal" title="Pork">
@@ -405,22 +448,22 @@
                                                                                     <constraint firstAttribute="bottom" secondItem="6yi-2Q-qwz" secondAttribute="bottom" id="FFn-Xk-gdN"/>
                                                                                     <constraint firstAttribute="trailing" secondItem="qjQ-6w-inO" secondAttribute="trailing" id="Nqd-yZ-jCL"/>
                                                                                     <constraint firstItem="qjQ-6w-inO" firstAttribute="leading" secondItem="Fjj-La-C8m" secondAttribute="leading" id="eEx-OQ-8QX"/>
-                                                                                    <constraint firstItem="6yi-2Q-qwz" firstAttribute="top" secondItem="qjQ-6w-inO" secondAttribute="bottom" id="fuf-ND-e6z"/>
+                                                                                    <constraint firstItem="6yi-2Q-qwz" firstAttribute="top" secondItem="qjQ-6w-inO" secondAttribute="bottom" constant="5" id="fuf-ND-e6z"/>
                                                                                     <constraint firstItem="6yi-2Q-qwz" firstAttribute="top" secondItem="qjQ-6w-inO" secondAttribute="bottom" id="kFA-gX-QrD"/>
                                                                                     <constraint firstItem="qjQ-6w-inO" firstAttribute="top" secondItem="Fjj-La-C8m" secondAttribute="top" id="yLz-s4-ZzC"/>
                                                                                 </constraints>
                                                                             </stackView>
-                                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="jkU-pe-R5N" userLabel="BottomHalfStack">
-                                                                                <rect key="frame" x="0.0" y="92" width="298" height="84"/>
+                                                                            <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="jkU-pe-R5N" userLabel="BottomHalfStack">
+                                                                                <rect key="frame" x="0.0" y="527.5" width="399" height="520"/>
                                                                                 <subviews>
                                                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="Rfh-5Z-vTm" userLabel="ThirdRowStack">
-                                                                                        <rect key="frame" x="0.0" y="0.0" width="298" height="38"/>
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="399" height="256"/>
                                                                                         <subviews>
                                                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="rnb-ev-zO0">
-                                                                                                <rect key="frame" x="0.0" y="0.0" width="129" height="38"/>
+                                                                                                <rect key="frame" x="0.0" y="0.0" width="172.5" height="256"/>
                                                                                                 <subviews>
                                                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mY8-R2-aOa">
-                                                                                                        <rect key="frame" x="0.0" y="0.0" width="48" height="38"/>
+                                                                                                        <rect key="frame" x="0.0" y="0.0" width="64.5" height="256"/>
                                                                                                         <color key="backgroundColor" red="0.60592025520000004" green="0.11053956299999999" blue="0.1215394065" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                                                         <state key="normal" title="Paleo">
@@ -428,7 +471,7 @@
                                                                                                         </state>
                                                                                                     </button>
                                                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tC0-xY-9yS">
-                                                                                                        <rect key="frame" x="56" y="0.0" width="73" height="38"/>
+                                                                                                        <rect key="frame" x="72.5" y="0.0" width="100" height="256"/>
                                                                                                         <color key="backgroundColor" red="0.60592025520000004" green="0.11053956299999999" blue="0.1215394065" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                                                         <state key="normal" title="Mustard">
@@ -438,10 +481,10 @@
                                                                                                 </subviews>
                                                                                             </stackView>
                                                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="cSh-Ut-h2q">
-                                                                                                <rect key="frame" x="135" y="0.0" width="163" height="38"/>
+                                                                                                <rect key="frame" x="178.5" y="0.0" width="220.5" height="256"/>
                                                                                                 <subviews>
                                                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ezs-nO-uMa">
-                                                                                                        <rect key="frame" x="0.0" y="0.0" width="84" height="38"/>
+                                                                                                        <rect key="frame" x="0.0" y="0.0" width="113.5" height="256"/>
                                                                                                         <color key="backgroundColor" red="0.60592025520000004" green="0.11053956299999999" blue="0.1215394065" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                                                         <state key="normal" title="Red Meat">
@@ -449,7 +492,7 @@
                                                                                                         </state>
                                                                                                     </button>
                                                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xhu-ZM-Xa3">
-                                                                                                        <rect key="frame" x="92" y="0.0" width="71" height="38"/>
+                                                                                                        <rect key="frame" x="121.5" y="0.0" width="99" height="256"/>
                                                                                                         <color key="backgroundColor" red="0.60592025520000004" green="0.11053956299999999" blue="0.1215394065" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                                                         <state key="normal" title="Sesame">
@@ -461,13 +504,13 @@
                                                                                         </subviews>
                                                                                     </stackView>
                                                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="zcc-RC-W1L" userLabel="LastRowStack">
-                                                                                        <rect key="frame" x="0.0" y="46" width="298" height="38"/>
+                                                                                        <rect key="frame" x="0.0" y="264" width="399" height="256"/>
                                                                                         <subviews>
                                                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="94L-nT-LlD">
-                                                                                                <rect key="frame" x="0.0" y="0.0" width="125" height="38"/>
+                                                                                                <rect key="frame" x="0.0" y="0.0" width="167" height="256"/>
                                                                                                 <subviews>
                                                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hSJ-0f-O4W">
-                                                                                                        <rect key="frame" x="0.0" y="0.0" width="80.5" height="38"/>
+                                                                                                        <rect key="frame" x="0.0" y="0.0" width="108" height="256"/>
                                                                                                         <color key="backgroundColor" red="0.60592025520000004" green="0.11053956299999999" blue="0.1215394065" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                                                         <state key="normal" title="Shellfish">
@@ -475,7 +518,7 @@
                                                                                                         </state>
                                                                                                     </button>
                                                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vEy-ch-wj7">
-                                                                                                        <rect key="frame" x="88.5" y="0.0" width="36.5" height="38"/>
+                                                                                                        <rect key="frame" x="116" y="0.0" width="51" height="256"/>
                                                                                                         <color key="backgroundColor" red="0.60592025520000004" green="0.11053956299999999" blue="0.1215394065" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                                                         <state key="normal" title="Soy">
@@ -485,10 +528,10 @@
                                                                                                 </subviews>
                                                                                             </stackView>
                                                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="AhR-73-y0M">
-                                                                                                <rect key="frame" x="132" y="0.0" width="166" height="38"/>
+                                                                                                <rect key="frame" x="174" y="0.0" width="225" height="256"/>
                                                                                                 <subviews>
                                                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hLQ-nN-6rh">
-                                                                                                        <rect key="frame" x="0.0" y="0.0" width="95" height="38"/>
+                                                                                                        <rect key="frame" x="0.0" y="0.0" width="128.5" height="256"/>
                                                                                                         <color key="backgroundColor" red="0.60592025520000004" green="0.11053956299999999" blue="0.1215394065" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                                                         <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                                                                                         <state key="normal" title="Tree Nuts">
@@ -496,7 +539,7 @@
                                                                                                         </state>
                                                                                                     </button>
                                                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v2B-vi-PGR">
-                                                                                                        <rect key="frame" x="103" y="0.0" width="63" height="38"/>
+                                                                                                        <rect key="frame" x="136.5" y="0.0" width="88.5" height="256"/>
                                                                                                         <color key="backgroundColor" red="0.60592025520000004" green="0.11053956299999999" blue="0.1215394065" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                                                         <state key="normal" title="Wheat">
@@ -547,12 +590,14 @@
                                                         <constraints>
                                                             <constraint firstAttribute="bottom" secondItem="wZr-SA-seV" secondAttribute="bottom" constant="5" id="AXK-vI-CP4"/>
                                                             <constraint firstItem="wZr-SA-seV" firstAttribute="leading" secondItem="WSJ-5c-0IM" secondAttribute="leading" constant="5" id="FRe-lk-XWb"/>
+                                                            <constraint firstAttribute="width" constant="409" id="KNU-co-uKp"/>
+                                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="300" id="ZBB-te-CuN"/>
                                                             <constraint firstAttribute="trailing" secondItem="wZr-SA-seV" secondAttribute="trailing" constant="5" id="e8U-U4-f13"/>
                                                             <constraint firstItem="wZr-SA-seV" firstAttribute="top" secondItem="WSJ-5c-0IM" secondAttribute="top" constant="5" id="s8l-8t-UXB"/>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uw9-Xw-PPK" userLabel="Dietary View">
-                                                        <rect key="frame" x="0.0" y="225" width="308" height="220"/>
+                                                        <rect key="frame" x="0.0" y="1441" width="409" height="0.0"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="2Uh-M2-ZHq" userLabel="Dietary Stack">
                                                                 <rect key="frame" x="5" y="5" width="364" height="291"/>
@@ -759,7 +804,7 @@
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z3n-iv-tEN" userLabel="Meal View">
-                                                        <rect key="frame" x="0.0" y="450" width="308" height="220"/>
+                                                        <rect key="frame" x="0.0" y="1446" width="409" height="0.0"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Meal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Emu-q3-nom">
                                                                 <rect key="frame" x="8" y="8" width="53" height="30"/>
@@ -912,7 +957,7 @@
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wde-fZ-s9m" userLabel="Food View">
-                                                        <rect key="frame" x="0.0" y="675" width="308" height="220"/>
+                                                        <rect key="frame" x="0.0" y="1451" width="409" height="0.0"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Food Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lC6-A4-mLV" userLabel="Food Type">
                                                                 <rect key="frame" x="8" y="0.0" width="112" height="30"/>
@@ -1012,8 +1057,8 @@
                                                                 </state>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4IT-BP-zqm">
-                                                                <rect key="frame" x="90" y="170" width="84" height="36"/>
-                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                <rect key="frame" x="90" y="170" width="84" height="0.0"/>
+                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <color key="backgroundColor" red="0.60592025520000004" green="0.11053956299999999" blue="0.1215394065" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                 <state key="normal" title="Pancake">
@@ -1078,7 +1123,7 @@
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LUg-81-LPr" userLabel="Cuisine View">
-                                                        <rect key="frame" x="0.0" y="900" width="308" height="220"/>
+                                                        <rect key="frame" x="0.0" y="1456" width="409" height="0.0"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Cuisine Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KVQ-vV-iE6">
                                                                 <rect key="frame" x="8" y="0.0" width="138" height="30"/>
@@ -1259,12 +1304,15 @@
                                                     <constraint firstItem="LUg-81-LPr" firstAttribute="top" secondItem="Wde-fZ-s9m" secondAttribute="bottom" constant="5" id="E81-rJ-io7"/>
                                                     <constraint firstItem="uw9-Xw-PPK" firstAttribute="top" secondItem="WSJ-5c-0IM" secondAttribute="bottom" constant="5" id="NhE-m2-y35"/>
                                                     <constraint firstItem="WSJ-5c-0IM" firstAttribute="leading" secondItem="egP-eb-gnA" secondAttribute="leading" id="Tpb-ad-egp"/>
+                                                    <constraint firstAttribute="trailing" secondItem="LUg-81-LPr" secondAttribute="trailing" id="UiW-3e-NKa"/>
                                                     <constraint firstItem="Wde-fZ-s9m" firstAttribute="top" secondItem="z3n-iv-tEN" secondAttribute="bottom" constant="5" id="Ukq-k7-mPz"/>
                                                     <constraint firstAttribute="trailing" secondItem="z3n-iv-tEN" secondAttribute="trailing" id="VxI-0X-kG2"/>
                                                     <constraint firstItem="Wde-fZ-s9m" firstAttribute="top" secondItem="z3n-iv-tEN" secondAttribute="bottom" constant="5" id="Y1s-yr-JXw"/>
                                                     <constraint firstAttribute="trailing" secondItem="WSJ-5c-0IM" secondAttribute="trailing" id="YM1-P2-Mbl"/>
                                                     <constraint firstAttribute="bottom" secondItem="LUg-81-LPr" secondAttribute="bottom" id="ZPS-6s-z6E"/>
+                                                    <constraint firstItem="LUg-81-LPr" firstAttribute="top" secondItem="Wde-fZ-s9m" secondAttribute="bottom" constant="5" id="dK6-io-059"/>
                                                     <constraint firstItem="z3n-iv-tEN" firstAttribute="leading" secondItem="egP-eb-gnA" secondAttribute="leading" id="doA-am-YVF"/>
+                                                    <constraint firstItem="LUg-81-LPr" firstAttribute="leading" secondItem="egP-eb-gnA" secondAttribute="leading" id="eOg-AE-2GL"/>
                                                     <constraint firstAttribute="trailing" secondItem="LUg-81-LPr" secondAttribute="trailing" id="iSe-Jf-Llc"/>
                                                     <constraint firstAttribute="trailing" secondItem="Wde-fZ-s9m" secondAttribute="trailing" id="k6m-VX-S5S"/>
                                                     <constraint firstAttribute="trailing" secondItem="uw9-Xw-PPK" secondAttribute="trailing" id="sxF-5Y-1bf"/>
@@ -1304,7 +1352,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Recipe Filter" id="dBd-8q-5RS"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="414" height="1385"/>
+                    <size key="freeformSize" width="414" height="1500"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9GM-n4-o20" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
