@@ -265,7 +265,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="9SJ-KG-Kt0">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="filterCell" id="9SJ-KG-Kt0">
                                 <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9SJ-KG-Kt0" id="oUd-dU-Qxu">
@@ -289,14 +289,14 @@
         <scene sceneID="K7I-b6-VQT">
             <objects>
                 <viewController id="zoD-UN-zdn" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="UJM-Hb-cub">
+                    <view key="view" contentMode="scaleToFill" id="UJM-Hb-cub">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="1500"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wOZ-As-kKa">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wOZ-As-kKa">
                                 <rect key="frame" x="0.0" y="44" width="414" height="1456"/>
                                 <subviews>
-                                    <view contentMode="scaleAspectFit" ambiguous="YES" id="isa-3P-9CD">
+                                    <view contentMode="scaleAspectFit" id="isa-3P-9CD">
                                         <rect key="frame" x="0.0" y="0.0" width="308" height="1456"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
@@ -305,11 +305,11 @@
                                                 <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
                                                 <subviews>
                                                     <view contentMode="scaleAspectFill" id="WSJ-5c-0IM" userLabel="Allergy View">
-                                                        <rect key="frame" x="0.0" y="0.0" width="409" height="1436"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="409" height="287"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" distribution="fillProportionally" spacing="4" id="wZr-SA-seV" userLabel="Allergy Stack">
-                                                                <rect key="frame" x="5" y="-1" width="399" height="2469"/>
+                                                                <rect key="frame" x="5" y="-1" width="399" height="171"/>
                                                                 <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
                                                                 <subviews>
                                                                     <stackView opaque="NO" contentMode="scaleAspectFit" layoutMarginsFollowReadableWidth="YES" axis="vertical" distribution="fillEqually" alignment="top" spacing="8" baselineRelativeArrangement="YES" id="GVa-cw-mMa" userLabel="Title Stack">
@@ -333,15 +333,15 @@
                                                                         <directionalEdgeInsets key="directionalLayoutMargins" top="8" leading="8" bottom="8" trailing="8"/>
                                                                     </stackView>
                                                                     <stackView opaque="NO" contentMode="scaleAspectFill" axis="vertical" distribution="fillEqually" spacing="8" id="cNT-vj-4eo" userLabel="Button Stack">
-                                                                        <rect key="frame" x="0.0" y="273" width="399" height="3345"/>
+                                                                        <rect key="frame" x="0.0" y="273" width="399" height="0.0"/>
                                                                         <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" distribution="fillEqually" spacing="9" id="Fjj-La-C8m" userLabel="Top Half Stack">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="399" height="1670"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="399" height="0.0"/>
                                                                                 <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
                                                                                 <subviews>
                                                                                     <stackView opaque="NO" contentMode="scaleAspectFill" distribution="fillProportionally" spacing="8" id="qjQ-6w-inO" userLabel="FirstRowStack">
-                                                                                        <rect key="frame" x="0.0" y="0.0" width="399" height="256"/>
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="399" height="255"/>
                                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                                                         <subviews>
                                                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="8" id="Ki2-7g-pqD">
@@ -368,7 +368,7 @@
                                                                                                 </subviews>
                                                                                             </stackView>
                                                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="8" id="3nj-3H-Cgj">
-                                                                                                <rect key="frame" x="251" y="0.0" width="148" height="255.5"/>
+                                                                                                <rect key="frame" x="251" y="0.0" width="148" height="256"/>
                                                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                                                                 <subviews>
                                                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="giZ-Tj-bnu">
@@ -392,7 +392,7 @@
                                                                                         </subviews>
                                                                                     </stackView>
                                                                                     <stackView opaque="NO" contentMode="scaleAspectFill" distribution="fillProportionally" spacing="7" id="6yi-2Q-qwz" userLabel="SecondRowStack">
-                                                                                        <rect key="frame" x="0.0" y="264.5" width="399" height="255.5"/>
+                                                                                        <rect key="frame" x="0.0" y="264" width="399" height="256"/>
                                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                                                         <subviews>
                                                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="7" id="thL-qr-qe9">
@@ -597,7 +597,7 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uw9-Xw-PPK" userLabel="Dietary View">
-                                                        <rect key="frame" x="0.0" y="1441" width="409" height="0.0"/>
+                                                        <rect key="frame" x="0.0" y="292" width="409" height="44"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="2Uh-M2-ZHq" userLabel="Dietary Stack">
                                                                 <rect key="frame" x="5" y="5" width="364" height="291"/>
@@ -804,7 +804,7 @@
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z3n-iv-tEN" userLabel="Meal View">
-                                                        <rect key="frame" x="0.0" y="1446" width="409" height="0.0"/>
+                                                        <rect key="frame" x="0.0" y="341" width="409" height="44"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Meal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Emu-q3-nom">
                                                                 <rect key="frame" x="8" y="8" width="53" height="30"/>
@@ -957,7 +957,7 @@
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wde-fZ-s9m" userLabel="Food View">
-                                                        <rect key="frame" x="0.0" y="1451" width="409" height="0.0"/>
+                                                        <rect key="frame" x="0.0" y="390" width="409" height="44"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Food Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lC6-A4-mLV" userLabel="Food Type">
                                                                 <rect key="frame" x="8" y="0.0" width="112" height="30"/>
@@ -1123,7 +1123,7 @@
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LUg-81-LPr" userLabel="Cuisine View">
-                                                        <rect key="frame" x="0.0" y="1456" width="409" height="0.0"/>
+                                                        <rect key="frame" x="0.0" y="439" width="409" height="1017"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Cuisine Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KVQ-vV-iE6">
                                                                 <rect key="frame" x="8" y="0.0" width="138" height="30"/>
