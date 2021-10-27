@@ -289,14 +289,14 @@
         <scene sceneID="K7I-b6-VQT">
             <objects>
                 <viewController id="zoD-UN-zdn" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="UJM-Hb-cub">
+                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="UJM-Hb-cub">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="1500"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wOZ-As-kKa">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wOZ-As-kKa">
                                 <rect key="frame" x="0.0" y="44" width="414" height="1456"/>
                                 <subviews>
-                                    <view contentMode="scaleAspectFit" id="isa-3P-9CD">
+                                    <view contentMode="scaleAspectFit" ambiguous="YES" id="isa-3P-9CD">
                                         <rect key="frame" x="0.0" y="0.0" width="308" height="1456"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
