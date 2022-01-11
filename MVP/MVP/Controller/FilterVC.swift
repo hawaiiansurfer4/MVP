@@ -12,10 +12,12 @@ var filterList = [Filters]()
 
 class FilterVC: UITableViewController {
     
+    var filterModel = FilterModel()
     var firstLoad = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        filterModel.addFilters()
         tableView.delegate = self
         if(firstLoad) {
             firstLoad = false

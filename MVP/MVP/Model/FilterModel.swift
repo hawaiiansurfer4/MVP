@@ -29,6 +29,7 @@ class FilterModel {
         let entity = NSEntityDescription.entity(forEntityName: "Filters", in: context)
         let newFilter = Filters(entity: entity!, insertInto: context)
         newFilter.category = "Allergies"
+//        filterList.append("Allergies")
         for allergy in allergyList {
             newFilter.filter = allergy
         }
