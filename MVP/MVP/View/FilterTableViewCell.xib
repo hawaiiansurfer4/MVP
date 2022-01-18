@@ -51,6 +51,10 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="filterLabel" destination="Jds-4r-2li" id="HoV-Vt-a7C"/>
+                <outlet property="isSelectedImage" destination="x4Z-8c-li0" id="plD-zc-z8T"/>
+            </connections>
             <point key="canvasLocation" x="173.18840579710147" y="153.34821428571428"/>
         </tableViewCell>
     </objects>

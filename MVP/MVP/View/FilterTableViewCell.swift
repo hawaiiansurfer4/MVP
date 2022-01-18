@@ -9,6 +9,9 @@ import UIKit
 
 class FilterTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var isSelectedImage: UIImageView!
+    @IBOutlet weak var filterLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
