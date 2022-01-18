@@ -30,6 +30,8 @@
 		C4AB811126FB862A008B1ECA /* SavedRecipeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AB811026FB8629008B1ECA /* SavedRecipeModel.swift */; };
 		C4B7BAC42655AB63003FAAB8 /* SearchHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B7BAC32655AB63003FAAB8 /* SearchHistoryViewController.swift */; };
 		C4B7BAC7265B5E08003FAAB8 /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B7BAC6265B5E08003FAAB8 /* MulticastDelegate.swift */; };
+		C4C4A880279727D4004BDFBD /* FilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C4A87E279727D4004BDFBD /* FilterTableViewCell.swift */; };
+		C4C4A881279727D4004BDFBD /* FilterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4C4A87F279727D4004BDFBD /* FilterTableViewCell.xib */; };
 		C4C8BF1326669B6C00257609 /* libAlamofire.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C4C8BF1226669B6C00257609 /* libAlamofire.a */; };
 		C4C8BF1526669B7100257609 /* libAlamofireImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C4C8BF1426669B7100257609 /* libAlamofireImage.a */; };
 		C4D60A8F2638D49000DA1E33 /* SpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D60A8E2638D49000DA1E33 /* SpinnerViewController.swift */; };
@@ -64,6 +66,8 @@
 		C4AB811026FB8629008B1ECA /* SavedRecipeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedRecipeModel.swift; sourceTree = "<group>"; };
 		C4B7BAC32655AB63003FAAB8 /* SearchHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryViewController.swift; sourceTree = "<group>"; };
 		C4B7BAC6265B5E08003FAAB8 /* MulticastDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulticastDelegate.swift; sourceTree = "<group>"; };
+		C4C4A87E279727D4004BDFBD /* FilterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTableViewCell.swift; sourceTree = "<group>"; };
+		C4C4A87F279727D4004BDFBD /* FilterTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterTableViewCell.xib; sourceTree = "<group>"; };
 		C4C8BF1226669B6C00257609 /* libAlamofire.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libAlamofire.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4C8BF1426669B7100257609 /* libAlamofireImage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libAlamofireImage.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4D60A8E2638D49000DA1E33 /* SpinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerViewController.swift; sourceTree = "<group>"; };
@@ -176,6 +180,8 @@
 				C4F6BC9526618FB40014B3F8 /* RenderingCellTableViewCell.xib */,
 				C4AB810C26EAA322008B1ECA /* ScannerTableViewCell.swift */,
 				C4AB810D26EAA322008B1ECA /* ScannerTableViewCell.xib */,
+				C4C4A87E279727D4004BDFBD /* FilterTableViewCell.swift */,
+				C4C4A87F279727D4004BDFBD /* FilterTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -247,6 +253,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C4AB810F26EAA322008B1ECA /* ScannerTableViewCell.xib in Resources */,
+				C4C4A881279727D4004BDFBD /* FilterTableViewCell.xib in Resources */,
 				C4F6BC9726618FB40014B3F8 /* RenderingCellTableViewCell.xib in Resources */,
 				C468864D2550E848000E72FF /* LaunchScreen.storyboard in Resources */,
 				C468864A2550E848000E72FF /* Assets.xcassets in Resources */,
@@ -298,6 +305,7 @@
 				C48303DE271F1E94002F516C /* Filters.swift in Sources */,
 				C4A374C426684C270022F2AC /* DataModels.xcdatamodeld in Sources */,
 				C4A2A48426DD4F790097C690 /* SavedReceipes.swift in Sources */,
+				C4C4A880279727D4004BDFBD /* FilterTableViewCell.swift in Sources */,
 				C46886412550E848000E72FF /* AppDelegate.swift in Sources */,
 				C4B7BAC42655AB63003FAAB8 /* SearchHistoryViewController.swift in Sources */,
 				C4B7BAC7265B5E08003FAAB8 /* MulticastDelegate.swift in Sources */,
