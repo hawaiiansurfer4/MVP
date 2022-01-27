@@ -9,9 +9,9 @@ import CoreData
 
 @objc (Filters)
 class Filters: NSManagedObject {
-    @NSManaged var category: String!
+    @NSManaged var categoryTitle: String!
     @NSManaged var filter: String!
-    @NSManaged var filterString: String!
-    var selectedFilter: Bool?
+    @NSManaged var id: String!
+    var isSelected: Bool?
     
 }

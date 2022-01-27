@@ -30,27 +30,7 @@ class FilterModel {
             let context: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
             let entity = NSEntityDescription.entity(forEntityName: "Filters", in: context)
             let newFilter = Filters(entity: entity!, insertInto: context)
-            newFilter.category = "Allergies"
-//        filterList.append("Allergies")
-            for allergy in allergyList {
-                newFilter.filter = allergy
-            }
-            newFilter.category = "Diet"
-            for diet in dietList {
-                newFilter.filter = diet
-            }
-            newFilter.category = "Meal"
-            for meal in mealList {
-                newFilter.filter = meal
-            }
-            newFilter.category = "Food"
-            for food in foodList {
-                newFilter.filter = food
-            }
-            newFilter.category = "Cuisine"
-            for cuisine in cuisineTypeList {
-                newFilter.filter = cuisine
-            }
+            
             let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Filters")
             do {
                 let results: NSArray = try context.fetch(request) as NSArray
