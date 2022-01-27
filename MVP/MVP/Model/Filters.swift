@@ -12,6 +12,6 @@ class Filters: NSManagedObject {
     @NSManaged var categoryTitle: String!
     @NSManaged var filter: String!
     @NSManaged var id: String!
-    var isSelected: Bool?
+    var isSelected: Bool!
     
 }

@@ -14,6 +14,8 @@ class FilterVC: UITableViewController {
     
     var filterModel = FilterModel()
     var firstLoad = true
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    let context: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,9 +41,7 @@ class FilterVC: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "filterCell", for: indexPath)
         cell.textLabel?.text = filterList[indexPath.row].filter
-        if filterList[indexPath.row].selectedFilter == true {
-            cell.accessoryType = .checkmark
-        }
+        cell.accessoryType = filterList[indexPath.row].isSelected! ? .checkmark : .none
         return cell
     }
     
@@ -50,7 +50,16 @@ class FilterVC: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        filterList[indexPath.row].selectedFilter = true
+         
+            do {
+                filterList[indexPath.row].isSelected = !filterList[indexPath.row].isSelected
+                try context.save()
+            } catch {
+                print("Error saving done status, \(error)")
+            }
+        
+        tableView.reloadData()
         tableView.deselectRow(at: indexPath, animated: true)
+        tableView.reloadData()
     }
 }
