@@ -14,8 +14,6 @@ class FilterVC: UITableViewController {
     
     var filterModel = FilterModel()
     var firstLoad = true
-//    let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//    let context: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
     
     override func viewDidLoad() {
         super.viewDidLoad()
