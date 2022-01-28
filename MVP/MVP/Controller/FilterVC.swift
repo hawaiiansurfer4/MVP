@@ -14,8 +14,8 @@ class FilterVC: UITableViewController {
     
     var filterModel = FilterModel()
     var firstLoad = true
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    let context: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
+//    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//    let context: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,7 +50,8 @@ class FilterVC: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-         
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
             do {
                 filterList[indexPath.row].isSelected = !filterList[indexPath.row].isSelected
                 try context.save()
@@ -60,6 +61,5 @@ class FilterVC: UITableViewController {
         
         tableView.reloadData()
         tableView.deselectRow(at: indexPath, animated: true)
-        tableView.reloadData()
     }
 }
