@@ -99,11 +99,6 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
-    func scrollToTop() {
-        let topRow = IndexPath(row: 0, section: 0)
-        tableView.scrollToRow(at: topRow, at: .top, animated: true)
-    }
-
 }
 
 
