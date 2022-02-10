@@ -28,11 +28,11 @@ class SavedReceipesToShowVC: UIViewController, UITextViewDelegate, UINavigationC
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        savedRecipes.removeAll()
         if(selectedRecipe != nil) {
             recipeTitleLabel.text = selectedRecipe?.receipeName
             editableReceipeText.text = selectedRecipe?.receipe
         }
-//        editableReceipeText.isUserInteractionEnabled = false
         editableReceipeText.isScrollEnabled = true
         recipeTitleLabel.isUserInteractionEnabled = false
         recipeTitleLabel.borderStyle = .none
