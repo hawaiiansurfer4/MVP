@@ -18,6 +18,7 @@ class FilterVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         filterModel.addFilters()
+        tableView.register(UINib(nibName: "FilterTableViewCell", bundle: nil), forCellReuseIdentifier: "FilterCell")
         tableView.delegate = self
         if(firstLoad) {
             firstLoad = false
@@ -37,9 +38,13 @@ class FilterVC: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "filterCell", for: indexPath)
-        cell.textLabel?.text = filterList[indexPath.row].filter
-        cell.accessoryType = filterList[indexPath.row].isSelected! ? .checkmark : .none
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FilterCell", for: indexPath) as! FilterTableViewCell
+        cell.filterLabel.text = filterList[indexPath.row].filter
+        if filterList[indexPath.row].isSelected == nil {
+            filterList[indexPath.row].isSelected = false
+        }
+        cell.isSelectedImage.image = filterList[indexPath.row].isSelected ? .checkmark : .none
+//        cell.accessoryType = filterList[indexPath.row].isSelected! ? .checkmark : .none
         return cell
     }
     

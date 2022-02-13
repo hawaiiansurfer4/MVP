@@ -35,10 +35,10 @@ class FilterModel {
             let entity = NSEntityDescription.entity(forEntityName: "Filters", in: context)
             let newFilter = Filters(entity: entity!, insertInto: context)
             
-            for allery in 0..<allergyList.count {
+            for allergy in 0..<allergyList.count {
                 newFilter.categoryTitle = "Allergies"
-                newFilter.id = allergyID[allery]
-                newFilter.filter = allergyList[allery]
+                newFilter.id = allergyID[allergy]
+                newFilter.filter = allergyList[allergy]
                 newFilter.isSelected = false
             }
             saveFilters(context)
