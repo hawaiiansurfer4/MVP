@@ -44,7 +44,6 @@ class FilterVC: UITableViewController {
             filterList[indexPath.row].isSelected = false
         }
         cell.isSelectedImage.image = filterList[indexPath.row].isSelected ? .checkmark : .none
-//        cell.accessoryType = filterList[indexPath.row].isSelected! ? .checkmark : .none
         return cell
     }
     

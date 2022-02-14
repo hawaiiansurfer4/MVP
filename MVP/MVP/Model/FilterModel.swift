@@ -28,41 +28,45 @@ class FilterModel {
     var cuisineTypeList = ["Asmerican", "Asian", "British", "Caribbean", "Central Europe", "Chinese", "Eastern Europe", "French", "Indian", "Italian", "Japanese", "Kosher", "Mediterranean", "Mexican", "Middle Eastern", "Nordic", "South American", "South East Asian"]
 
     func addFilters() {
-        if appFirstLoad {
-            appFirstLoad = false
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            let context: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
-            let entity = NSEntityDescription.entity(forEntityName: "Filters", in: context)
-            let newFilter = Filters(entity: entity!, insertInto: context)
-            
-            for allergy in 0..<allergyList.count {
-                newFilter.categoryTitle = "Allergies"
-                newFilter.id = allergyID[allergy]
-                newFilter.filter = allergyList[allergy]
-                newFilter.isSelected = false
-            }
-            saveFilters(context)
-            for diet in 0..<dietList.count {
-                newFilter.filter = dietList[diet]
-                newFilter.categoryTitle = "Diet"
-                newFilter.isSelected = false
-                newFilter.id = dietID[diet]
-            }
-            saveFilters(context)
-            for meal in mealList {
-                newFilter.categoryTitle = "Meal"
-                newFilter.filter = meal
-                newFilter.id = meal
-                newFilter.isSelected = false
-            }
-            saveFilters(context)
-            for dish in typeOfDishList {
-                newFilter.categoryTitle = "Dish Type"
-                newFilter.filter = dish
-                newFilter.id = dish
-                newFilter.isSelected = false
-            }
-            saveFilters(context)
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
+        let entity = NSEntityDescription.entity(forEntityName: "Filters", in: context)
+        let newFilter = Filters(entity: entity!, insertInto: context)
+        
+        DispatchQueue.main.async {
+            if appFirstLoad {
+                appFirstLoad = false
+                
+                for allergy in 0..<self.allergyList.count {
+                    newFilter.categoryTitle = "Allergies"
+                    newFilter.id = self.allergyID[allergy]
+                    newFilter.filter = self.allergyList[allergy]
+                    newFilter.isSelected = false
+                }
+                self.saveFilters(context)
+                for diet in 0..<self.dietList.count {
+                    newFilter.filter = self.dietList[diet]
+                    newFilter.categoryTitle = "Diet"
+                    newFilter.isSelected = false
+                    newFilter.id = self.dietID[diet]
+                }
+                self.saveFilters(context)
+                for meal in self.mealList {
+                    newFilter.categoryTitle = "Meal"
+                    newFilter.filter = meal
+                    newFilter.id = meal
+                    newFilter.isSelected = false
+                }
+                self.saveFilters(context)
+                for dish in self.typeOfDishList {
+                    newFilter.categoryTitle = "Dish Type"
+                    newFilter.filter = dish
+                    newFilter.id = dish
+                    newFilter.isSelected = false
+                }
+        }
+        
+            self.saveFilters(context)
             let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Filters")
             do {
                 let results: NSArray = try context.fetch(request) as NSArray
