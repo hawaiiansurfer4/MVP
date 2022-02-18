@@ -42,6 +42,7 @@ class ScannerViewController: UITableViewController, UIImagePickerControllerDeleg
             let request = NSFetchRequest<NSFetchRequestResult>(entityName: "SavedReceipes")
             do {
                 let results: NSArray = try context.fetch(request) as NSArray
+                savedReceipeList.removeAll()
                 for result in results {
                     let savedRecipe = result as! SavedReceipes
                     savedReceipeList.append(savedRecipe)

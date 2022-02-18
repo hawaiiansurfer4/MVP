@@ -93,12 +93,13 @@ class FilterVC: UITableViewController {
     }
     
     func addFilters() {
+        DispatchQueue.main.async {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
         let entity = NSEntityDescription.entity(forEntityName: "Filters", in: context)
         let newFilter = Filters(entity: entity!, insertInto: context)
         
-        DispatchQueue.main.async {
+//        DispatchQueue.main.async {
             if self.firstLoad {
                 self.firstLoad = false
 //                appFirstLoad = false
