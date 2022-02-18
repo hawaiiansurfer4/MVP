@@ -51,7 +51,10 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate {
         self.tableView.reloadData()
     }
 
-
+    @IBAction func filterButtonPressed(_ sender: UIBarButtonItem) {
+        performSegue(withIdentifier: "GoToFilterVC", sender: sender)
+    }
+    
     @IBAction func searcButtonPressed(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: "goToSearchHistory", sender: sender)
         status = .loading
@@ -60,8 +63,12 @@ class RecipeTableViewController: UITableViewController, UISearchBarDelegate {
     @IBAction func scanButtonPressed(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: "GoToScanner", sender: sender)
     }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let searchHistoryVC = segue.destination as? SearchHistoryViewController else { return }
+        guard let savedRecipesToShowVC = segue.destination as? SavedReceipesToShowVC else { return }
+        guard let filterVC = segue.destination as? FilterVC else { return }
+        filterVC.addFilters()
     }
 
 

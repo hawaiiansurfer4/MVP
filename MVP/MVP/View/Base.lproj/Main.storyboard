@@ -141,7 +141,8 @@
                             </barButtonItem>
                             <barButtonItem title="Filter" image="slider.horizontal.3" catalog="system" id="ZkF-vZ-lOK">
                                 <connections>
-                                    <segue destination="aAg-0U-3EO" kind="show" id="dsA-Ah-3y9"/>
+                                    <action selector="filterButtonPressed:" destination="faX-Pu-1FP" id="LMX-Oo-CX2"/>
+                                    <segue destination="aAg-0U-3EO" kind="show" identifier="GoToFilterVC" id="dsA-Ah-3y9"/>
                                 </connections>
                             </barButtonItem>
                         </leftBarButtonItems>
@@ -338,11 +339,11 @@
                                                                         <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" distribution="fillEqually" spacing="9" id="Fjj-La-C8m" userLabel="Top Half Stack">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="399" height="419"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="399" height="520"/>
                                                                                 <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
                                                                                 <subviews>
                                                                                     <stackView opaque="NO" contentMode="scaleAspectFill" distribution="fillProportionally" spacing="8" id="qjQ-6w-inO" userLabel="FirstRowStack">
-                                                                                        <rect key="frame" x="0.0" y="0.0" width="399" height="256"/>
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="399" height="255"/>
                                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                                                         <subviews>
                                                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="8" id="Ki2-7g-pqD">
@@ -393,7 +394,7 @@
                                                                                         </subviews>
                                                                                     </stackView>
                                                                                     <stackView opaque="NO" contentMode="scaleAspectFill" distribution="fillProportionally" spacing="7" id="6yi-2Q-qwz" userLabel="SecondRowStack">
-                                                                                        <rect key="frame" x="0.0" y="265" width="399" height="255"/>
+                                                                                        <rect key="frame" x="0.0" y="264" width="399" height="256"/>
                                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                                                         <subviews>
                                                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="7" id="thL-qr-qe9">
