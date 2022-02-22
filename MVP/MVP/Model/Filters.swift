@@ -13,5 +13,5 @@ class Filters: NSManagedObject {
     @NSManaged var filter: String!
     @NSManaged var id: String!
     var isSelected: Bool!
-    
+
 }

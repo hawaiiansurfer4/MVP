@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="21C52" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="FilterCategory" representedClassName="FilterCategory" syncable="YES" codeGenerationType="class">
+    <entity name="FilterCategory" representedClassName=".FilterCategory" syncable="YES" codeGenerationType="class">
         <attribute name="category" optional="YES" attributeType="String"/>
     </entity>
-    <entity name="Filters" representedClassName=".Filters" parentEntity="FilterCategory" syncable="YES">
+    <entity name="Filters" representedClassName=".Filters" syncable="YES">
         <attribute name="categoryTitle" optional="YES" attributeType="String"/>
         <attribute name="filter" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="String"/>
@@ -20,8 +20,8 @@
         <relationship name="relationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SearchHistoryData" inverseName="relationship" inverseEntity="SearchHistoryData"/>
     </entity>
     <elements>
-        <element name="FilterCategory" positionX="-45" positionY="36" width="128" height="44"/>
-        <element name="Filters" positionX="-45" positionY="36" width="128" height="89"/>
+        <element name="FilterCategory" positionX="-45" positionY="36" width="128" height="58"/>
+        <element name="Filters" positionX="-45" positionY="36" width="128" height="103"/>
         <element name="SavedReceipes" positionX="-54" positionY="9" width="128" height="89"/>
         <element name="SearchHistoryData" positionX="-63" positionY="-18" width="128" height="59"/>
     </elements>
