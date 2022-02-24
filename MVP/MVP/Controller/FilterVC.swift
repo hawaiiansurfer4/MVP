@@ -13,7 +13,7 @@ import CoreData
 class FilterVC: UITableViewController {
     
     var filterList = [Filters]()
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+//    let filterContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var keepCount = 0
     var firstLoad = true
     var screenLoad = true
@@ -41,10 +41,6 @@ class FilterVC: UITableViewController {
         loadFilters()
         tableView.register(UINib(nibName: "FilterTableViewCell", bundle: nil), forCellReuseIdentifier: "FilterCell")
         tableView.delegate = self
-//        if(screenLoad) {
-//            screenLoad = false
-//            loadFilters()
-//        }
     }
 
 
@@ -55,7 +51,6 @@ class FilterVC: UITableViewController {
         }
         if filterList[indexPath.row].categoryTitle != previousCategory {
             cell.filterLabel.text = filterList[indexPath.row].categoryTitle
-//            cell.isSelectedImage = .none
             cell.backgroundColor = .red
         }
         cell.filterLabel.text = filterList[indexPath.row].filter
@@ -83,8 +78,8 @@ class FilterVC: UITableViewController {
     }
 
     func addFilters() {
-//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//        let context: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
         let entity = NSEntityDescription.entity(forEntityName: "Filters", in: context)!
         let newFilter = Filters(entity: entity, insertInto: context)
 
@@ -94,8 +89,8 @@ class FilterVC: UITableViewController {
             for allergy in 0..<self.allergyList.count {
                 self.countingTotal += 1
                 newFilter.categoryTitle = "Allergies"
-                newFilter.id = self.allergyID[count]
-                newFilter.filter = self.allergyList[allergy]
+                newFilter.id = allergyID[count]
+                newFilter.filter = allergyList[allergy]
                 newFilter.isSelected = false
                 saveFilters()
                 do {
@@ -108,67 +103,32 @@ class FilterVC: UITableViewController {
                 count += 1
             }
             count = 0
-//            for diet in self.dietList {
-//                self.countingTotal += 1
-//                newFilter.filter = diet
-//                newFilter.categoryTitle = "Diet"
-//                newFilter.isSelected = false
-//                newFilter.id = self.dietID[count]
-//                count += 1
-//                saveFilters()
-//            }
-//            count = 0
-//            for meal in self.mealList {
-//                self.countingTotal += 1
-//                newFilter.categoryTitle = "Meal"
-//                newFilter.filter = meal
-//                newFilter.id = meal
-//                newFilter.isSelected = false
-//                saveFilters()
-//            }
-//            for dish in self.typeOfDishList {
-//                self.countingTotal += 1
-//                newFilter.categoryTitle = "Dish Type"
-//                newFilter.filter = dish
-//                newFilter.id = dish
-//                newFilter.isSelected = false
-//                saveFilters()
-//            }
-//            count = 0
-//            for cuisine in self.cuisineTypeList {
-//                self.countingTotal += 1
-//                newFilter.categoryTitle = "Cuisine Type"
-//                newFilter.filter = cuisine
-//                newFilter.id = cuisine
-//                newFilter.isSelected = false
-//                saveFilters()
-//            }
 
         }
     }
 
     func saveFilters() {
-
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
         keepCount += 1
-//        print("I have been called \(keepCount) ")
-//        do {
-//            try context.save()
-//        } catch {
-//            print("error saving filters to the context within saveFilters func")
-//        }
+        do {
+            try context.save()
+            print("I have been called \(keepCount) ")
+        } catch {
+            print("error saving filters to the context within saveFilters func")
+        }
     }
 
     func loadFilters() {
-//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//        let context: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
-//        let entity = NSEntityDescription.entity(forEntityName: "Filters", in: context)
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Filters")
         do {
             let results: NSArray = try context.fetch(request) as NSArray
             filterList.removeAll()
             for result in results {
-                let filters = result as! Filters
-                filterList.append(filters)
+                let filterer = result as! Filters
+                filterList.append(filterer)
             }
         } catch {
             print("Fetch Failed for filter")

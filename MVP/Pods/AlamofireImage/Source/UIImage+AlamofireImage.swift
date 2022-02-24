@@ -365,7 +365,7 @@ extension AlamofireExtension where ExtendedType: UIImage {
 
         guard let coreImage = image else { return nil }
 
-        let context = CIContext(options: [.priorityRequestLow: true])
+        let filterContext = CIContext(options: [.priorityRequestLow: true])
 
         var parameters: [String: Any] = parameters ?? [:]
         parameters[kCIInputImageKey] = coreImage
@@ -373,7 +373,7 @@ extension AlamofireExtension where ExtendedType: UIImage {
         guard let filter = CIFilter(name: name, parameters: parameters) else { return nil }
         guard let outputImage = filter.outputImage else { return nil }
 
-        let cgImageRef = context.createCGImage(outputImage, from: outputImage.extent)
+        let cgImageRef = filterContext.createCGImage(outputImage, from: outputImage.extent)
 
         return UIImage(cgImage: cgImageRef!, scale: type.scale, orientation: type.imageOrientation)
     }
