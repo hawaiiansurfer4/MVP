@@ -55,6 +55,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return container
     }()
     
+//    lazy var managedObjectContext: NSManagedObjectContext = {
+//        let coordinator = self.per
+//    }
+    
     // MARK: - Core Data Saving support
     
     func saveContext () {
