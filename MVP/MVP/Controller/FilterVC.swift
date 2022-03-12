@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreData
+import SwiftUI
 
 var loaded = false
 
@@ -196,7 +197,9 @@ class FilterVC: UITableViewController {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Filters")
-        
+        let categorySort = NSSortDescriptor(key: "categoryTitle", ascending: true, selector: #selector(NSString.caseInsensitiveCompare(_:)))
+        let filterSort = NSSortDescriptor(key: "filter", ascending: true)
+        request.sortDescriptors = [categorySort, filterSort]
         do {
             let results: NSArray = try context.fetch(request) as NSArray
             filterList.removeAll()
