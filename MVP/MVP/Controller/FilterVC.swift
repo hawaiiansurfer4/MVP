@@ -31,7 +31,9 @@ class FilterVC: UITableViewController {
     var typeOfDishList = ["Alcohol-cocktail", "Biscuits and cookies", "Bread", "Cereals", "Condiments and sauces", "Drinks", "Desserts", "Egg", "Main course", "Omelet", "Pancake", "Preps", "Preserve", "Salad", "Sandwhiches", "Soup", "Starter"]
 
     var cuisineTypeList = ["Asmerican", "Asian", "British", "Caribbean", "Central Europe", "Chinese", "Eastern Europe", "French", "Indian", "Italian", "Japanese", "Kosher", "Mediterranean", "Mexican", "Middle Eastern", "Nordic", "South American", "South East Asian"]
-
+    
+    var sectionTitles = ["Allergies", "Cuisine", "Diet", "Dish Type", "Meal"]
+    var titleOffset = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,28 +49,42 @@ class FilterVC: UITableViewController {
 
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "FilterCell", for: indexPath) as! FilterTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FilterCell", for: indexPath)
         if filterList[indexPath.row].categoryTitle != previousCategory {
-            cell.filterLabel.text = filterList[indexPath.row].categoryTitle
-            cell.backgroundColor = .red
+            previousCategory = filterList[indexPath.row].categoryTitle
+            
+//            cell.filterLabel.isOpaque = true
+//            cell.isSelectedImage.isOpaque = true
+//            cell.titleLabel.textColor = .red
+//            cell.titleLabel.backgroundColor = .black
+            titleOffset += 1
+            return cell
+        } else {
+//        cell.filterLabel.isOpaque = false
+//        cell.isSelectedImage.isOpaque = false
+//        cell.titleLabel.isOpaque = true
+//        cell.titleLabel.backgroundColor = .none
+//        cell.filterLabel.backgroundColor = .none
+//        cell.isSelectedImage.backgroundColor = .none
+//        cell.filterLabel.textColor = .red
+            cell.filterLabel.text = filterList[indexPath.row].filter
+
+            cell.isSelectedImage.image = filterList[indexPath.row].isSelected ? .checkmark : .none
+            return cell
         }
-        cell.filterLabel.text = filterList[indexPath.row].filter
-
-        cell.isSelectedImage.image = filterList[indexPath.row].isSelected ? .checkmark : .none
         saveFilters()
-
-        return cell
+//        return cell
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filterList.count
+        return filterList.count + sectionTitles.count
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
+        filterList[indexPath.row].isSelected = !filterList[indexPath.row].isSelected
         do {
-            filterList[indexPath.row].isSelected = !filterList[indexPath.row].isSelected
             try context.save()
         } catch {
             print("Error saving done status, \(error)")
@@ -107,8 +123,6 @@ class FilterVC: UITableViewController {
             newFilter.id = allergyID[allergy]
             newFilter.filter = allergyList[allergy]
             newFilter.isSelected = false
-            print("The value of newFilter is \(newFilter.filter)")
-
         }
         do {
             try context.save()
@@ -123,8 +137,6 @@ class FilterVC: UITableViewController {
             newFilter.id = dietList[diet]
             newFilter.filter = dietID[diet]
             newFilter.isSelected = false
-            print("The value of newFilter is \(newFilter.filter)")
-
         }
         do {
             try context.save()
@@ -140,8 +152,6 @@ class FilterVC: UITableViewController {
             newFilter.id = meal
             newFilter.filter = meal
             newFilter.isSelected = false
-            print("The value of newFilter is \(newFilter.filter)")
-
         }
         do {
             try context.save()
@@ -156,8 +166,6 @@ class FilterVC: UITableViewController {
             newFilter.id = dish
             newFilter.filter = dish
             newFilter.isSelected = false
-            print("The value of newFilter is \(newFilter.filter)")
-
         }
         do {
             try context.save()
@@ -172,8 +180,6 @@ class FilterVC: UITableViewController {
             newFilter.id = cuisine
             newFilter.filter = cuisine
             newFilter.isSelected = false
-            print("The value of newFilter is \(newFilter.filter)")
-
         }
         do {
             try context.save()
