@@ -14,7 +14,8 @@ var loaded = false
 class FilterVC: UITableViewController {
 
     var filterList = [Filters]()
-    var filter = Filters.self
+    var updatingFilterList = [Filters]()
+    var filter: Filters? = nil
     var filtersInPlace = false
     var previousCategory = "None"
     var allergyList = ["Alcohol-free", "Immune-Supportive", "Celery-free", "Crustcean-free", "Dairy", "Dietary Approaches to Stop Hypertension", "Eggs", "Fish", "FODMAP free", "Gluten", "Keto", "Kidney friendly", "Kosher", "Low potassium", "Lupine-free", "Mediterranean", "Mustard-free", "Low-fat-abs", "No oil added", "No-sugar", "Paleo", "Peanuts", "Pescatarian", "Pork-free", "Red meat-free", "Sesame-free", "Shellfish", "Soy", "Sugar-conscious", "Tree Nuts", "Vegan", "Vegetarian", "Wheat-free"]
@@ -31,7 +32,7 @@ class FilterVC: UITableViewController {
     var typeOfDishList = ["Alcohol-cocktail", "Biscuits and cookies", "Bread", "Cereals", "Condiments and sauces", "Drinks", "Desserts", "Egg", "Main course", "Omelet", "Pancake", "Preps", "Preserve", "Salad", "Sandwhiches", "Soup", "Starter"]
 
     var cuisineTypeList = ["Asmerican", "Asian", "British", "Caribbean", "Central Europe", "Chinese", "Eastern Europe", "French", "Indian", "Italian", "Japanese", "Kosher", "Mediterranean", "Mexican", "Middle Eastern", "Nordic", "South American", "South East Asian"]
-    
+
     var sectionTitles = ["Allergies", "Cuisine", "Diet", "Dish Type", "Meal"]
     var titleOffset = 0
 
@@ -49,49 +50,45 @@ class FilterVC: UITableViewController {
 
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "FilterCell", for: indexPath)
-        if filterList[indexPath.row].categoryTitle != previousCategory {
-            previousCategory = filterList[indexPath.row].categoryTitle
-            
-//            cell.filterLabel.isOpaque = true
-//            cell.isSelectedImage.isOpaque = true
-//            cell.titleLabel.textColor = .red
-//            cell.titleLabel.backgroundColor = .black
-            titleOffset += 1
-            return cell
-        } else {
-//        cell.filterLabel.isOpaque = false
-//        cell.isSelectedImage.isOpaque = false
-//        cell.titleLabel.isOpaque = true
-//        cell.titleLabel.backgroundColor = .none
-//        cell.filterLabel.backgroundColor = .none
-//        cell.isSelectedImage.backgroundColor = .none
-//        cell.filterLabel.textColor = .red
-            cell.filterLabel.text = filterList[indexPath.row].filter
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FilterCell", for: indexPath) as! FilterTableViewCell
 
-            cell.isSelectedImage.image = filterList[indexPath.row].isSelected ? .checkmark : .none
-            return cell
-        }
-        saveFilters()
-//        return cell
+        cell.filterLabel.text = filterList[indexPath.row].filter
+
+        cell.isSelectedImage.image = filterList[indexPath.row].isSelected ? .checkmark : .none
+
+        return cell
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filterList.count + sectionTitles.count
+        return filterList.count
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
-        filterList[indexPath.row].isSelected = !filterList[indexPath.row].isSelected
+//        let entity = NSEntityDescription.entity(forEntityName: "Filters", in: context)
+//        let objectID = filterList[indexPath.row].objectID
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Filters")
+//        let categorySort = NSSortDescriptor(key: "categoryTitle", ascending: true, selector: #selector(NSString.caseInsensitiveCompare(_:)))
+//        let filterSort = NSSortDescriptor(key: "filter", ascending: true)
+//        request.sortDescriptors = [categorySort, filterSort]
         do {
-            try context.save()
+            let results: NSArray = try context.fetch(request) as NSArray
+////            filterList.removeAll()
+//            updatingFilterList.removeAll()
+            for result in results {
+                let filterer = result as! Filters
+                if filterer == filterList[indexPath.row] {
+                    filterer.isSelected = !filterList[indexPath.row].isSelected
+                    saveFilters()
+                    loadFilters()
+                } else {
+//                    updatingFilterList.append(filterer)
+                }
+            }
         } catch {
             print("Error saving done status, \(error)")
         }
-
-        tableView.reloadData()
-        tableView.deselectRow(at: indexPath, animated: true)
     }
 
     func hasFiltersBeenAdded() -> Bool {
@@ -158,7 +155,7 @@ class FilterVC: UITableViewController {
         } catch {
             print("*** error saving filters to the context within saveFilters func ***")
         }
-        
+
         for dish in typeOfDishList {
             let entity = NSEntityDescription.entity(forEntityName: "Filters", in: context)
             let newFilter = Filters(entity: entity!, insertInto: context)
@@ -172,7 +169,7 @@ class FilterVC: UITableViewController {
         } catch {
             print("*** error saving filters to the context within saveFilters func ***")
         }
-        
+
         for cuisine in cuisineTypeList {
             let entity = NSEntityDescription.entity(forEntityName: "Filters", in: context)
             let newFilter = Filters(entity: entity!, insertInto: context)
@@ -197,6 +194,7 @@ class FilterVC: UITableViewController {
         } catch {
             print("error saving filters to the context within saveFilters func")
         }
+        tableView.reloadData()
     }
 
     func loadFilters() {
